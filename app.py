@@ -8,7 +8,7 @@ app.config["TEMPLATES_AUTO_RELOAD"]=True
 import mysql.connector
 from mysql.connector import pooling
 config = {
-    "host":"127.0.0.1",
+    "host":"0.0.0.0",
     "user":"root",
     "password":"rfv406406",
     "database":"taipeiattractions",
@@ -170,5 +170,5 @@ def api_mrts():
 		}
 		return jsonify(error_dict)
 	
-# app.run(host="0.0.0.0", port=3000)
-app.run(debug = True, port = 3000)
+app.run(host="0.0.0.0", port=3000)
+# app.run(debug = True, port = 3000)
