@@ -8,7 +8,7 @@ app.config["TEMPLATES_AUTO_RELOAD"]=True
 import mysql.connector
 from mysql.connector import pooling
 config = {
-    "host":"0.0.0.0",
+    "host":"127.0.0.1",
     "user":"root",
     "password":"rfv406406",
     "database":"taipeiattractions",
