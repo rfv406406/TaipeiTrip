@@ -1,5 +1,4 @@
 SHOW DATABASES;
-CREATE DATABASE  taipeiattractions;
 USE  taipeiattractions;
 SHOW TABLES;
 CREATE TABLE attractions(
@@ -34,14 +33,14 @@ SELECT * FROM images;
 SELECT * FROM mrts;
 SELECT * FROM categories;
 
-SELECT attractions.id, attractions.name, attractions.description, attractions.address, attractions.transport, attractions.lat, attractions.lng, mrts.mrt, categories.category FROM attractions INNER JOIN mrts ON mrts.id = attractions.mrtnumber INNER JOIN categories ON categories.id = attractions.categorynumber;
-SELECT attractions.id, attractions.name, attractions.category, attractions.description, attractions.address, attractions.transport, attractions.mrt, attractions.lat, attractions.lng, images.URL_image FROM attractions LEFT JOIN images ON attractions.id=images.attractions;
-SELECT mrts.id,mrts.name,attractions.mrt FROM mrts INNER JOIN attractions ON mrts.id=attractions.mrt;
-SELECT mrts.id, mrts.mrt, COUNT(attractions.mrtnumber) as count_mrt FROM mrts INNER JOIN attractions ON mrts.id = attractions.mrtnumber GROUP BY mrts.id, mrts.mrt ORDER BY count_mrt DESC;
+-- SELECT attractions.id, attractions.name, attractions.description, attractions.address, attractions.transport, attractions.lat, attractions.lng, mrts.mrt, categories.category FROM attractions INNER JOIN mrts ON mrts.id = attractions.mrtnumber INNER JOIN categories ON categories.id = attractions.categorynumber;
+-- SELECT attractions.id, attractions.name, attractions.category, attractions.description, attractions.address, attractions.transport, attractions.mrt, attractions.lat, attractions.lng, images.URL_image FROM attractions LEFT JOIN images ON attractions.id=images.attractions;
+-- SELECT mrts.id,mrts.name,attractions.mrt FROM mrts INNER JOIN attractions ON mrts.id=attractions.mrt;
+-- SELECT mrts.id, mrts.mrt, COUNT(attractions.mrtnumber) as count_mrt FROM mrts INNER JOIN attractions ON mrts.id = attractions.mrtnumber GROUP BY mrts.id, mrts.mrt ORDER BY count_mrt DESC;
 
-ALTER TABLE attractions ADD FOREIGN KEY(categorynumber) REFERENCES categories(category);
-ALTER TABLE attractions ADD FOREIGN KEY(mrtnumber) REFERENCES mrts(mrt);
-ALTER TABLE images ADD FOREIGN KEY(attractions) REFERENCES attractions(id);
+-- ALTER TABLE attractions ADD FOREIGN KEY(categorynumber) REFERENCES categories(category);
+-- ALTER TABLE attractions ADD FOREIGN KEY(mrtnumber) REFERENCES mrts(mrt);
+-- ALTER TABLE images ADD FOREIGN KEY(attractions) REFERENCES attractions(id);
 
 DROP TABLE images;
 DROP TABLE attractions;
