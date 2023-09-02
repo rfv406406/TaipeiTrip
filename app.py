@@ -34,10 +34,10 @@ def thankyou():
 @app.route("/api/attractions")
 
 def api_attractions():
-	page = max(1, int(request.args.get("page", 1)))
+	page = max(0, int(request.args.get("page", 1)))
 	per_page = 12
 	keyword = request.args.get("keyword", None)
-	offset = (page - 1) * per_page
+	offset = page * per_page
 	limit = per_page
 
 	connection = con.get_connection()
