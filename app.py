@@ -2,6 +2,7 @@ from flask import *
 from flask_cors import CORS
 
 app=Flask(__name__)
+app.debug = True
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 
@@ -37,7 +38,7 @@ def api_attractions():
 	page = max(0, int(request.args.get("page", 1)))
 	per_page = 12
 	keyword = request.args.get("keyword", None)
-	offset = page * per_page
+	offset = max(0, page * per_page)
 	limit = per_page
 
 	connection = con.get_connection()
