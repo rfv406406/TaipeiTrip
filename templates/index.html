@@ -190,7 +190,7 @@
 
         <script>
             function getDatas() {
-                fetch("http://127.0.0.1:3000/api/mrts")
+                fetch("http://52.200.212.151:3000/api/mrts")
                     .then(function(response) {
                         return response.json();
                     })
@@ -226,7 +226,7 @@
 
         <script>
             function getData(){
-                fetch("http://127.0.0.1:3000/api/attractions?page=0")
+                fetch("http://52.200.212.151:3000/api/attractions?page=0")
                 .then(function(response){
                     return response.json();
                 })
@@ -288,7 +288,7 @@
             const fetchData = () => {
                 if (isLoading) return; // 如果正在加載，則直接返回
                 isLoading = true;
-                fetch("http://127.0.0.1:3000/api/attractions?page=" + nextPage + "&keyword=" + keyword)
+                fetch("http://52.200.212.151:3000/api/attractions?page=" + nextPage + "&keyword=" + keyword)
                 .then(function(response){
                     return response.json();
                 })
