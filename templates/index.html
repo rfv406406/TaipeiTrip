@@ -297,6 +297,7 @@
                     if (data.message === 'no spot') {
                         // 如果收到 {error: true, message: 'no spot'} 這條消息
                         Container.textContent = '查無資料';
+                        observer.observe(loadingObserver);
                     }else {
                         if (data.nextPage !== null) {
                             nextPage = data.nextPage;

@@ -9,7 +9,7 @@ app=Flask(
     static_url_path = "/static",
 	)
 
-CORS(app, resources={r"/": {"origins": ""}})
+CORS(app, resources={r"/": {"origins": "*"}})
 
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
