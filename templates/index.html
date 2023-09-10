@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="view point" content="width=device-width, initial-scale=1.0, minimum-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
         <meta charset="utf-8"/>
         <title>網頁切版</title>
         <link rel="stylesheet" type="text/css" href="../static/Week2CSS.css" />
@@ -190,7 +190,7 @@
 
         <script>
             function getDatas() {
-                fetch("http://52.200.212.151:3000/api/mrts")
+                fetch("http://127.0.0.1:3000/api/mrts")
                     .then(function(response) {
                         return response.json();
                     })
@@ -226,7 +226,7 @@
 
         <script>
             function getData(){
-                fetch("http://52.200.212.151:3000/api/attractions?page=0")
+                fetch("http://127.0.0.1:3000/api/attractions?page=0")
                 .then(function(response){
                     return response.json();
                 })
@@ -288,71 +288,79 @@
             const fetchData = () => {
                 if (isLoading) return; // 如果正在加載，則直接返回
                 isLoading = true;
-                fetch("http://52.200.212.151:3000/api/attractions?page=" + nextPage + "&keyword=" + keyword)
+                fetch("http://127.0.0.1:3000/api/attractions?page=" + nextPage + "&keyword=" + keyword)
                 .then(function(response){
                     return response.json();
                 })
                 .then(function(data){
                     console.log(data);
-                    if (data.nextPage !== null) {
-                        nextPage = data.nextPage;
-                    } else {
-                        observer.disconnect(); // Stop the observer if there's no next page
-                    }
+                    if (data.message === 'no spot') {
+                        // 如果收到 {error: true, message: 'no spot'} 這條消息
+                        Container.textContent = '查無資料';
+                    }else {
+                        if (data.nextPage !== null) {
+                            nextPage = data.nextPage;
+                        } else {
+                            observer.disconnect(); // Stop the observer if there's no next page
+                        }
 
-                    for (let i = 0; i < data.data.length; i++) {
-                        let imageURL = data.data[i].images;
-                        let nameData = data.data[i].name;
-                        let mrtData = data.data[i].mrt;
-                        let categoryData = data.data[i].category;
+                        for (let i = 0; i < data.data.length; i++) {
+                            let imageURL = data.data[i].images;
+                            let nameData = data.data[i].name;
+                            let mrtData = data.data[i].mrt;
+                            let categoryData = data.data[i].category;
 
-                        let frame4Item = document.createElement("div");
-                        frame4Item.classList.add("frame4-item");
+                            let frame4Item = document.createElement("div");
+                            frame4Item.classList.add("frame4-item");
 
-                        let frame4ItemContent = document.createElement("div");
-                        frame4ItemContent.classList.add("frame4-item-content");
-                        frame4Item.appendChild(frame4ItemContent);
+                            let frame4ItemContent = document.createElement("div");
+                            frame4ItemContent.classList.add("frame4-item-content");
+                            frame4Item.appendChild(frame4ItemContent);
 
-                        let newDiv = document.createElement("div");
-                        newDiv.classList.add("frame4-item-img");
-                        let image = document.createElement("img");
-                        image.src = imageURL[0];
-                        newDiv.prepend(image);
-                        frame4ItemContent.appendChild(newDiv);
+                            let newDiv = document.createElement("div");
+                            newDiv.classList.add("frame4-item-img");
+                            let image = document.createElement("img");
+                            image.src = imageURL[0];
+                            newDiv.prepend(image);
+                            frame4ItemContent.appendChild(newDiv);
 
-                        let frame4Name = document.createElement("div");
-                        frame4Name.classList.add("frame4-item-name");
-                        frame4Name.textContent = nameData;
-                        frame4ItemContent.appendChild(frame4Name);
+                            let frame4Name = document.createElement("div");
+                            frame4Name.classList.add("frame4-item-name");
+                            frame4Name.textContent = nameData;
+                            frame4ItemContent.appendChild(frame4Name);
 
-                        let frame4Item2 = document.createElement("div");
-                        frame4Item2.classList.add("frame4-item2");
-                        frame4Item.appendChild(frame4Item2);
+                            let frame4Item2 = document.createElement("div");
+                            frame4Item2.classList.add("frame4-item2");
+                            frame4Item.appendChild(frame4Item2);
 
-                        let frame4Mrt = document.createElement("div");
-                        frame4Mrt.classList.add("frame4-item2-mrt");
-                        frame4Mrt.textContent = mrtData;
-                        frame4Item2.appendChild(frame4Mrt);
+                            let frame4Mrt = document.createElement("div");
+                            frame4Mrt.classList.add("frame4-item2-mrt");
+                            frame4Mrt.textContent = mrtData;
+                            frame4Item2.appendChild(frame4Mrt);
 
-                        let frame4Category = document.createElement("div");
-                        frame4Category.classList.add("frame4-item2-category");
-                        frame4Category.textContent = categoryData;
-                        frame4Item2.appendChild(frame4Category);
+                            let frame4Category = document.createElement("div");
+                            frame4Category.classList.add("frame4-item2-category");
+                            frame4Category.textContent = categoryData;
+                            frame4Item2.appendChild(frame4Category);
 
-                        Container.appendChild(frame4Item);
-                    }
-                    isLoading = false;
+                            Container.appendChild(frame4Item);
+                        }
+                        isLoading = false;
+                    }    
                 })
-            }
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error.message);
+                        });
+                    }
 
-            const callback = ([entry]) => {
-            if (entry && entry.isIntersecting) {
-                fetchData()
-            }
-            }
+                const callback = ([entry]) => {
+                if (entry && entry.isIntersecting) {
+                    fetchData()
+                }
+                }
 
-            let observer = new IntersectionObserver(callback, options)
-            observer.observe(loadingObserver)
+                let observer = new IntersectionObserver(callback, options)
+                observer.observe(loadingObserver)
         </script>
     </body>
 </html>      

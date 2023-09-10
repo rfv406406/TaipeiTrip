@@ -71,16 +71,17 @@ body{
 
 .slogan{
   display: flex;
-  width: 1180px;
   height: 149px;
+  width:1180px;
   padding: 10px 10px;
   flex-direction: column;
   align-items: flex-start;
+  margin:85px auto 86px auto;
 }
 
 .slogan-item-1{
   display: flex;
-  width: 1180px;
+  width: 100%;
   height: 41px;
   margin-bottom: 15px;
   flex-direction: column;
@@ -94,7 +95,7 @@ body{
 
 .slogan-item-2{
   display: flex;
-  width: 1180px;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   margin-bottom: 25px;
@@ -176,7 +177,6 @@ body{
   font-family: Noto Sans TC;
   font-weight: 500;
   font-size: 16px;
-  line-height: 13.3px;
   font-style: normal;
   cursor: pointer;  /*手手*/      
 }
@@ -301,7 +301,7 @@ body{
   font-family: Noto Sans TC; 
   font-size: 16px; 
   font-weight: 500; 
-  line-height: 13.3px"
+  line-height: 13.3px;
 }
 
 .footer{
@@ -324,17 +324,19 @@ body{
   }
   .frame-item-2{
     width: 90%;
-    min-width: 25px;
+    min-width: 15px;
   }
 
   .slogan{
     width: 90%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .slogan-item-3-text{
     width: 195px;
     padding:15px 20px 15px 15px;
-    color:#757575
+    color:#757575;
   }
 
   .frame3-listbar {
@@ -351,7 +353,7 @@ body{
   }
 }
 
-@media (max-width:360px){
+@media (max-width:600px){
   .frame{
     padding: 10px 0 10px 10px;
   }
@@ -364,7 +366,7 @@ body{
   }
   
   .frame3-listbar {
-    margin: 0;
+   padding: 13px 0;
   }
 
   .frame4-item{
