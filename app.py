@@ -2,6 +2,13 @@ from flask import *
 from flask_cors import CORS
 
 app=Flask(__name__)
+
+app=Flask(
+	__name__,
+	static_folder = "static",
+    static_url_path = "/static",
+	)
+
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 
@@ -48,8 +55,8 @@ def api_attractions():
 			"SELECT attractions.id, attractions.name, attractions.description, attractions.address, "
 			"attractions.transport, attractions.lat, attractions.lng, mrts.mrt, categories.category "
 			"FROM attractions "
-			"INNER JOIN mrts ON mrts.id = attractions.mrtnumber "
-			"INNER JOIN categories ON categories.id = attractions.categorynumber "
+			"LEFT JOIN mrts ON mrts.id = attractions.mrtnumber "
+			"LEFT JOIN categories ON categories.id = attractions.categorynumber "
 			"WHERE mrts.mrt = %s OR attractions.name LIKE %s OR attractions.name LIKE %s "
 			"LIMIT %s OFFSET %s"
 		)
@@ -62,8 +69,8 @@ def api_attractions():
 			"SELECT attractions.id, attractions.name, attractions.description, attractions.address, "
 			"attractions.transport, attractions.lat, attractions.lng, mrts.mrt, categories.category "
 			"FROM attractions "
-			"INNER JOIN mrts ON mrts.id = attractions.mrtnumber "
-			"INNER JOIN categories ON categories.id = attractions.categorynumber "
+			"LEFT JOIN mrts ON mrts.id = attractions.mrtnumber "
+			"LEFT JOIN categories ON categories.id = attractions.categorynumber "
 			"LIMIT %s OFFSET %s"
 		)
 		cursor.execute(sql_query, (limit, offset))
