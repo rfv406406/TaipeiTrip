@@ -2,6 +2,15 @@ from flask import *
 from flask_cors import CORS
 
 app=Flask(__name__)
+
+app=Flask(
+	__name__,
+	static_folder = "static",
+    static_url_path = "/static",
+	)
+
+CORS(app, resources={r"/": {"origins": "*"}})
+
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 
@@ -37,7 +46,7 @@ def api_attractions():
 	page = max(0, int(request.args.get("page", 1)))
 	per_page = 12
 	keyword = request.args.get("keyword", None)
-	offset = (page - 1) * per_page
+	offset = max(0, page * per_page)
 	limit = per_page
 
 	connection = con.get_connection()
@@ -48,8 +57,8 @@ def api_attractions():
 			"SELECT attractions.id, attractions.name, attractions.description, attractions.address, "
 			"attractions.transport, attractions.lat, attractions.lng, mrts.mrt, categories.category "
 			"FROM attractions "
-			"INNER JOIN mrts ON mrts.id = attractions.mrtnumber "
-			"INNER JOIN categories ON categories.id = attractions.categorynumber "
+			"LEFT JOIN mrts ON mrts.id = attractions.mrtnumber "
+			"LEFT JOIN categories ON categories.id = attractions.categorynumber "
 			"WHERE mrts.mrt = %s OR attractions.name LIKE %s OR attractions.name LIKE %s "
 			"LIMIT %s OFFSET %s"
 		)
@@ -62,8 +71,8 @@ def api_attractions():
 			"SELECT attractions.id, attractions.name, attractions.description, attractions.address, "
 			"attractions.transport, attractions.lat, attractions.lng, mrts.mrt, categories.category "
 			"FROM attractions "
-			"INNER JOIN mrts ON mrts.id = attractions.mrtnumber "
-			"INNER JOIN categories ON categories.id = attractions.categorynumber "
+			"LEFT JOIN mrts ON mrts.id = attractions.mrtnumber "
+			"LEFT JOIN categories ON categories.id = attractions.categorynumber "
 			"LIMIT %s OFFSET %s"
 		)
 		cursor.execute(sql_query, (limit, offset))
@@ -170,5 +179,6 @@ def api_mrts():
 		}
 		return jsonify(error_dict)
 	
-app.run(host="0.0.0.0", port=3000)
+	
+app.run(debug=True, host="0.0.0.0", port=3000)
 # app.run(debug = True, port = 3000)
