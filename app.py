@@ -116,7 +116,12 @@ def api_attraction(attractionId):
 		cursor = connection.cursor(dictionary=True)
 
 		cursor.execute(
-			"SELECT attractions.id, attractions.name, attractions.categorynumber, attractions.description, attractions.address, attractions.transport, attractions.mrtnumber, attractions.lat, attractions.lng FROM attractions WHERE id = %s",
+				"SELECT attractions.id, attractions.name, mrts.mrt, attractions.description, "
+			"attractions.address, attractions.transport, categories.category, attractions.lat, attractions.lng "
+			"FROM attractions "
+			"LEFT JOIN mrts ON mrts.id = attractions.mrtnumber "
+			"LEFT JOIN categories ON categories.id = attractions.categorynumber "
+			"WHERE attractions.id = %s",
 			(attractionId,)
 			)
 		attraction = cursor.fetchone()
