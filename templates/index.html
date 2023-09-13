@@ -5,7 +5,6 @@
         <meta charset="utf-8"/>
         <title>網頁切版</title>
         <link rel="stylesheet" type="text/css" href="../static/Week2CSS.css" />
-
     </head>
     <body>
         <div class="frame">
@@ -362,6 +361,42 @@
 
                 let observer = new IntersectionObserver(callback, options)
                 observer.observe(loadingObserver)
+        </script>
+
+        <script>
+            function getDatas() {
+                fetch("http://52.200.212.151:3000/api/mrts")
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        let frame3 = document.querySelectorAll(".frame3-listbar-item");
+                        for (let i = 0; i < data.data.length; i++) {
+                            let mrt = data.data[i];
+                            frame3[i].innerText = mrt;
+                            frame3[i].dataset.mrt = mrt; // 設置 data-mrt 屬性
+                        }
+                        frame3.forEach(item => {
+                            item.addEventListener("click", function() {
+                                let selectedMrt = this.dataset.mrt;
+                                let inputMrt = document.querySelector('.slogan-item-3-text');
+                                inputMrt.value = selectedMrt;
+                                // 模擬按鈕的點擊行為
+                                document.querySelector('.slogan-item-3-button').click();
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.error("發生錯誤", error);
+                    });
+            }
+
+            // 阻止表單的預設提交行為，這裡只需要做一次
+            document.querySelector(".slogan-item-3").addEventListener("submit", function(event) {
+                event.preventDefault();
+            });
+
+            getDatas();
         </script>
     </body>
 </html>      

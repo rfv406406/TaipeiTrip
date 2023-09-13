@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attraction</title>
+    <link rel="stylesheet" type="text/css" href="../static/Week3CSS.css" />
+</head>
+<body>
+    <div class="header">
+        <h2 class="title">台北一日遊</h2>
+        <div class="space"></div>
+        <button class="button_plan">預定行程</button>
+        <button class="button_signin">登入/註冊</button>
+    </div>
+    <div class="frame">
+        <div class="content">
+                <div class="img_container">
+                    <button class="button-img-left" id="button-img-left"></button>
+                    <div class="image_div" id="image_div">
+                        <!-- <div class="image"></div> -->
+                        <div class="pot_container">
+                            <!-- <div class="pot"></div> -->
+                        </div>
+                    </div>
+                    <button class="button-img-right" id="button-img-right"></button>
+                </div>
+                <div class="plan_selector">
+                    <div class="name">平安鐘</div>
+                    <div class="category_at_mrt_container">
+                        <div class="category">公共藝術</div>
+                        <div class="at">at</div>
+                        <div class="mrt">忠孝復興</div>
+                    </div>
+                    <form class="booking_form">
+                        <div class="booking_form_title">訂購導覽行程</div>
+                        <div class="booking_form_title2">以此景點為中心的一日行程，帶您探索城市角落故事</div>
+                        <div class="date_container">
+                            <label class="datetitle" for="datePicker">選擇日期：</label>
+                            <input id="datePicker" class="datePicker" type="date" name="date"></input>
+                        </div>
+                        <div class="time_container">
+                            <label class="timetitle" for="timePicker">選擇時間：</label>
+                            <div class="timebutton_container">
+                                <button class="timeButton1" id="morning">
+                                    <!-- <div class="buttonicon1"></div> -->
+                                </button>
+                                <div class="booking_form_title3">上半天</div>
+                                <button class="timeButton2" id="afternoon"></button>
+                                <div class="booking_form_title3">下半天</div>
+                            </div>
+                        </div>
+                        <div class="price_container">
+                            <div class="title">導覽費用：</div>
+                            <div class="booking_form_title4">
+                                <span id="price">新台幣 2000 元</span>
+                            </div>
+                        </div>
+                        <button class="button_submit">開始預約行程</button>
+                    </from>
+                </div>
+        </div>
+    </div>
+    <div class="separator_container">
+        <div class="separator"></div>
+    </div>
+    <div class="infors_container">
+        <div class="infors">
+            <div class="introduction">平安鐘祈求大家的平安，這是為了紀念921地震週年的設計，在喧鬧的廣場上每個小時鳴鐘，保佑平安，祈禱臺灣不會再發生這樣的天災。雙手合十加上108個黃色的琉璃乳丁，隨著緩緩流下的水，在底下的一個小噴泉噴出。雙手合十的意義，一個是祈福，一個是包容，教我們要包容這樣的改變，撫平這樣的傷口。下面的水緩緩流出，代表著人的生命力是不斷地延續下去。緩緩地鐘聲，卻帶來心中的寧靜。 這個平安鐘是由建築師姚仁喜與琉璃創作家王俠軍共同設計，長6公尺、寬5公尺，以鑄銅製成，由法鼓山文教基金會全額出資。平安鐘點綴都市景觀，不時提醒大家，面對刻骨銘心的災難痛苦，更應該有謙卑的一顆心。</div>
+            <div class="address_container">景點地址：</div>
+            <div class="address">臺北市 大安區忠孝東路4段</div>
+            <div class="traffic_container">交通方式：</div>
+            <div class="traffic">捷運站名：忠孝復興站4號出口1.公車：204、212、212直、232、232副、262、262(區間)、278、299、521、605、605(副)、605(新台五線)、667、903、忠孝新幹線至頂好市場站 2.車位：太平洋崇光百貨地下停車場或市民大道附近地下停車場</div>
+        </div>
+    </div>
+    <div class="footer">
+        <div style="font-size: 16px; font-style: normal; font-weight: 700; line-height: 13.3px; color:#FFF">COPYRIGHT © 2021 台北一日遊</div>
+    </div>
+
+    <script>
+        function getData(){
+            fetch("http://52.200.212.151:3000/api/attraction/2")
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(data){
+                let frameItems = document.querySelector(".frame");
+                let inforsContaineritems = document.querySelector(".infors_container");
+                let imageDiv = document.querySelector(".image_div");
+        
+                let nameData = data.data.name;
+                let mrtData = data.data.mrt;
+                let descriptionData = data.data.description;
+                let addressData = data.data.address;
+                let transportData = data.data.transport;
+                let categoryData = data.data.category;
+                let imageURL = data.data.images;
+
+                let Name = frameItems.querySelector(".name");
+                let Mrt = frameItems.querySelector(".mrt");
+                let Category = frameItems.querySelector(".category");
+                let Description = inforsContaineritems.querySelector(".introduction");
+                let Address = inforsContaineritems.querySelector(".address");
+                let Traffic = inforsContaineritems.querySelector(".traffic");
+
+                // for (let i = 0;i < imageURL.length; i++){
+                //     let newDiv = document.createElement("div")
+                //     newDiv.classList.add("image");
+                //     let img = document.createElement("img");
+                //     img.src = imageURL[i];
+                //     newDiv.appendChild(img);
+                //     imageDiv.appendChild(newDiv);
+                // }
+        
+                Name.textContent = nameData;
+                Mrt.textContent = mrtData;
+                Category.textContent = categoryData;
+                Description.textContent = descriptionData;
+                Address.textContent = addressData;
+                Traffic.textContent = transportData;
+        
+            })  
+        }
+        getData()
+    </script>
+
+<script>
+    function getData2() {
+        fetch("http://52.200.212.151:3000/api/attraction/2")
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function getData(data) {
+                let buttonRight = document.getElementById("button-img-right");
+                let buttonLeft = document.getElementById("button-img-left");
+                let currentImageIndex = 0;
+                let imageDiv = document.getElementById("image_div");
+                let imageURL = data.data.images;
+                let isAnimating = false;
+                let potContainer = document.querySelector(".pot_container")
+
+
+                for (let i = 0; i < imageURL.length; i++) {
+                    let newDiv = document.createElement("div");
+                    newDiv.classList.add("image");
+                    
+                    let pot = document.createElement("div");
+                    pot.classList.add("pot")
+                    
+                    let img = document.createElement("img");
+                    img.src = imageURL[i];
+                    newDiv.appendChild(img);
+                    imageDiv.appendChild(newDiv);
+
+                    potContainer.appendChild(pot)
+                }
+
+                let pot = document.querySelectorAll(".pot")
+                let images = imageDiv.querySelectorAll('.image');
+                let potpot = document.createElement("div");
+                let potpotlength = 0
+                potpot.classList.add("potpot")
+                pot[potpotlength].appendChild(potpot)
+                
+
+                buttonRight.onclick = function () {
+
+
+                    if (currentImageIndex < images.length - 1) {
+                        currentImageIndex++;
+                        potpotlength++;
+                        pot[potpotlength].appendChild(potpot);
+                    } else {
+                        currentImageIndex = 0; // return first
+                        potpotlength = 0;
+                        pot[potpotlength].appendChild(potpot);
+
+                    }
+                    imageDiv.scrollLeft = images[currentImageIndex].offsetLeft;
+
+                };
+
+                buttonLeft.onclick = function () {
+
+                    if (currentImageIndex > 0) {
+                        currentImageIndex--;
+                        potpotlength--;
+                        pot[potpotlength].appendChild(potpot);
+                    } else {
+                        currentImageIndex = images.length - 1; // last pic
+                        potpotlength = pot.length - 1;
+                        pot[potpotlength].appendChild(potpot);
+                    }
+                    imageDiv.scrollLeft = images[currentImageIndex].offsetLeft;
+
+                };
+            })
+    }
+
+    getData2()
+</script>
+
+<script>
+// let buttonImg = document.createElement('img');
+// buttonImg.src = '../static/timebtnfill.png';
+// buttonImg.classList.add('timePicker1-2');
+
+// document.getElementById('morning').addEventListener('click', function () {
+//     event.preventDefault();
+//     document.getElementById('price').textContent = '新台幣 2000 元';
+//     document.getElementById('morning').appendChild(buttonImg);
+// });
+
+// document.getElementById('afternoon').addEventListener('click', function () {
+//     event.preventDefault();
+//     document.getElementById('price').textContent = '新台幣 2500 元';
+// });
+document.getElementById('morning').addEventListener('click', function () {
+    event.preventDefault();
+    this.classList.toggle('timeButton1-filled');
+    document.getElementById('afternoon').classList.remove('timeButton1-filled');
+    document.getElementById('price').textContent = '新台幣 2000 元';
+});
+
+document.getElementById('afternoon').addEventListener('click', function () {
+    event.preventDefault();
+    this.classList.toggle('timeButton1-filled');
+    document.getElementById('morning').classList.remove('timeButton1-filled');
+    document.getElementById('price').textContent = '新台幣 2500 元';
+});
+</script>
+
+</body>
+</html>
