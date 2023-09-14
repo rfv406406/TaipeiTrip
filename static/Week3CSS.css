@@ -11,7 +11,22 @@ body{
     border-bottom: 1px solid #E8E8E8;
     margin-bottom: 40px;
 }
-  
+
+@media (max-width:1200px){
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+.header{
+    width:90%;
+    padding: 10px 0 10px 0;
+    margin-left: 5%;
+}    
+}
+    
+@media (max-width:360px){
+.header{
+    padding: 10px 0 10px 10px;
+}
+}
+
 .header .title{
     font-family: Noto Sans TC;
     font-size: 30px;
@@ -19,14 +34,22 @@ body{
     color: #489;
     min-width: 150px;
 } 
-  
+
 .header .space{
     display: flex;
     justify-content: center;
     align-items: flex-start;
     min-width: 875px;
 } 
-  
+
+@media (max-width:1200px){
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+    .header .space{
+        width: 90%;
+        min-width: 15px;
+    } 
+}
+
 .header .button_plan{
     display: flex;
     height: 34px;
@@ -63,7 +86,7 @@ body{
     align-items: center;
 }
 
-.content {
+.content{
     display:flex;
     justify-content: center;
     align-items: center;
@@ -73,18 +96,50 @@ body{
     margin-bottom:40px;
 }
 
+@media (max-width:1200px){
+.content{
+    width: 100%;
+    height:100%;
+    flex-wrap: wrap;
+}
+}
+
+@media (max-width:360px){
+.content{
+    width:90%;
+    height:100%;
+    flex-wrap: wrap;
+}
+}
+
 .content .img_container{
     display:flex;
     align-items: center;
     position:relative;
+    width:100%;
+    width:540px;
 }
+
+@media (max-width:600px){
+.content .img_container{
+    justify-content: center;
+    width:360px;
+    }
+    }
 
 .img_container .image_div{
     display:flex;
     align-items: center;
-    width: 540px;  
+    justify-content: space-between;
+    /* width: 540px;   */
     overflow-x: hidden;
     scroll-behavior: smooth;
+}
+
+@media (max-width:600px){
+.img_container .image_div{
+   
+}
 }
 
 .img_container .image{
@@ -101,6 +156,13 @@ body{
     flex-shrink: 0;
     z-index: 1;
 }
+    
+@media (max-width:360px){
+.img_container img{
+    width: 466px;
+    height: 350px;
+}
+}
 .img_container .button-img-left{
     background-image: url('button-left.png');
     background-size: 32px 32px;
@@ -112,7 +174,7 @@ body{
     left: 10px;
     z-index: 2;
 }
-.img_container .button-img-left:hover{
+/* .img_container .button-img-left:hover{
     background-image: url('button-left-Hovered.png');
     background-size: 32px 32px;
     width: 32px;
@@ -122,7 +184,7 @@ body{
     position:absolute;
     left: 10px;
     z-index: 2;
-  }
+  } */
 
   .img_container .pot_container{
     display: flex;
@@ -168,7 +230,7 @@ body{
     z-index: 2;
   }
 
-  .img_container .button-img-right:hover{
+  /* .img_container .button-img-right:hover{
     background-image: url('button-right-Hovered.png');
     background-size: 32px 32px;
     width: 32px;
@@ -178,20 +240,22 @@ body{
     position:absolute;
     right: 10px;
     z-index: 2;
-  }
-
-.img_container .img-right-button{
-    background-image: url('button-right-Hovered.png');
-    background-size: 32px 32px;
-    width: 32px;
-    height: 32px;
-    background-color: transparent;
-    border:transparent;
-  }
+  } */
 
 .content .plan_selector{
-    width:100%;
     height:400px;
+}
+
+@media (max-width:1200px){
+.content .plan_selector{
+    width: 90%;
+}
+}
+
+@media (max-width:360px){
+.content .plan_selector{
+    width: auto;
+}
 }
 
 .plan_selector .name{
@@ -225,6 +289,18 @@ body{
     border-radius: 5px;
 }
 
+@media (max-width:1200px){
+.plan_selector .booking_form{
+    width: auto;
+}
+}
+
+@media (max-width:360px){
+.plan_selector .booking_form{
+   
+}
+}  
+
 .booking_form .booking_form_title{
     display: flex;
     justify-content: flex-start;
@@ -235,6 +311,7 @@ body{
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 15px;
+    width: 100%;
 }
 
 .booking_form .booking_form_title2{
@@ -248,6 +325,8 @@ body{
     font-weight: 500;
     font-style: normal;
     margin-bottom: 15px;
+    overflow-wrap: break-word;
+    width: 100%;
 }
 
 .booking_form .date_container{
@@ -302,6 +381,7 @@ body{
     font-size: 16px;
     font-weight: 700;
     margin-right: 5px;
+    min-width: 81px;
 }
 
 .time_container .timebutton_container{
@@ -406,16 +486,35 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    height:352px;
+    width:100%;
     margin-bottom: 40px;
 }
 
+@media (max-width:360px){
+.infors_container{
+    height:100%;
+}
+}  
+
 .infors_container .infors{
+    width: 1180px;
     padding: 10px 10px 0 10px;
 }
 
+@media (max-width:1200px){
+    .infors_container .infors{
+    width: 90%;
+}
+}  
+
+@media (max-width:360px){
+.infors_container .infors{
+    width: 100%;
+}
+}  
+
 .infors .introduction{
-    width:1180px;
+    width:100%;
     font-family: Noto Sans TC;
     font-size: 16px;
     font-style: normal;
@@ -425,7 +524,7 @@ body{
 }
 
 .infors .address_container{
-    width:1180px;
+    width:100%;
     height:32px;
     font-family: Noto Sans TC;
     font-size: 16px;
@@ -435,7 +534,7 @@ body{
 }
 
 .infors .address{
-    width:1180px;
+    width:100%;
     font-family: Noto Sans TC;
     font-size: 16px;
     font-style: normal;
@@ -445,7 +544,7 @@ body{
 }
 
 .infors .traffic_container{
-    width:1180px;
+    width:100%;
     height:32px;
     font-family: Noto Sans TC;
     font-size: 16px;
@@ -455,7 +554,7 @@ body{
 }
 
 .infors .traffic{
-    width:1180px;
+    width:100%;
     font-family: Noto Sans TC;
     font-size: 16px;
     font-style: normal;

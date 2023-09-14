@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="header">
-        <h2 class="title">台北一日遊</h2>
+        <h2 class="title" id="Title">台北一日遊</h2>
         <div class="space"></div>
         <button class="button_plan">預定行程</button>
         <button class="button_signin">登入/註冊</button>
@@ -36,11 +36,11 @@
                         <div class="booking_form_title">訂購導覽行程</div>
                         <div class="booking_form_title2">以此景點為中心的一日行程，帶您探索城市角落故事</div>
                         <div class="date_container">
-                            <label class="datetitle" for="datePicker">選擇日期：</label>
-                            <input id="datePicker" class="datePicker" type="date" name="date"></input>
+                            <div class="datetitle">選擇日期：</div>
+                            <input id="datePicker" class="datePicker" type="date" name="date">
                         </div>
                         <div class="time_container">
-                            <label class="timetitle" for="timePicker">選擇時間：</label>
+                            <div class="timetitle">選擇時間：</div>
                             <div class="timebutton_container">
                                 <button class="timeButton1" id="morning">
                                     <!-- <div class="buttonicon1"></div> -->
@@ -48,6 +48,7 @@
                                 <div class="booking_form_title3">上半天</div>
                                 <button class="timeButton2" id="afternoon"></button>
                                 <div class="booking_form_title3">下半天</div>
+                                <input type="hidden" id="timePicker" name="time">
                             </div>
                         </div>
                         <div class="price_container">
@@ -57,7 +58,7 @@
                             </div>
                         </div>
                         <button class="button_submit">開始預約行程</button>
-                    </from>
+                    </form>
                 </div>
         </div>
     </div>
@@ -79,7 +80,9 @@
 
     <script>
         function getData(){
-            fetch("http://52.200.212.151:3000/api/attraction/2")
+            let attractionId = window.location.pathname.split("/").pop();
+
+            fetch("http://127.0.0.1:3000/api/attraction/" + attractionId)
             .then(function(response){
                 return response.json();
             })
@@ -126,7 +129,9 @@
 
 <script>
     function getData2() {
-        fetch("http://52.200.212.151:3000/api/attraction/2")
+        let attractionId = window.location.pathname.split("/").pop();
+        console.log(attractionId)
+        fetch("http://127.0.0.1:3000/api/attraction/" + attractionId)
             .then(function (response) {
                 return response.json();
             })
@@ -215,11 +220,11 @@
 //     event.preventDefault();
 //     document.getElementById('price').textContent = '新台幣 2500 元';
 // });
-document.getElementById('morning').addEventListener('click', function () {
+document.getElementById("morning").addEventListener("click", function () {
     event.preventDefault();
-    this.classList.toggle('timeButton1-filled');
-    document.getElementById('afternoon').classList.remove('timeButton1-filled');
-    document.getElementById('price').textContent = '新台幣 2000 元';
+    this.classList.toggle("timeButton1-filled");
+    document.getElementById("afternoon").classList.remove("timeButton1-filled");
+    document.getElementById("price").textContent = "新台幣 2000 元";
 });
 
 document.getElementById('afternoon').addEventListener('click', function () {
@@ -228,6 +233,13 @@ document.getElementById('afternoon').addEventListener('click', function () {
     document.getElementById('morning').classList.remove('timeButton1-filled');
     document.getElementById('price').textContent = '新台幣 2500 元';
 });
+</script>
+
+<script>
+    document.getElementById('Title').addEventListener('click', function () {
+        event.preventDefault();
+        window.location.href = "http://52.200.212.151:3000";
+    });
 </script>
 
 </body>

@@ -239,6 +239,7 @@
                         let nameData = data.data[i].name;
                         let mrtData = data.data[i].mrt;
                         let categoryData = data.data[i].category;
+                        let idData = data.data[i].id;
 
                         let frame4ItemImgContainer = frame4Items[i].querySelector(".frame4-item-img");
                         let frame4ItemName = frame4Items[i].querySelector(".frame4-item-name");
@@ -253,8 +254,13 @@
                         let image = document.createElement("img");
                         image.src = imageURL[0];
                         frame4ItemImgContainer.appendChild(image);
-                    }
-                })  
+
+                        frame4Items[i].addEventListener("click", function(event) {
+                            event.preventDefault();
+                            console.log(idData);
+                            window.location = "http://127.0.0.1:3000/attraction/" + idData;
+                                })
+                }})  
             }
             getData();
         </script>
@@ -268,7 +274,7 @@
 
             document.querySelector(".slogan-item-3").addEventListener("submit", function(event) {
                 event.preventDefault();
-                inputData = document.querySelector("input[name=keyword]").value;
+                 let inputData = document.querySelector("input[name=keyword]").value;
                 if(inputData !== ""){
                     keyword = inputData;
                     nextPage = 0;
@@ -309,9 +315,16 @@
                             let nameData = data.data[i].name;
                             let mrtData = data.data[i].mrt;
                             let categoryData = data.data[i].category;
+                            let idData = data.data[i].id;
 
                             let frame4Item = document.createElement("div");
                             frame4Item.classList.add("frame4-item");
+
+                            frame4Item.addEventListener("click", function(event) {
+                                event.preventDefault();
+                                console.log(idData);
+                                window.location = "http://127.0.0.1:3000/attraction/" + idData;
+                            });
 
                             let frame4ItemContent = document.createElement("div");
                             frame4ItemContent.classList.add("frame4-item-content");
@@ -361,42 +374,6 @@
 
                 let observer = new IntersectionObserver(callback, options)
                 observer.observe(loadingObserver)
-        </script>
-
-        <script>
-            function getDatas() {
-                fetch("http://52.200.212.151:3000/api/mrts")
-                    .then(function(response) {
-                        return response.json();
-                    })
-                    .then(function(data) {
-                        let frame3 = document.querySelectorAll(".frame3-listbar-item");
-                        for (let i = 0; i < data.data.length; i++) {
-                            let mrt = data.data[i];
-                            frame3[i].innerText = mrt;
-                            frame3[i].dataset.mrt = mrt; // 設置 data-mrt 屬性
-                        }
-                        frame3.forEach(item => {
-                            item.addEventListener("click", function() {
-                                let selectedMrt = this.dataset.mrt;
-                                let inputMrt = document.querySelector('.slogan-item-3-text');
-                                inputMrt.value = selectedMrt;
-                                // 模擬按鈕的點擊行為
-                                document.querySelector('.slogan-item-3-button').click();
-                            });
-                        });
-                    })
-                    .catch(error => {
-                        console.error("發生錯誤", error);
-                    });
-            }
-
-            // 阻止表單的預設提交行為，這裡只需要做一次
-            document.querySelector(".slogan-item-3").addEventListener("submit", function(event) {
-                event.preventDefault();
-            });
-
-            getDatas();
         </script>
     </body>
 </html>      
