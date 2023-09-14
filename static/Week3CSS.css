@@ -136,12 +136,6 @@ body{
     scroll-behavior: smooth;
 }
 
-@media (max-width:600px){
-.img_container .image_div{
-   
-}
-}
-
 .img_container .image{
     display:flex;
     align-items: center;
@@ -157,9 +151,9 @@ body{
     z-index: 1;
 }
     
-@media (max-width:360px){
+@media (max-width:600px){
 .img_container img{
-    width: 466px;
+    width: 360px;
     height: 350px;
 }
 }
