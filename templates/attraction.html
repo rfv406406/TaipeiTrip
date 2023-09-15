@@ -82,7 +82,7 @@
         function getData(){
             let attractionId = window.location.pathname.split("/").pop();
 
-            fetch("http://127.0.0.1:3000/api/attraction/" + attractionId)
+            fetch("http://52.200.212.151:3000/api/attraction/" + attractionId)
             .then(function(response){
                 return response.json();
             })
@@ -131,7 +131,7 @@
     function getData2() {
         let attractionId = window.location.pathname.split("/").pop();
         console.log(attractionId)
-        fetch("http://127.0.0.1:3000/api/attraction/" + attractionId)
+        fetch("http://52.200.212.151:3000/api/attraction/" + attractionId)
             .then(function (response) {
                 return response.json();
             })

@@ -116,7 +116,7 @@ def api_attraction(attractionId):
 		cursor = connection.cursor(dictionary=True)
 
 		cursor.execute(
-				"SELECT attractions.id, attractions.name, mrts.mrt, attractions.description, "
+			"SELECT attractions.id, attractions.name, mrts.mrt, attractions.description, "
 			"attractions.address, attractions.transport, categories.category, attractions.lat, attractions.lng "
 			"FROM attractions "
 			"LEFT JOIN mrts ON mrts.id = attractions.mrtnumber "

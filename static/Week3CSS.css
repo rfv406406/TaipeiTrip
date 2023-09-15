@@ -289,11 +289,11 @@ body{
 }
 }
 
-@media (max-width:360px){
+/* @media (max-width:360px){
 .plan_selector .booking_form{
    
 }
-}  
+}   */
 
 .booking_form .booking_form_title{
     display: flex;
@@ -347,7 +347,7 @@ body{
 .date_container .datePicker{
     width: 149px;
     height: 25px;
-    padding: 5px 34px 5px 10px;
+    padding: 5px 10px 5px 10px;
     font-family: Noto Sans TC;
     font-size: 16px;
     font-weight: 500;
