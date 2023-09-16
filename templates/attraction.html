@@ -18,7 +18,7 @@
                 <div class="img_container">
                     <button class="button-img-left" id="button-img-left"></button>
                     <div class="image_div" id="image_div">
-                        <!-- <div class="image"></div> -->
+                        <!-- <div class="image"><img src="https://www.travel.taipei/d_upload_ttn/sceneadmin/pic/11000848.jpg"></div> -->
                         <div class="pot_container">
                             <!-- <div class="pot"></div> -->
                         </div>
@@ -142,7 +142,8 @@
                 let imageDiv = document.getElementById("image_div");
                 let imageURL = data.data.images;
                 let isAnimating = false;
-                let potContainer = document.querySelector(".pot_container")
+                let potContainer = document.querySelector(".pot_container");
+                let outer = document.querySelector(".img_container");
 
 
                 for (let i = 0; i < imageURL.length; i++) {

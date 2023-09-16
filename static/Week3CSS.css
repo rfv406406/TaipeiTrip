@@ -20,7 +20,13 @@ body{
     margin-left: 5%;
 }    
 }
-    
+
+@media (max-width:600px){
+.header{
+    margin-bottom: 0px;
+}
+}
+
 @media (max-width:360px){
 .header{
     padding: 10px 0 10px 10px;
@@ -468,6 +474,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 40px;
 }
 
 .separator{
