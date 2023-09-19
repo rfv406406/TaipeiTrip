@@ -389,3 +389,253 @@ body{
     top: 195px; 
   }
 }
+
+.modal{
+  display: none; /* 預設為隱藏 */
+  position: fixed; /* 讓彈出窗口固定在畫面上，不受滾動影響 */
+  top: 0;
+  left: 0;
+  width: 100%; /* 覆蓋整個視窗的寬度 */
+  height: 100%; /* 覆蓋整個視窗的高度 */
+  background-color: rgba(0, 0, 0, 0.25); /* 透明黑色背景，可產生半透明的遮罩效果 */
+  z-index: 1000; /* 確保在其他元素之上 */
+}
+
+.member_signin-container{
+  display:none;
+  position: absolute; /* 相對於.modal定位 */
+  top: 18%; /* 將其移至父元素的中央 */
+  left: 50%; /* 將其移至父元素的中央 */
+  transform: translate(-50%, -50%); /* 使用transform確保完美居中 */
+  width:340px;
+  height:275px;
+  border-radius: 6px;
+  box-shadow: 0px 4px 60px 0px #AAA;
+  background-color: #FFF;
+}
+
+.member_signin-container .signin_form-header{
+  width: 340px;
+  height: 10px;
+  flex-shrink: 0;
+  background: linear-gradient(90deg, #337788 0%, #66AABB 100%);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.member_signin-container .signin_form{
+  width:310px;
+  height:235px;
+  padding:15px;
+}
+
+.signin_form .form_title-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:310px;
+  height:27px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.form_title-container .form_title{
+  font-family: Noto Sans TC;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  position: absolute;
+  color:#666;
+}
+
+.form_title-container .form_x{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('icon_close.png');
+  background-repeat: no-repeat;
+  background-color: #FFF;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  border: none; /* 移除按鈕預設的邊框 */
+  cursor: pointer;
+}
+
+.form_title-container .form_x img{
+  width: 16px;
+  height: 16px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.signin_form .name_email_password{
+  width:278px;
+  height:17px;
+  padding:15px;
+  font-family: Noto Sans TC;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 13.3px; 
+  color: #757575;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 6px;
+  border-color: #757575;
+  margin-bottom: 10px;
+}
+
+.signin{
+  display: flex;
+  width: 310px;
+  height: 47px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  color:#FFF;
+  border:transparent;
+  background-color: #489;
+  font-family: Noto Sans TC;
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  border-radius: 5px;
+  border-color: #489;
+  margin-bottom: 10px;
+}
+
+.signon-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Noto Sans TC;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 13.3px;
+  color:#666;
+  border:transparent;
+}
+
+.go_signon{
+  color:#666;
+  border:transparent;
+  background-color: #FFF;
+  font-family: Noto Sans TC;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 13.3px;
+}
+
+.member_signon-container{
+  display:none;
+  position: absolute; /* 相對於.modal定位 */
+  top: 18%; /* 將其移至父元素的中央 */
+  left: 50%; /* 將其移至父元素的中央 */
+  transform: translate(-50%, -50%); /* 使用transform確保完美居中 */
+  width:340px;
+  height:332px;
+  border-radius: 6px;
+  box-shadow: 0px 4px 60px 0px #AAA;
+  background-color: #FFF;
+}
+
+.member_signon-container .signon_form-header{
+  width: 340px;
+  height: 10px;
+  flex-shrink: 0;
+  background: linear-gradient(90deg, #337788 0%, #66AABB 100%);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.member_signon-container .signon_form{
+  width:310px;
+  height:235px;
+  padding:15px;
+}
+
+.signon_form .form_title-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:310px;
+  height:27px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.signon_form .name_email_password{
+  width:278px;
+  height:17px;
+  padding:15px;
+  font-family: Noto Sans TC;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 13.3px; 
+  color: #757575;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 6px;
+  border-color: #757575;
+  margin-bottom: 10px;
+}
+
+.signon{
+  display: flex;
+  width: 310px;
+  height: 47px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  color:#FFF;
+  border:transparent;
+  background-color: #489;
+  font-family: Noto Sans TC;
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  border-radius: 5px;
+  border-color: #489;
+  margin-bottom: 10px;
+}
+
+.signoninfor{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display:none;
+  width:310px;
+  height:22px;
+  color:#489;
+  border:transparent;
+  background-color: #FFF;
+  font-family: Noto Sans TC;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 13.3px;
+  margin:auto;
+  margin-bottom: 10px;
+}
+
+.return_signin{
+  color:#666;
+  border:transparent;
+  background-color: #FFF;
+  font-family: Noto Sans TC;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 13.3px;
+}

@@ -78,11 +78,11 @@
         <div style="font-size: 16px; font-style: normal; font-weight: 700; line-height: 13.3px; color:#FFF">COPYRIGHT © 2021 台北一日遊</div>
     </div>
 
-    <script>
+    <script> // 文字資料匯入
         function getData(){
             let attractionId = window.location.pathname.split("/").pop();
 
-            fetch("http://52.200.212.151:3000/api/attraction/" + attractionId)
+            fetch("/api/attraction/" + attractionId)
             .then(function(response){
                 return response.json();
             })
@@ -127,11 +127,11 @@
         getData()
     </script>
 
-<script>
+<script> //輪播圖
     function getData2() {
         let attractionId = window.location.pathname.split("/").pop();
         console.log(attractionId)
-        fetch("http://52.200.212.151:3000/api/attraction/" + attractionId)
+        fetch("/api/attraction/" + attractionId)
             .then(function (response) {
                 return response.json();
             })
@@ -206,41 +206,56 @@
     getData2()
 </script>
 
-<script>
-// let buttonImg = document.createElement('img');
-// buttonImg.src = '../static/timebtnfill.png';
-// buttonImg.classList.add('timePicker1-2');
+<script> //切換$$
+    document.getElementById("morning").addEventListener("click", function () {
+        event.preventDefault();
+        this.classList.toggle("timeButton1-filled");
+        document.getElementById("afternoon").classList.remove("timeButton1-filled");
+        document.getElementById("price").textContent = "新台幣 2000 元";
+    });
 
-// document.getElementById('morning').addEventListener('click', function () {
-//     event.preventDefault();
-//     document.getElementById('price').textContent = '新台幣 2000 元';
-//     document.getElementById('morning').appendChild(buttonImg);
-// });
-
-// document.getElementById('afternoon').addEventListener('click', function () {
-//     event.preventDefault();
-//     document.getElementById('price').textContent = '新台幣 2500 元';
-// });
-document.getElementById("morning").addEventListener("click", function () {
-    event.preventDefault();
-    this.classList.toggle("timeButton1-filled");
-    document.getElementById("afternoon").classList.remove("timeButton1-filled");
-    document.getElementById("price").textContent = "新台幣 2000 元";
-});
-
-document.getElementById('afternoon').addEventListener('click', function () {
-    event.preventDefault();
-    this.classList.toggle('timeButton1-filled');
-    document.getElementById('morning').classList.remove('timeButton1-filled');
-    document.getElementById('price').textContent = '新台幣 2500 元';
-});
+    document.getElementById('afternoon').addEventListener('click', function () {
+        event.preventDefault();
+        this.classList.toggle('timeButton1-filled');
+        document.getElementById('morning').classList.remove('timeButton1-filled');
+        document.getElementById('price').textContent = '新台幣 2500 元';
+    });
 </script>
 
-<script>
+<script> //返回首頁
     document.getElementById('Title').addEventListener('click', function () {
         event.preventDefault();
         window.location.href = "http://52.200.212.151:3000";
     });
+</script>
+
+<script> //喚醒登入頁面
+    const buttonSignin = document.querySelector(".frame-item-4");
+    const memberSignincontainer = document.querySelector(".member_signin-container")
+    const memberSignoncontainer = document.querySelector(".member_signon-container")
+    const goSignon = document.querySelector(".go_signon");
+    const returnSignin = document.querySelector(".return_signin");
+    const formX = document.querySelectorAll(".form_x")
+    const modal = document.querySelector(".modal");
+
+    buttonSignin.addEventListener('click', () => {
+        console.log("點點點!")
+        modal.style.display = "block";
+        memberSignincontainer.style.display = "block";
+    });
+    goSignon.addEventListener('click', () => {
+        memberSignincontainer.style.display = "none";
+        memberSignoncontainer.style.display = "block";
+    });
+    returnSignin.addEventListener('click', () => {
+        memberSignincontainer.style.display = "block";
+        memberSignoncontainer.style.display = "none";
+    });
+    formX.forEach(formX => {formX.addEventListener('click', () => {
+        modal.style.display = "none";
+        memberSignincontainer.style.display = "none";
+        memberSignoncontainer.style.display = "none";
+    })});
 </script>
 
 </body>

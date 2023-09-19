@@ -10,8 +10,8 @@
         <div class="frame">
             <h2 class="frame-item-1">台北一日遊</h2>
             <div class="frame-item-2"></div>
-            <button class="frame-item-3">預定行程</button>
-            <button class="frame-item-4">登入/註冊</button>
+            <button type="button" class="frame-item-3">預定行程</button>
+            <button type="button" class="frame-item-4">登入/註冊</button>
         </div>
 
         <div class="frame2">
@@ -169,13 +169,40 @@
             </div>
             <div class="loadingObserver"></div>
         </div>
-
         <div class="footer">
             <div style="font-size: 16px; font-style: normal; font-weight: 700; line-height: 13.3px; color:#FFF">COPYRIGHT © 2021 台北一日遊</div>
         </div>
-       
-
-        <script>
+       <div class="modal">
+            <div class="member_signin-container">
+                <div class="signin_form-header"></div>
+                <form class="signin_form" id="signin_form" action="/signin" method="PUT">
+                    <div class="form_title-container">
+                        <div class="form_title">登入會員帳號</div>
+                        <button class="form_x"></button>
+                    </div>
+                    <input type="text" name="email" class="name_email_password" placeholder="輸入電子信箱">
+                    <input type="password" name="password" class="name_email_password" placeholder="輸入密碼" autocomplete="current-password">
+                    <button class="signin">登入帳戶</button>
+                    <div class="signon-container">還沒有帳戶？<button class="go_signon">點此註冊</button></div>
+                </form>
+            </div>
+            <div class="member_signon-container">
+                <div class="signon_form-header"></div>
+                <form class="signon_form" id="signon_form" action="/signon" method="POST">
+                    <div class="form_title-container">
+                        <div class="form_title">註冊會員帳號</div>
+                        <button class="form_x"></button>
+                    </div>
+                    <input type="text" name="signon_name" class="name_email_password" placeholder="輸入姓名">
+                    <input type="text" name="signon_email" class="name_email_password" placeholder="輸入電子信箱">
+                    <input type="password" name="signon_password" class="name_email_password" placeholder="輸入密碼" autocomplete="new-password">
+                    <button class="signon">註冊新帳戶</button>
+                    <div class="signoninfor"></div>
+                    <div class="signon-container">已經有帳戶了？<button class="return_signin">點此登入</button></div>
+                </form>
+            </div>
+        </div>
+        <script> //listbar scroll
             let buttonRight = document.getElementById('frame3-right-button');
             let buttonLeft = document.getElementById('frame3-left-button');
 
@@ -187,9 +214,9 @@
             };
         </script>
 
-        <script>
+        <script> //listbarn功能
             function getDatas() {
-                fetch("http://52.200.212.151:3000/api/mrts")
+                fetch("/api/mrts")
                     .then(function(response) {
                         return response.json();
                     })
@@ -223,9 +250,9 @@
             getDatas();
         </script>
 
-        <script>
+        <script> // 自動生成
             function getData(){
-                fetch("http://52.200.212.151:3000/api/attractions?page=0")
+                fetch("/api/attractions?page=0")
                 .then(function(response){
                     return response.json();
                 })
@@ -258,14 +285,14 @@
                         frame4Items[i].addEventListener("click", function(event) {
                             event.preventDefault();
                             console.log(idData);
-                            window.location = "http://52.200.212.151:3000/attraction/" + idData;
+                            window.location = "/attraction/" + idData;
                                 })
                 }})  
             }
             getData();
         </script>
 
-        <script>
+        <script> //Intersection Observer
             let nextPage = 1
             let Container = document.querySelector('.frame4')
             let loadingObserver = document.querySelector('.loadingObserver')
@@ -293,7 +320,7 @@
             const fetchData = () => {
                 if (isLoading) return; // 如果正在加載，則直接返回
                 isLoading = true;
-                fetch("http://52.200.212.151:3000/api/attractions?page=" + nextPage + "&keyword=" + keyword)
+                fetch("/api/attractions?page=" + nextPage + "&keyword=" + keyword)
                 .then(function(response){
                     return response.json();
                 })
@@ -323,7 +350,7 @@
                             frame4Item.addEventListener("click", function(event) {
                                 event.preventDefault();
                                 console.log(idData);
-                                window.location = "http://52.200.212.151:3000/attraction/" + idData;
+                                window.location = "/attraction/" + idData;
                             });
 
                             let frame4ItemContent = document.createElement("div");
@@ -374,6 +401,100 @@
 
                 let observer = new IntersectionObserver(callback, options)
                 observer.observe(loadingObserver)
+        </script>
+
+        <script> //喚醒登入頁面
+            const buttonSignin = document.querySelector(".frame-item-4");
+            const memberSignincontainer = document.querySelector(".member_signin-container")
+            const memberSignoncontainer = document.querySelector(".member_signon-container")
+            const goSignon = document.querySelector(".go_signon");
+            const returnSignin = document.querySelector(".return_signin");
+            const formX = document.querySelectorAll(".form_x");
+            const modal = document.querySelector(".modal");
+
+            buttonSignin.addEventListener('click', (event) => {
+                console.log("點點點!")
+                event.preventDefault();
+                modal.style.display = "block";
+                memberSignincontainer.style.display = "block";
+            });
+            goSignon.addEventListener('click', (event) => {
+                event.preventDefault();
+                memberSignincontainer.style.display = "none";
+                memberSignoncontainer.style.display = "block";
+            });
+            returnSignin.addEventListener('click', (event) => {
+                event.preventDefault();
+                memberSignincontainer.style.display = "block";
+                memberSignoncontainer.style.display = "none";
+            });
+            formX.forEach(formX => {formX.addEventListener('click', () => {
+                modal.style.display = "none";
+                memberSignincontainer.style.display = "none";
+                memberSignoncontainer.style.display = "none";
+            })});
+        </script>
+
+        <script> //登入資料
+            const signonForm = document.querySelector("#signon_form");
+            const signinForm = document.querySelector("#signin_form");
+
+            signonForm.addEventListener("submit",(event) => {
+                const signonName = document.querySelector("input[name=signon_name]").value;
+                const signonEmail = document.querySelector("input[name=signon_email]").value;
+                const signonPassword = document.querySelector("input[name=signon_password]").value;
+                const signonInput = [signonName,signonEmail,signonPassword];
+                let isEmpty = false;
+
+                signonInput.forEach(values => {
+                    if (values === ""){
+                        isEmpty = true;
+                    }
+                })
+                if(isEmpty){
+                        event.preventDefault();
+                        alert("Please fills all infors");
+                    }
+                else{
+                    event.preventDefault();
+                    signonFunc(signonInput)
+                }
+            })
+
+            function signonFunc(signonInput){
+                fetch("/api/signon", {  
+                    method: "POST",
+                    body: JSON.stringify({
+                        "name":signonInput[0],
+                        "email":signonInput[1],
+                        "password":signonInput[2],
+                    }),
+                    headers: {
+                        "Content-type": "application/json",
+                    }
+                })
+                .then(function(response){
+                return response.json();
+                })
+                .then(function(data){
+                    let signoninfor = document.querySelector(".signoninfor");
+                    let memberSignoncontainer = document.querySelector(".member_signon-container");
+
+                    if(data.ok){
+                        signoninfor.innerHTML = "<div>註冊成功，請登入系統</div>";
+                        signoninfor.style.display = "flex";
+                        memberSignoncontainer.style.height = "354px";
+                        signoninfor.style.color = "#489";
+                        console.log(data);
+                    }else{
+                        signoninfor.innerHTML = "<div>Email已經註冊帳戶</div>";
+                        signoninfor.style.display = "flex";
+                        memberSignoncontainer.style.height = "354px";
+                        signoninfor.style.color = "red";
+                        console.log(data);
+                    };
+                });
+            }
         </script>
     </body>
 </html>      

@@ -183,7 +183,36 @@ def api_mrts():
 			"data": "no mrt"
 		}
 		return jsonify(error_dict)
-	
-	
+
+@app.route("/api/signon", methods = ["POST"])
+
+def signon():
+    try:
+        data = request.json
+        name = data["name"]
+        email = data["email"]
+        password = data["password"]
+
+        connection = con.get_connection()
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("SELECT email FROM member WHERE email= %s", (email, ))
+        data = cursor.fetchone()
+
+        if data is None:
+            cursor.execute("INSERT INTO member(name, email, password) VALUES(%s, %s, %s)", (name, email, password))
+            connection.commit()
+            cursor.close()
+            connection.close()
+            return jsonify({"ok":True}), 200
+        else:
+            cursor.close()
+            connection.close()
+            return jsonify({"error": True,"message": "註冊失敗"}), 400
+    except mysql.connector.Error:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+        return jsonify({"error": True,"message": "databaseError"}), 500
 app.run(debug=True, host="0.0.0.0", port=3000)
 # app.run(debug = True, port = 3000)
