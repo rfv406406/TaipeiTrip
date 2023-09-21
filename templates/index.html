@@ -182,7 +182,8 @@
                     </div>
                     <input type="text" name="email" class="name_email_password" placeholder="輸入電子信箱">
                     <input type="password" name="password" class="name_email_password" placeholder="輸入密碼" autocomplete="current-password">
-                    <button class="signin">登入帳戶</button>
+                    <button class="signin" id="signinSubmit">登入帳戶</button>
+                    <div class="signoninfor"></div>
                     <div class="signon-container">還沒有帳戶？<button class="go_signon">點此註冊</button></div>
                 </form>
             </div>
@@ -196,7 +197,7 @@
                     <input type="text" name="signon_name" class="name_email_password" placeholder="輸入姓名">
                     <input type="text" name="signon_email" class="name_email_password" placeholder="輸入電子信箱">
                     <input type="password" name="signon_password" class="name_email_password" placeholder="輸入密碼" autocomplete="new-password">
-                    <button class="signon">註冊新帳戶</button>
+                    <button class="signon" id="signonSubmit">註冊新帳戶</button>
                     <div class="signoninfor"></div>
                     <div class="signon-container">已經有帳戶了？<button class="return_signin">點此登入</button></div>
                 </form>
@@ -411,6 +412,7 @@
             const returnSignin = document.querySelector(".return_signin");
             const formX = document.querySelectorAll(".form_x");
             const modal = document.querySelector(".modal");
+            const signoninfor = document.querySelector(".signoninfor");
 
             buttonSignin.addEventListener('click', (event) => {
                 console.log("點點點!")
@@ -422,13 +424,19 @@
                 event.preventDefault();
                 memberSignincontainer.style.display = "none";
                 memberSignoncontainer.style.display = "block";
+                document.getElementById("signin_form").reset();
+                signoninfor.style.display = "none";
             });
             returnSignin.addEventListener('click', (event) => {
                 event.preventDefault();
                 memberSignincontainer.style.display = "block";
                 memberSignoncontainer.style.display = "none";
+                document.getElementById("signon_form").reset();
+                signoninfor.style.display = "none";
+                memberSignoncontainer.style.height = "332px";
             });
-            formX.forEach(formX => {formX.addEventListener('click', () => {
+            formX.forEach(formX => {formX.addEventListener('click', (event) => {
+                event.preventDefault();
                 modal.style.display = "none";
                 memberSignincontainer.style.display = "none";
                 memberSignoncontainer.style.display = "none";
@@ -436,64 +444,120 @@
         </script>
 
         <script> //登入資料
-            const signonForm = document.querySelector("#signon_form");
-            const signinForm = document.querySelector("#signin_form");
+            const signonSubmit = document.querySelector("#signonSubmit");
+            const signinSubmit = document.querySelector("#signinSubmit");
 
-            signonForm.addEventListener("submit",(event) => {
+            document.addEventListener("DOMContentLoaded", function() {
+                init();
+            });
+
+            function init() {
+                signonSubmit.addEventListener("click", handleSignonSubmit);
+                signinSubmit.addEventListener("click", handleSignonSubmit);
+            }
+
+            function handleSignonSubmit(event) {
+                const signonInput = getSignonInput();
+                const inputResults = isInputEmpty(signonInput);
+                event.preventDefault();
+
+                if (inputResults[0] && inputResults[1]) {
+                    alert("Please fills all infors");
+                    console.log(inputResults[0]);
+                    console.log(inputResults[1]);
+                    return;
+                } 
+
+                if (!inputResults[0]){
+                    signon(signonInput)
+                }else{
+                    signin(signonInput)
+                }
+            }
+
+            function getSignonInput() {
                 const signonName = document.querySelector("input[name=signon_name]").value;
                 const signonEmail = document.querySelector("input[name=signon_email]").value;
                 const signonPassword = document.querySelector("input[name=signon_password]").value;
-                const signonInput = [signonName,signonEmail,signonPassword];
-                let isEmpty = false;
+                const email = document.querySelector("input[name=email]").value;
+                const password = document.querySelector("input[name=password]").value;
+                const signonInput = [signonName,signonEmail,signonPassword,email,password];
+                return signonInput
+            }
 
-                signonInput.forEach(values => {
-                    if (values === ""){
-                        isEmpty = true;
-                    }
-                })
-                if(isEmpty){
-                        event.preventDefault();
-                        alert("Please fills all infors");
-                    }
-                else{
-                    event.preventDefault();
-                    signonFunc(signonInput)
-                }
-            })
+            function isInputEmpty(signonInput) {
+                const firstThreeEmpty = signonInput.slice(0, 3).some(value => value === "");
+                const lastTwoHasEmpty = signonInput.slice(3).some(value => value === "");
+                return [firstThreeEmpty,lastTwoHasEmpty];
+            }
 
-            function signonFunc(signonInput){
-                fetch("/api/signon", {  
-                    method: "POST",
+            function submitForm(endpoint, method, signonInput) {
+                fetch(endpoint, {
+                    method: method,
                     body: JSON.stringify({
-                        "name":signonInput[0],
-                        "email":signonInput[1],
-                        "password":signonInput[2],
+                        "signonName": signonInput[0],
+                        "signonEmail": signonInput[1],
+                        "signonPassword": signonInput[2],
+                        "email": signonInput[3],
+                        "password": signonInput[4],
                     }),
                     headers: {
                         "Content-type": "application/json",
                     }
                 })
-                .then(function(response){
-                return response.json();
-                })
-                .then(function(data){
-                    let signoninfor = document.querySelector(".signoninfor");
-                    let memberSignoncontainer = document.querySelector(".member_signon-container");
+                .then(response => response.json())
+                .then(displaySignonResponse);
+            }
 
-                    if(data.ok){
-                        signoninfor.innerHTML = "<div>註冊成功，請登入系統</div>";
-                        signoninfor.style.display = "flex";
-                        memberSignoncontainer.style.height = "354px";
-                        signoninfor.style.color = "#489";
-                        console.log(data);
-                    }else{
-                        signoninfor.innerHTML = "<div>Email已經註冊帳戶</div>";
-                        signoninfor.style.display = "flex";
-                        memberSignoncontainer.style.height = "354px";
-                        signoninfor.style.color = "red";
-                        console.log(data);
-                    };
-                });
+            function signon(signonInput) {
+                submitForm("/api/user", "POST", signonInput);
+            }
+
+            function signin(signonInput) {
+                submitForm("/api/user/auth", "PUT", signonInput);
+            }
+
+            function displaySignonResponse(data) {
+                const signoninfor = document.querySelector(".signoninfor");
+                const memberSignoncontainer = document.querySelector(".member_signon-container");
+
+                if (data.ok) {
+                    updateUIForSuccess(signoninfor, memberSignoncontainer, data);
+                } else {
+                    updateUIForFailure(signoninfor, memberSignoncontainer, data);
+                }
+            }
+
+            function updateUIForSuccess(signoninfor, memberSignoncontainer, data) {
+                signoninfor.innerHTML = "<div>註冊成功，請登入系統</div>";
+                signoninfor.style.display = "flex";
+                memberSignoncontainer.style.height = "354px";
+                signoninfor.style.color = "#489";
+                console.log(data);
+            }
+
+            function updateUIForFailure(signoninfor, memberSignoncontainer, data) {
+                signoninfor.innerHTML = "<div>Email已經註冊帳戶</div>";
+                signoninfor.style.display = "flex";
+                memberSignoncontainer.style.height = "354px";
+                signoninfor.style.color = "red";
+                console.log(data);
+            }
+
+            function updateUIForSuccess(signoninfor, memberSignoncontainer, data) {
+                signoninfor.innerHTML = "<div>登入成功</div>";
+                signoninfor.style.display = "flex";
+                memberSignoncontainer.style.height = "297px";
+                signoninfor.style.color = "#489";
+                console.log(data);
+            }
+
+            function updateUIForFailure(signoninfor, memberSignoncontainer, data) {
+                signoninfor.innerHTML = "<div>電子郵件或密碼錯誤</div>";
+                signoninfor.style.display = "flex";
+                memberSignoncontainer.style.height = "275px";
+                signoninfor.style.color = "red";
+                console.log(data);
             }
         </script>
     </body>
