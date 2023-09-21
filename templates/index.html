@@ -10,8 +10,9 @@
         <div class="frame">
             <h2 class="frame-item-1">台北一日遊</h2>
             <div class="frame-item-2"></div>
-            <button type="button" class="frame-item-3">預定行程</button>
-            <button type="button" class="frame-item-4">登入/註冊</button>
+            <button class="frame-item-3">預定行程</button>
+            <button class="frame-item-4">登入/註冊</button>
+            <button class="frame-item-5">登出系統</button>
         </div>
 
         <div class="frame2">
@@ -183,7 +184,7 @@
                     <input type="text" name="email" class="name_email_password" placeholder="輸入電子信箱">
                     <input type="password" name="password" class="name_email_password" placeholder="輸入密碼" autocomplete="current-password">
                     <button class="signin" id="signinSubmit">登入帳戶</button>
-                    <div class="signoninfor"></div>
+                    <div class="signininfor"></div>
                     <div class="signon-container">還沒有帳戶？<button class="go_signon">點此註冊</button></div>
                 </form>
             </div>
@@ -406,6 +407,7 @@
 
         <script> //喚醒登入頁面
             const buttonSignin = document.querySelector(".frame-item-4");
+            const buttonSignout = document.querySelector(".frame-item-5");
             const memberSignincontainer = document.querySelector(".member_signin-container")
             const memberSignoncontainer = document.querySelector(".member_signon-container")
             const goSignon = document.querySelector(".go_signon");
@@ -413,6 +415,7 @@
             const formX = document.querySelectorAll(".form_x");
             const modal = document.querySelector(".modal");
             const signoninfor = document.querySelector(".signoninfor");
+            const signininfor = document.querySelector(".signininfor");
 
             buttonSignin.addEventListener('click', (event) => {
                 console.log("點點點!")
@@ -425,7 +428,7 @@
                 memberSignincontainer.style.display = "none";
                 memberSignoncontainer.style.display = "block";
                 document.getElementById("signin_form").reset();
-                signoninfor.style.display = "none";
+                signininfor.style.display = "none";
             });
             returnSignin.addEventListener('click', (event) => {
                 event.preventDefault();
@@ -446,16 +449,10 @@
         <script> //登入資料
             const signonSubmit = document.querySelector("#signonSubmit");
             const signinSubmit = document.querySelector("#signinSubmit");
-
-            document.addEventListener("DOMContentLoaded", function() {
-                init();
-            });
-
-            function init() {
-                signonSubmit.addEventListener("click", handleSignonSubmit);
-                signinSubmit.addEventListener("click", handleSignonSubmit);
-            }
-
+        
+            signonSubmit.addEventListener("click", handleSignonSubmit);
+            signinSubmit.addEventListener("click", handleSignonSubmit);
+            
             function handleSignonSubmit(event) {
                 const signonInput = getSignonInput();
                 const inputResults = isInputEmpty(signonInput);
@@ -519,16 +516,35 @@
 
             function displaySignonResponse(data) {
                 const signoninfor = document.querySelector(".signoninfor");
+                const signininfor = document.querySelector(".signininfor");
                 const memberSignoncontainer = document.querySelector(".member_signon-container");
-
+                const memberSignincontainer = document.querySelector(".member_signin-container");
+                
                 if (data.ok) {
-                    updateUIForSuccess(signoninfor, memberSignoncontainer, data);
-                } else {
-                    updateUIForFailure(signoninfor, memberSignoncontainer, data);
+                    signonForsuccess(signoninfor, memberSignoncontainer, data);
+                }  
+                
+                if (data.message === "Email已經註冊帳戶") {
+                    signonForfailure(signoninfor, memberSignoncontainer, data);
+                }
+
+                if (data.token) {
+                    signinForsuccess(signininfor, memberSignincontainer, data);
+                    saveToken(data.token);
+                    // submitToken();
+                } 
+                
+                if (data.message === "電子郵件或密碼錯誤"){
+                    signinForfailure(signininfor, memberSignincontainer, data);
+                }
+
+                if (data.message === "databaseError") {
+                    signonForfailure(signoninfor, memberSignoncontainer, data);
+                    signinForfailure(signininfor, memberSignincontainer, data);
                 }
             }
 
-            function updateUIForSuccess(signoninfor, memberSignoncontainer, data) {
+            function signonForsuccess(signoninfor, memberSignoncontainer, data) {
                 signoninfor.innerHTML = "<div>註冊成功，請登入系統</div>";
                 signoninfor.style.display = "flex";
                 memberSignoncontainer.style.height = "354px";
@@ -536,29 +552,73 @@
                 console.log(data);
             }
 
-            function updateUIForFailure(signoninfor, memberSignoncontainer, data) {
-                signoninfor.innerHTML = "<div>Email已經註冊帳戶</div>";
+            function signonForfailure(signoninfor, memberSignoncontainer, data) {
+                signoninfor.innerHTML = `<div>${data.message}</div>`;
                 signoninfor.style.display = "flex";
                 memberSignoncontainer.style.height = "354px";
                 signoninfor.style.color = "red";
+                console.log(data.message);
+            }
+
+            function signinForsuccess(signininfor, memberSignincontainer, data) {
+                signininfor.innerHTML = "<div>登入成功</div>";
+                signininfor.style.display = "flex";
+                memberSignincontainer.style.height = "297px";
+                signininfor.style.color = "#489";
+                buttonSignin.style.display = "none";
+                buttonSignout.style.display = "flex";
+                location.reload(); 
                 console.log(data);
             }
 
-            function updateUIForSuccess(signoninfor, memberSignoncontainer, data) {
-                signoninfor.innerHTML = "<div>登入成功</div>";
-                signoninfor.style.display = "flex";
-                memberSignoncontainer.style.height = "297px";
-                signoninfor.style.color = "#489";
+            function signinForfailure(signininfor, memberSignincontainer, data) {
+                signininfor.innerHTML = `<div>${data.message}</div>`;
+                signininfor.style.display = "flex";
+                memberSignincontainer.style.height = "297px";
+                signininfor.style.color = "red";
                 console.log(data);
             }
 
-            function updateUIForFailure(signoninfor, memberSignoncontainer, data) {
-                signoninfor.innerHTML = "<div>電子郵件或密碼錯誤</div>";
-                signoninfor.style.display = "flex";
-                memberSignoncontainer.style.height = "275px";
-                signoninfor.style.color = "red";
-                console.log(data);
+            buttonSignout.addEventListener('click', logout);
+
+            function saveToken(token){
+                localStorage.setItem('Token', token);
             }
+
+            function init(){
+                const token = localStorage.getItem('Token');
+                console.log(token)
+                if (token == null){
+                    return
+                }
+                fetch("/api/user/auth", {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    }
+                })
+                .then(response => response.json())
+                .then(data => loginCheck(data, buttonSignin, buttonSignout));
+            }
+
+            function loginCheck(data, buttonSignin, buttonSignout){
+                if (data !== null) {
+                    buttonSignin.style.display = "none";
+                    buttonSignout.style.display = "flex";
+                    buttonSignout.addEventListener('click', logout);
+                } else {
+                    buttonSignin.style.display = "flex";
+                    buttonSignout.style.display = "none";
+                    logout();
+                }
+            }
+
+            function logout() {
+                localStorage.removeItem('Token');
+                location.reload(); 
+            }
+
+            window.addEventListener('load', init);
         </script>
     </body>
 </html>      

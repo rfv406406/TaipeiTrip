@@ -25,6 +25,7 @@ con =  pooling.MySQLConnectionPool(pool_name = "mypool",
 
 import jwt
 import datetime
+from datetime import datetime, timedelta
 SECRET_KEY = "any string but secret"
 
 def create_token(user_data):
@@ -32,13 +33,18 @@ def create_token(user_data):
         'id': user_data['id'],
         'name': user_data['name'],
         'email': user_data['email'],
+        'exp': datetime.utcnow() + timedelta(days=7)
     }
     token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
     return token
 
 def decode_token(token):
-    payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
-    return payload
+    try:
+        return jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+    except jwt.ExpiredSignatureError:
+        return 'Token has expired'
+    except jwt.InvalidTokenError:
+        return 'Invalid token'
 
 # Pages
 @app.route("/")
@@ -221,7 +227,7 @@ def user():
         else:
             cursor.close()
             connection.close()
-            return jsonify({"error": True,"message": "註冊失敗"}), 400
+            return jsonify({"error": True,"message": "Email已經註冊帳戶"}), 400
     except mysql.connector.Error:
         if cursor:
             cursor.close()
@@ -239,7 +245,7 @@ def user_auth():
 
             connection = con.get_connection()
             cursor = connection.cursor(dictionary=True)
-            cursor.execute("SELECT id, email, password FROM member WHERE email= %s AND password=%s", (email, password))
+            cursor.execute("SELECT id, name, email FROM member WHERE email= %s AND password=%s", (email, password))
             data = cursor.fetchone()
             print(data)
 
@@ -260,23 +266,20 @@ def user_auth():
             return jsonify({"error": True,"message": "databaseError"}), 500
                    
     if request.method == "GET":
-        if "name" in session and "username" in session and "password" in session:
+        try:
+            auth_header = request.headers.get('Authorization')
+            token = auth_header.split(" ")[1]
+            payload = decode_token(token)
+    
+            user_id = payload.get('id')
+            user_name = payload.get('name')
+            user_email = payload.get('email')
 
-            data = request.json
-            renew_name = data.get("name")
-            cursor = con.cursor(dictionary=True)
-            cursor.execute("UPDATE member SET name = %s WHERE username = %s", (renew_name, session["username"]))
-            con.commit()
-            cursor.execute("SELECT id, name, username FROM member WHERE username = %s", (session["username"],))
-            result = cursor.fetchone()
-            cursor.close()
-            if result and result["name"] == renew_name:
-                session["name"] = renew_name
-                return '{"ok": true}'
-            else:
-                return '{"error": true}'
-        else:
-            return '{"error": true}'
+            return jsonify({"data":{'id': user_id, 'name': user_name, 'email': user_email}}), 200
+        except Exception:
+            return jsonify(None), 400
+
+
         
-app.run(debug=True, host="0.0.0.0", port=3000)
+app.run(debug=None, host="0.0.0.0", port=3000)
 # app.run(debug = True, port = 3000)

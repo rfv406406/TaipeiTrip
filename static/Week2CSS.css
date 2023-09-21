@@ -56,6 +56,21 @@ body{
   line-height: 13.3px;
     } 
 
+.frame-item-5{
+  display: none;
+  height: 34px;
+  min-width:91px;
+  padding: 10px 10px;
+  align-items: center;
+  color: #666666;
+  background-color:#FFF;
+  border:transparent;
+  font-family: Noto Sans TC;
+  font-weight: 500;
+  font-size:16px;
+  line-height: 13.3px;
+    } 
+
 .frame2{
   background-image: url("101.png");
   background-repeat: no-repeat;
@@ -521,6 +536,24 @@ body{
   line-height: 13.3px;
   color:#666;
   border:transparent;
+}
+
+.signininfor{
+  justify-content: center;
+  align-items: center;
+  display:none;
+  width:310px;
+  height:22px;
+  color:#489;
+  border:transparent;
+  background-color: #FFF;
+  font-family: Noto Sans TC;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 13.3px;
+  margin:auto;
+  margin-bottom: 10px;
 }
 
 .go_signon{
