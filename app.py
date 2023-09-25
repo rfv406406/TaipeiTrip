@@ -6,6 +6,7 @@ app=Flask(
     static_folder = "static",
     static_url_path = "/static",
     )
+
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.config["JSON_AS_ASCII"]=False
@@ -23,6 +24,8 @@ con =  pooling.MySQLConnectionPool(pool_name = "mypool",
                               pool_size = 3,
                               **config)
 
+# JWT
+# ============================================================================================
 import jwt
 import datetime
 from datetime import datetime, timedelta
@@ -45,6 +48,8 @@ def decode_token(token):
         return 'Token has expired'
     except jwt.InvalidTokenError:
         return 'Invalid token'
+
+# ============================================================================================
 
 # Pages
 @app.route("/")
@@ -268,7 +273,7 @@ def user_auth():
     if request.method == "GET":
         try:
             auth_header = request.headers.get('Authorization')
-            token = auth_header.split(" ")[1]
+            token = auth_header.split(' ')[1]
             payload = decode_token(token)
     
             user_id = payload.get('id')
@@ -279,7 +284,36 @@ def user_auth():
         except Exception:
             return jsonify(None), 400
 
+@app.route("/api/booking")
 
+def api_booking():
+    try:
+        data = request.json
+        name = data["signonName"]
+        email = data["signonEmail"]
+        password = data["signonPassword"]
+
+        connection = con.get_connection()
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("SELECT email FROM member WHERE email= %s", (email, ))
+        data = cursor.fetchone()
+
+        if data is None:
+            cursor.execute("INSERT INTO member(name, email, password) VALUES(%s, %s, %s)", (name, email, password))
+            connection.commit()
+            cursor.close()
+            connection.close()
+            return jsonify({"ok":True}), 200
+        else:
+            cursor.close()
+            connection.close()
+            return jsonify({"error": True,"message": "Email已經註冊帳戶"}), 400
+    except mysql.connector.Error:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+        return jsonify({"error": True,"message": "databaseError"}), 500
         
 app.run(debug=None, host="0.0.0.0", port=3000)
 # app.run(debug = True, port = 3000)

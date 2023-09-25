@@ -72,7 +72,7 @@ body{
     } 
 
 .frame2{
-  background-image: url("101.png");
+  background-image: url("static/image/101.png");
   background-repeat: no-repeat;
   background-size:cover;
   display: flex;

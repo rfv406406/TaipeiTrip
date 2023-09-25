@@ -1,0 +1,428 @@
+body{
+    margin:0;
+}
+  
+.header{
+    display: flex;
+    height: 34px;
+    padding: 10px 360px 10px 360px;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #E8E8E8;
+    margin-bottom: 40px;
+}
+
+@media (max-width:1200px){
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+.header{
+    width:90%;
+    padding: 10px 0 10px 0;
+    margin-left: 5%;
+}    
+}
+
+@media (max-width:360px){
+.header{
+    padding: 10px 0 10px 10px;
+}
+}
+
+.header .title{
+    font-family: Noto Sans TC;
+    font-size: 30px;
+    font-weight: 700;
+    color: #489;
+    min-width: 150px;
+} 
+
+.header .space{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: 875px;
+} 
+
+@media (max-width:1200px){
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+    .header .space{
+        width: 90%;
+        min-width: 15px;
+    } 
+}
+
+.header .button_plan{
+    display: flex;
+    height: 34px;
+    min-width:84px;
+    padding: 10px 10px;
+    align-items: center;
+    color: #666666;
+    background-color:#FFF;
+    border:transparent;
+    font-family: Noto Sans TC;
+    font-weight: 500;
+    font-size:16px;
+    line-height: 13.3px;
+}
+      
+.frame-item-4{
+    display: flex;
+    height: 34px;
+    min-width:91px;
+    padding: 10px 10px;
+    align-items: center;
+    color: #666666;
+    background-color:#FFF;
+    border:transparent;
+    font-family: Noto Sans TC;
+    font-weight: 500;
+    font-size:16px;
+    line-height: 13.3px;
+      } 
+
+.frame-item-5{
+    display: none;
+    height: 34px;
+    min-width:91px;
+    padding: 10px 10px;
+    align-items: center;
+    color: #666666;
+    background-color:#FFF;
+    border:transparent;
+    font-family: Noto Sans TC;
+    font-weight: 500;
+    font-size:16px;
+    line-height: 13.3px;
+    } 
+
+.header_line{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin:auto;
+    width: 1000px;
+    height: 17px;
+    padding: 5px 0;
+    color: #666;
+    font-family: Noto Sans TC;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+    margin-bottom: 30px;
+}
+
+@media (max-width:1200px){
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+.header_line{
+    width:90%;
+}    
+}
+
+.infors_container{
+    display: flex;
+    justify-content: flex-start;
+    width: 980px;
+    height: 200px;
+    gap: 30px;
+    margin:auto;
+}
+
+@media (max-width:1200px){
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+.infors_container{
+    width:90%;
+}    
+}
+
+@media (max-width:600px){
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+.infors_container{
+    width:90%;
+    height:100%;
+    flex-wrap: wrap;
+    flex-basis: calc(80%);
+}    
+}
+
+.attraction_image{
+    width: 266px;
+    height: 200px
+}
+
+@media (max-width:600px){
+    .attraction_image{
+        width: 100%;
+        height: 256px;
+        margin:auto;
+    }
+    }
+
+.attraction_image img{
+    width: 266px;
+    height: 200px
+}
+
+@media (max-width:600px){
+.attraction_image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+}
+
+.booking_infor{
+    width: 700px;
+    height: 185px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@media (max-width:600px){
+.booking_infor{
+    width: 100%;
+    height: 100%;
+}
+}
+
+.booking_infor .infor_title{
+    width: 100%;
+    height: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #489;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.booking_infor .delete_icon_1{
+    background-image: url("icon_delete.png");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: #FFF;
+    border: 1px solid transparent;
+}
+
+@media (max-width:600px){
+.booking_infor .delete_icon_1{
+    display: none;
+}
+}
+
+.booking_infor .delete_icon_2{
+    background-image: url("icon_delete.png");
+    background-size: cover;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: #FFF;
+    border: 1px solid transparent;
+    align-self: flex-end;
+}
+
+@media (max-width:600px){
+.booking_infor .delete_icon_2{
+    display: flex;
+}
+}
+
+
+.booking_infor .infor_title_2{
+    width: 100%;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap; 
+    color: #666;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    margin-top: 15px;
+}
+
+.booking_infor .text{
+    width: 100%;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    color: #666;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.separator_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.separator{
+    width: 1200px;
+    height: 1px;
+    background-color: #E8E8E8;
+}
+
+@media (max-width:1200px){
+.separator{
+    width: 90%;
+}
+}
+
+.connection_infor_container{
+    margin:auto;
+    width: 980px;
+    height: 227px;
+    color: #666;
+    font-family: Noto Sans TC;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+}
+
+@media (max-width:1200px){
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+.connection_infor_container{
+    width: 90%;
+    height: 100%;
+    line-height: 1.2;
+}    
+}
+
+.connection_infor_container .text{
+    min-width: 81px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap; 
+    color: #666;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.connection_infor{
+    width: 100%;
+    height: 175px;
+    margin-top: 20px;
+}
+
+.connection_infor .input{
+    width: 180px;
+    height: 18px;
+    padding: 10px;
+    color: #000;
+    border-radius: 5px;
+    border: #E8E8E8 solid 1px;
+}
+
+.payment_infor_container{
+    margin:auto;
+    width: 980px;
+    height: 198px;
+    color: #666;
+    font-family: Noto Sans TC;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+}
+
+@media (max-width:1200px){
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+.payment_infor_container{
+    width:90%;
+}    
+}
+
+.payment_infor_container .text{
+    min-width: 81px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap; 
+    color: #757575;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.payment_infor_container .input{
+    width: 180px;
+    height: 18px;
+    padding: 10px;
+    color: #757575;
+    border-radius: 5px;
+    border: #E8E8E8 solid 1px;
+}
+
+.payment{
+    display: flex;
+    width: 980px;
+    height: 100px;
+    margin:auto;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 22px;
+    color: #666;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 13.3px;
+    margin-bottom: 40px;
+}
+
+@media (max-width:1200px){
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+    .payment{
+    width: 90%;
+}    
+}
+
+.payment .pay_button{
+    width: 173px;
+    height: 36px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border-color: transparent;
+    background-color: #489;
+    color: #FFF;
+    font-family: Noto Sans TC;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    white-space: nowrap; 
+}
+
+.footer{
+    display: flex;
+    background-color:#757575;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 104px;
+    margin: 0;
+  }
