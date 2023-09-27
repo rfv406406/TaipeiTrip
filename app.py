@@ -29,6 +29,7 @@ con =  pooling.MySQLConnectionPool(pool_name = "mypool",
 import jwt
 import datetime
 from datetime import datetime, timedelta
+from jwt import ExpiredSignatureError
 SECRET_KEY = "any string but secret"
 
 def create_token(user_data):
@@ -252,7 +253,6 @@ def user_auth():
             cursor = connection.cursor(dictionary=True)
             cursor.execute("SELECT id, name, email FROM member WHERE email= %s AND password=%s", (email, password))
             data = cursor.fetchone()
-            print(data)
 
             if data is None:
                 cursor.close()
@@ -286,12 +286,13 @@ def user_auth():
         except Exception:
             return jsonify(None), 400
 
-@app.route("/api/booking", methods=["GET","PUT","DELETE"])
+@app.route("/api/booking", methods=["GET","POST","DELETE"])
 
 def api_booking():
     if request.method == "POST":
         try:
             auth_header = request.headers.get('Authorization')
+            print(auth_header)
             if auth_header is None:
                 return ({"error": True,"message": "please sign in"}), 403
             else:
@@ -300,6 +301,7 @@ def api_booking():
                 member_id = payload.get('id')
 
             data = request.json
+            print(data)
             if not data:
                 return ({"error": True,"message": "data is not existed"}), 400
             
@@ -385,5 +387,5 @@ def api_booking():
             cursor.close()
             connection.close()
         
-app.run(debug=None, host="0.0.0.0", port=3000)
+app.run(debug=True, host="0.0.0.0", port=3000)
 # app.run(debug = True, port = 3000)

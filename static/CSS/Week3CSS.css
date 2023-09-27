@@ -180,7 +180,7 @@ body{
 }
 }
 .img_container .button-img-left{
-    background-image: url('button-left.png');
+    background-image: url('../image/button-left.png');
     background-size: 32px 32px;
     width: 32px;
     height: 32px;
@@ -235,7 +235,7 @@ body{
 }
   
 .img_container .button-img-right{
-    background-image: url('button-right.png');
+    background-image: url('../image/button-right.png');
     background-size: 32px 32px;
     width: 32px;
     height: 32px;
@@ -423,7 +423,7 @@ body{
 }
 
 .timebutton_container .timeButton1-filled{
-    background-image: url("timebtnfill.png");
+    background-image: url("../image/timebtnfill.png");
 }
 
 .timebutton_container .booking_form_title3{
@@ -654,7 +654,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('icon_close.png');
+    background-image: url('../image/icon_close.png');
     background-repeat: no-repeat;
     background-color: #FFF;
     position: absolute;

@@ -201,7 +201,7 @@ body{
 }
 
 .booking_infor .delete_icon_1{
-    background-image: url("icon_delete.png");
+    background-image: url("../image/icon_delete.png");
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -219,7 +219,7 @@ body{
 }
 
 .booking_infor .delete_icon_2{
-    background-image: url("icon_delete.png");
+    background-image: url("../image/icon_delete.png");
     background-size: cover;
     display: none;
     justify-content: center;

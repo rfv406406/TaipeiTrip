@@ -21,7 +21,7 @@ con =  pooling.MySQLConnectionPool(pool_name = "mypool",
                               pool_size = 3,
                               **config)
 
-json_file_path = "taipei-attractions.json"
+json_file_path = "data/taipei-attractions.json"
 with open(json_file_path, "r", encoding="utf-8") as json_file:
     data = json.load(json_file)
 

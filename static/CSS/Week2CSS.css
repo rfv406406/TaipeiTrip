@@ -72,7 +72,7 @@ body{
     } 
 
 .frame2{
-  background-image: url("static/image/101.png");
+  background-image: url("../image/101.png");
   background-repeat: no-repeat;
   background-size:cover;
   display: flex;
@@ -143,7 +143,7 @@ body{
 }
 
 .slogan-item-3-button{
-  background-image: url("search_bg.png");
+  background-image: url("../image/search_bg.png");
   width: 60px;
   height: 46px;
   flex-shrink: 0;
@@ -153,7 +153,7 @@ body{
 }
 
 .slogan-item-3-button-icon{
-  background-image: url('search_icon.png');
+  background-image: url('../image/search_icon.png');
   background-size: 30px 30px;
   height: 30px;
   flex-shrink: 0;
@@ -201,7 +201,7 @@ body{
 }
 
 .frame3-left-button{
-  background-image: url('button-left.png');
+  background-image: url('../image/button-left.png');
   background-size: 32px 32px;
   width: 32px;
   height: 32px;
@@ -210,7 +210,7 @@ body{
 }
 
 .frame3-left-button:hover{
-  background-image: url('button-left-Hovered.png');
+  background-image: url('../image/button-left-Hovered.png');
   background-size: 32px 32px;
   width: 32px;
   height: 32px;
@@ -219,7 +219,7 @@ body{
 }
 
 .frame3-right-button{
-  background-image: url('button-right.png');
+  background-image: url('../image/button-right.png');
   background-size: 32px 32px;
   width: 32px;
   height: 32px;
@@ -228,7 +228,7 @@ body{
 }
 
 .frame3-right-button:hover{
-  background-image: url('button-right-Hovered.png');
+  background-image: url('../image/button-right-Hovered.png');
   background-size: 32px 32px;
   width: 32px;
   height: 32px;
@@ -468,7 +468,7 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('icon_close.png');
+  background-image: url('../image/icon_close.png');
   background-repeat: no-repeat;
   background-color: #FFF;
   position: absolute;
