@@ -125,30 +125,24 @@
     getData2()
 
  //切換$$
-    document.getElementById("morning").addEventListener("click", function () {
+    let getTimeandPrice = []
+    
+    document.getElementById("morning").addEventListener("click", function morningDataget() {
         event.preventDefault();
         this.classList.toggle("timeButton1-filled");
         document.getElementById("afternoon").classList.remove("timeButton2-filled");
         document.getElementById("price").textContent = "新台幣 2000 元";
-        const morning = document.querySelector('.timeButton1-filled');
-        const afternoon = document.querySelector('.timeButton2-filled');
-        const price = document.getElementById('price').textContent;
-        console.log(morning)
-        console.log(afternoon)
-        console.log(price)
+        getTimeandPrice = ['morning', 2000];
+        console.log(getTimeandPrice)
     });
 
-    document.getElementById('afternoon').addEventListener('click', function () {
+    document.getElementById('afternoon').addEventListener('click', function afternoonDataget() {
         event.preventDefault();
         this.classList.toggle('timeButton2-filled');
         document.getElementById('morning').classList.remove('timeButton1-filled');
         document.getElementById('price').textContent = '新台幣 2500 元';
-        const morning = document.querySelector('.timeButton1-filled');
-        const afternoon = document.querySelector('.timeButton2-filled');
-        const price = document.getElementById('price').textContent;
-        console.log(afternoon)
-        console.log(morning)
-        console.log(price)
+        getTimeandPrice = ['afternoon', 2500]
+        console.log(getTimeandPrice)
     });
 
 
@@ -164,43 +158,57 @@ const button_submit = document.querySelector('#button_submit');
 
 button_plan.addEventListener('click', init_2);
 button_submit.addEventListener('click', init_2);
-//使用者登入狀態確認
+
 function init_2(event){
+    event.preventDefault();
     const buttonId = event.target.id;
     const token = localStorage.getItem('Token');
-    console.log(token)
+    console.log(token);
     if (token !== null){
-        fetch("http://127.0.0.1:3000/api/user/auth", {
+        fetchData(token, buttonId);
+    }else{
+        executeButtonsignin();
+    }
+}
+
+function fetchData(token, buttonId) {
+    fetch("http://127.0.0.1:3000/api/user/auth", {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,
         }
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Get null from backend');
-        }
-        return response.json();
-    })
-    .then(data => {
-        switch(buttonId) {
-            case 'button_plan':
-                loginCheck_2();
-                break;
-            case 'button_submit':
-                booking();
-                break;
-        }
-    })
-    .catch(error => {
-        console.error('Backend could got problems');
-    })
-    }else{
-        executeButtonsignin();
-}
+    .then(handleResponse)
+    .then(data => handleData(data, buttonId))
+    .catch(handleError);
 }
 
-// function init_2(){
+function handleResponse(response) {
+    if (!response.ok) {
+        throw new Error('Get null from backend');
+    }
+    return response.json();
+}
+
+function handleData(data, buttonId) {
+    console.log(buttonId);
+    switch(buttonId) {
+        case 'button_plan':
+            loginCheck_2();
+            break;
+        case 'button_submit':
+            booking();
+            break;
+    }
+}
+
+function handleError(error) {
+    console.error('Backend could got problems', error);
+}
+//使用者登入狀態確認
+// function init_2(event){
+//     event.preventDefault();
+//     const buttonId = event.target.id;
 //     const token = localStorage.getItem('Token');
 //     console.log(token)
 //     if (token !== null){
@@ -217,10 +225,18 @@ function init_2(event){
 //         return response.json();
 //     })
 //     .then(data => {
-//         booking();
+//         console.log(buttonId)
+//         switch(buttonId) {
+//             case 'button_plan':
+//                 loginCheck_2();
+//                 break;
+//             case 'button_submit':
+//                 booking();
+//                 break;
+//         }
 //     })
 //     .catch(error => {
-//         console.error('Backend could get problems');
+//         console.error('Backend could got problems');
 //     })
 //     }else{
 //         executeButtonsignin();
@@ -236,22 +252,37 @@ function executeButtonsignin(){
     memberSignincontainer.style.display = "block";
 }
 
-const morning = document.querySelector('.timeButton1-filled');
-const afternoon = document.querySelector('.timeButton2-filled');
-// const price = document.getElementById('price').textContent
-const datePicker = document.querySelector('#datePicker');
-console.log(attractionId,morning,afternoon,price,datePicker)
-
 datePicker.addEventListener('input', datePickerclick);
 
 function datePickerclick(){
     let selectedDate = datePicker.value; // 获取日期输入框的值
     console.log(selectedDate); // 打印选中的日期
-    datePicker.setAttribute('data-selected-date', selectedDate);
+    datePicker.setAttribute('value', selectedDate);
 }
 
 function booking(){
     const attractionId = window.location.pathname.split("/").pop();
-    const selectedDate = datePicker.getAttribute('data-selected-date');
-    console.log(selectedDate);
+    const selectedDate = datePicker.getAttribute('value');
+    const token = localStorage.getItem('Token');
+    console.log(attractionId, selectedDate, getTimeandPrice)
+    if (attractionId == null || selectedDate == null || getTimeandPrice.length == 0){
+        alert('請輸入訂購資訊');
+        return;
+    }
+    fetch("http://127.0.0.1:3000/api/booking", {
+        method: 'POST',
+        body: JSON.stringify({
+            "attractionId": attractionId,
+            "date": selectedDate,
+            "time": getTimeandPrice[0],
+            "price": getTimeandPrice[1],
+        }),
+        headers: {
+            "Content-type": "application/json",
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then(handleResponse)
+    .then(data => window.location.href = "/booking")
+    .catch(handleError);
 }

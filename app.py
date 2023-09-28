@@ -313,6 +313,14 @@ def api_booking():
             connection = con.get_connection()
             cursor = connection.cursor(dictionary=True)
 
+            cursor.execute("SELECT * FROM booking WHERE member_id = %s",(member_id,))
+            data = cursor.fetchall()
+            print(data)
+
+            if data:
+                cursor.execute("DELETE FROM booking WHERE member_id = %s", (member_id,))
+                connection.commit()
+
             cursor.execute("INSERT INTO booking(member_id, attractionId, date, time, price) VALUES(%s, %s, %s, %s, %s)", (member_id, attractionId, date, time, price))
             connection.commit()
             cursor.close()
