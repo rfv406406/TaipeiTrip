@@ -426,6 +426,10 @@ body{
     background-image: url("../image/timebtnfill.png");
 }
 
+.timebutton_container .timeButton2-filled{
+    background-image: url("../image/timebtnfill.png");
+}
+
 .timebutton_container .booking_form_title3{
     display: flex;
     justify-content: flex-start;

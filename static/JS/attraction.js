@@ -1,7 +1,6 @@
  // 文字資料匯入
+    const attractionId = window.location.pathname.split("/").pop();
     function getData(){
-        let attractionId = window.location.pathname.split("/").pop();
-
         fetch("http://127.0.0.1:3000/api/attraction/" + attractionId)
         .then(function(response){
             return response.json();
@@ -129,15 +128,27 @@
     document.getElementById("morning").addEventListener("click", function () {
         event.preventDefault();
         this.classList.toggle("timeButton1-filled");
-        document.getElementById("afternoon").classList.remove("timeButton1-filled");
+        document.getElementById("afternoon").classList.remove("timeButton2-filled");
         document.getElementById("price").textContent = "新台幣 2000 元";
+        const morning = document.querySelector('.timeButton1-filled');
+        const afternoon = document.querySelector('.timeButton2-filled');
+        const price = document.getElementById('price').textContent;
+        console.log(morning)
+        console.log(afternoon)
+        console.log(price)
     });
 
     document.getElementById('afternoon').addEventListener('click', function () {
         event.preventDefault();
-        this.classList.toggle('timeButton1-filled');
+        this.classList.toggle('timeButton2-filled');
         document.getElementById('morning').classList.remove('timeButton1-filled');
         document.getElementById('price').textContent = '新台幣 2500 元';
+        const morning = document.querySelector('.timeButton1-filled');
+        const afternoon = document.querySelector('.timeButton2-filled');
+        const price = document.getElementById('price').textContent;
+        console.log(afternoon)
+        console.log(morning)
+        console.log(price)
     });
 
 
@@ -147,5 +158,100 @@
         window.location.href = "http://127.0.0.1:3000";
     });
 
+//===================================================================================
+const button_plan = document.querySelector('#button_plan');
+const button_submit = document.querySelector('#button_submit');
 
- 
+button_plan.addEventListener('click', init_2);
+button_submit.addEventListener('click', init_2);
+//使用者登入狀態確認
+function init_2(event){
+    const buttonId = event.target.id;
+    const token = localStorage.getItem('Token');
+    console.log(token)
+    if (token !== null){
+        fetch("http://127.0.0.1:3000/api/user/auth", {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Get null from backend');
+        }
+        return response.json();
+    })
+    .then(data => {
+        switch(buttonId) {
+            case 'button_plan':
+                loginCheck_2();
+                break;
+            case 'button_submit':
+                booking();
+                break;
+        }
+    })
+    .catch(error => {
+        console.error('Backend could got problems');
+    })
+    }else{
+        executeButtonsignin();
+}
+}
+
+// function init_2(){
+//     const token = localStorage.getItem('Token');
+//     console.log(token)
+//     if (token !== null){
+//         fetch("http://127.0.0.1:3000/api/user/auth", {
+//         method: 'GET',
+//         headers: {
+//             'Authorization': `Bearer ${token}`,
+//         }
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Get null from backend');
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         booking();
+//     })
+//     .catch(error => {
+//         console.error('Backend could get problems');
+//     })
+//     }else{
+//         executeButtonsignin();
+// }
+// }
+//確認登入狀態後之事件處理
+function loginCheck_2(){
+    window.location.href = "/booking";
+}
+
+function executeButtonsignin(){
+    modal.style.display = "block";
+    memberSignincontainer.style.display = "block";
+}
+
+const morning = document.querySelector('.timeButton1-filled');
+const afternoon = document.querySelector('.timeButton2-filled');
+// const price = document.getElementById('price').textContent
+const datePicker = document.querySelector('#datePicker');
+console.log(attractionId,morning,afternoon,price,datePicker)
+
+datePicker.addEventListener('input', datePickerclick);
+
+function datePickerclick(){
+    let selectedDate = datePicker.value; // 获取日期输入框的值
+    console.log(selectedDate); // 打印选中的日期
+    datePicker.setAttribute('data-selected-date', selectedDate);
+}
+
+function booking(){
+    const attractionId = window.location.pathname.split("/").pop();
+    const selectedDate = datePicker.getAttribute('data-selected-date');
+    console.log(selectedDate);
+}

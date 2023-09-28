@@ -42,10 +42,11 @@ formX.forEach(formX => {formX.addEventListener('click', (event) => {
 //登入資料
 const signonSubmit = document.querySelector("#signonSubmit");
 const signinSubmit = document.querySelector("#signinSubmit");
-
+//註冊
 signonSubmit.addEventListener("click", handleSignonSubmit);
+//登入
 signinSubmit.addEventListener("click", handleSignonSubmit);
-
+//登入及註冊資料確認後連接對應之傳送API
 function handleSignonSubmit(event) {
     const signonInput = getSignonInput();
     const inputResults = isInputEmpty(signonInput);
@@ -64,7 +65,7 @@ function handleSignonSubmit(event) {
         signin(signonInput)
     }
 }
-
+//取得註冊及登入資料
 function getSignonInput() {
     const signonName = document.querySelector("input[name=signon_name]").value;
     const signonEmail = document.querySelector("input[name=signon_email]").value;
@@ -74,13 +75,13 @@ function getSignonInput() {
     const signonInput = [signonName,signonEmail,signonPassword,email,password];
     return signonInput
 }
-
+//檢查註冊及登入資料是否有缺失
 function isInputEmpty(signonInput) {
     const firstThreeEmpty = signonInput.slice(0, 3).some(value => value === "");
     const lastTwoHasEmpty = signonInput.slice(3).some(value => value === "");
     return [firstThreeEmpty,lastTwoHasEmpty];
 }
-
+//送出表單到後端
 function submitForm(endpoint, method, signonInput) {
     fetch(endpoint, {
         method: method,
@@ -98,15 +99,15 @@ function submitForm(endpoint, method, signonInput) {
     .then(response => response.json())
     .then(displaySignonResponse);
 }
-
+//連接後端註冊API
 function signon(signonInput) {
     submitForm("http://127.0.0.1:3000/api/user", "POST", signonInput);
 }
-
+//連接後端登入API
 function signin(signonInput) {
     submitForm("http://127.0.0.1:3000/api/user/auth", "PUT", signonInput);
 }
-
+//後端註冊及登入回應處理
 function displaySignonResponse(data) {
     const signoninfor = document.querySelector(".signoninfor");
     const signininfor = document.querySelector(".signininfor");
@@ -136,7 +137,7 @@ function displaySignonResponse(data) {
         signinForfailure(signininfor, memberSignincontainer, data);
     }
 }
-
+//註冊成功文字顯示
 function signonForsuccess(signoninfor, memberSignoncontainer, data) {
     signoninfor.innerHTML = "<div>註冊成功，請登入系統</div>";
     signoninfor.style.display = "flex";
@@ -144,7 +145,7 @@ function signonForsuccess(signoninfor, memberSignoncontainer, data) {
     signoninfor.style.color = "#489";
     console.log(data);
 }
-
+//註冊失敗文字顯示
 function signonForfailure(signoninfor, memberSignoncontainer, data) {
     signoninfor.innerHTML = `<div>${data.message}</div>`;
     signoninfor.style.display = "flex";
@@ -152,7 +153,7 @@ function signonForfailure(signoninfor, memberSignoncontainer, data) {
     signoninfor.style.color = "red";
     console.log(data.message);
 }
-
+//登入成功文字顯示
 function signinForsuccess(signininfor, memberSignincontainer, data) {
     signininfor.innerHTML = "<div>登入成功</div>";
     signininfor.style.display = "flex";
@@ -163,7 +164,7 @@ function signinForsuccess(signininfor, memberSignincontainer, data) {
     location.reload(); 
     console.log(data);
 }
-
+//登入失敗文字顯示
 function signinForfailure(signininfor, memberSignincontainer, data) {
     signininfor.innerHTML = `<div>${data.message}</div>`;
     signininfor.style.display = "flex";
@@ -171,13 +172,13 @@ function signinForfailure(signininfor, memberSignincontainer, data) {
     signininfor.style.color = "red";
     console.log(data);
 }
-
+//登出_監聽事件
 buttonSignout.addEventListener('click', logout);
-
+//token儲存
 function saveToken(token){
     localStorage.setItem('Token', token);
 }
-
+//使用者登入狀態確認
 function init(){
     const token = localStorage.getItem('Token');
     console.log(token)
@@ -193,7 +194,7 @@ function init(){
     .then(response => response.json())
     .then(data => loginCheck(data, buttonSignin, buttonSignout));
 }
-
+//確認登入狀態後之事件處理
 function loginCheck(data, buttonSignin, buttonSignout){
     if (data !== null) {
         buttonSignin.style.display = "none";
@@ -205,10 +206,11 @@ function loginCheck(data, buttonSignin, buttonSignout){
         logout();
     }
 }
-
+//登出
 function logout() {
     localStorage.removeItem('Token');
     location.reload(); 
 }
-
+//F5
 window.addEventListener('load', init);
+
