@@ -101,11 +101,11 @@ function submitForm(endpoint, method, signonInput) {
 }
 //連接後端註冊API
 function signon(signonInput) {
-    submitForm("http://127.0.0.1:3000/api/user", "POST", signonInput);
+    submitForm("/api/user", "POST", signonInput);
 }
 //連接後端登入API
 function signin(signonInput) {
-    submitForm("http://127.0.0.1:3000/api/user/auth", "PUT", signonInput);
+    submitForm("/api/user/auth", "PUT", signonInput);
 }
 //後端註冊及登入回應處理
 function displaySignonResponse(data) {
@@ -189,7 +189,7 @@ function init(){
             return
         }
     }
-    fetch("http://127.0.0.1:3000/api/user/auth", {
+    fetch("/api/user/auth", {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,

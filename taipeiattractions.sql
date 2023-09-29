@@ -84,6 +84,34 @@ INSERT INTO `attractions` VALUES (1,'新北投溫泉區','北投溫泉從日據�
 UNLOCK TABLES;
 
 --
+-- Table structure for table `booking`
+--
+
+DROP TABLE IF EXISTS `booking`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `booking` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `member_id` bigint NOT NULL,
+  `attractionId` bigint NOT NULL,
+  `date` varchar(255) NOT NULL,
+  `time` varchar(255) NOT NULL,
+  `price` varchar(255) NOT NULL,
+  `currenttime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `booking`
+--
+
+LOCK TABLES `booking` WRITE;
+/*!40000 ALTER TABLE `booking` DISABLE KEYS */;
+/*!40000 ALTER TABLE `booking` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `categories`
 --
 
@@ -266,4 +294,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-22 21:59:28
+-- Dump completed on 2023-09-29 22:55:37

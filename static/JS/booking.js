@@ -13,7 +13,7 @@ function init_2(event){
 }
 
 function fetchData(token, buttonId) {
-    fetch("http://127.0.0.1:3000/api/user/auth", {
+    fetch("/api/user/auth", {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -91,7 +91,7 @@ function appendData(data){
 //取得訂購資料
 function fetchReservedata() {
     const token = localStorage.getItem('Token');
-    fetch("http://127.0.0.1:3000/api/booking", {
+    fetch("/api/booking", {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -108,7 +108,7 @@ function checkResponse(response) {
     let body = document.querySelector('#body');
     return response.json().then(data => {
         if (data == null || data.data == null) {
-            body.innerHTML = '<div style="display: flex; justify-content: flex-start; align-items: center; width: 90%; margin:auto; margin-bottom: 30px;">目前沒有任何預定行程</div>';
+            body.innerHTML = '<div style="display: flex; justify-content: center; align-items: center; width: 90%; margin:auto; margin-bottom: 30px;">目前沒有任何預定行程</div>';
             throw new Error('No booking data available'); // 抛出错误
         }
         return data; // 返回实际数据以进行进一步处理
@@ -121,7 +121,7 @@ function checkResponse(response) {
 //返回首頁
 document.getElementById('Title').addEventListener('click', function () {
     event.preventDefault();
-    window.location.href = "http://127.0.0.1:3000";
+    window.location.href = '/';
 });
 
 //刪除按鈕
@@ -141,7 +141,7 @@ deleteIcon2.addEventListener('click', function () {
 //刪除訂購資訊
 function deleteReservedata() {
     const token = localStorage.getItem('Token');
-    fetch("http://127.0.0.1:3000/api/booking", {
+    fetch("/api/booking", {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${token}`,

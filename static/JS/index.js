@@ -12,7 +12,7 @@ buttonLeft.onclick = function () {
 
 //listbarn功能
 function getDatas() {
-    fetch("http://127.0.0.1:3000/api/mrts")
+    fetch("/api/mrts")
         .then(function(response) {
             return response.json();
         })
@@ -48,7 +48,7 @@ getDatas();
 
 // 自動生成
 function getData(){
-    fetch("http://127.0.0.1:3000/api/attractions?page=0")
+    fetch("/api/attractions?page=0")
     .then(function(response){
         return response.json();
     })
@@ -116,7 +116,7 @@ document.querySelector(".slogan-item-3").addEventListener("submit", function(eve
 const fetchDatas = () => {
     if (isLoading) return; // 如果正在加載，則直接返回
         isLoading = true;
-        fetch("http://127.0.0.1:3000/api/attractions?page=" + nextPage + "&keyword=" + keyword)
+        fetch("/api/attractions?page=" + nextPage + "&keyword=" + keyword)
         .then(function(response){
             return response.json();
         })
@@ -217,7 +217,7 @@ function init_2(event){
 }
 
 function fetchData(token, buttonId) {
-    fetch("http://127.0.0.1:3000/api/user/auth", {
+    fetch("/api/user/auth", {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,

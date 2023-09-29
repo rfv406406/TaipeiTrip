@@ -1,7 +1,7 @@
  // 文字資料匯入
     const attractionId = window.location.pathname.split("/").pop();
     function getData(){
-        fetch("http://127.0.0.1:3000/api/attraction/" + attractionId)
+        fetch("/api/attraction/" + attractionId)
         .then(function(response){
             return response.json();
         })
@@ -50,7 +50,7 @@
     function getData2() {
         let attractionId = window.location.pathname.split("/").pop();
         console.log(attractionId)
-        fetch("http://127.0.0.1:3000/api/attraction/" + attractionId)
+        fetch("/api/attraction/" + attractionId)
             .then(function (response) {
                 return response.json();
             })
@@ -149,7 +149,7 @@
 //返回首頁
     document.getElementById('Title').addEventListener('click', function () {
         event.preventDefault();
-        window.location.href = "http://127.0.0.1:3000";
+        window.location.href = '/';
     });
 
 //===================================================================================
@@ -172,7 +172,7 @@ function init_2(event){
 }
 
 function fetchData(token, buttonId) {
-    fetch("http://127.0.0.1:3000/api/user/auth", {
+    fetch("/api/user/auth", {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -269,7 +269,7 @@ function booking(){
         alert('請輸入訂購資訊');
         return;
     }
-    fetch("http://127.0.0.1:3000/api/booking", {
+    fetch("/api/booking", {
         method: 'POST',
         body: JSON.stringify({
             "attractionId": attractionId,
