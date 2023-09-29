@@ -183,7 +183,11 @@ function init(){
     const token = localStorage.getItem('Token');
     console.log(token)
     if (token == null){
-        return
+        if(window.location.pathname === '/booking') {
+            window.location.href = '/'; 
+        }else{
+            return
+        }
     }
     fetch("http://127.0.0.1:3000/api/user/auth", {
         method: 'GET',
@@ -196,10 +200,15 @@ function init(){
 }
 //確認登入狀態後之事件處理
 function loginCheck(data, buttonSignin, buttonSignout){
+    console.log(data);
     if (data !== null) {
         buttonSignin.style.display = "none";
         buttonSignout.style.display = "flex";
         buttonSignout.addEventListener('click', logout);
+        console.log(data.data.name)
+        const usernameData = data.data.name;
+        const userName = document.querySelector('#user_name');
+        userName.textContent = usernameData;
     } else {
         buttonSignin.style.display = "flex";
         buttonSignout.style.display = "none";
@@ -209,7 +218,11 @@ function loginCheck(data, buttonSignin, buttonSignout){
 //登出
 function logout() {
     localStorage.removeItem('Token');
-    location.reload(); 
+    if(window.location.pathname === '/booking') {
+        window.location.href = '/'; 
+    } else {
+        location.reload(); 
+    }
 }
 //F5
 window.addEventListener('load', init);

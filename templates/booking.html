@@ -10,56 +10,58 @@
     <div class="header">
         <h2 class="title" id="Title">台北一日遊</h2>
         <div class="space"></div>
-        <button class="button_plan">預定行程</button>
+        <button class="button_plan" id="button_plan">預定行程</button>
         <button class="frame-item-4">登入/註冊</button>
         <button class="frame-item-5">登出系統</button>
     </div>
     <div class="header_line">
         您好，<span id="user_name">Yakko</span>，帶預定的行程如下:
     </div>
-    <main class="infors_container">
-        <div class="attraction_image">
-            <img src="https://www.travel.taipei/d_upload_ttn/sceneadmin/pic/11000848.jpg">
+    <div id="body">
+        <main class="infors_container">
+            <div class="attraction_image">
+                <!-- <img src="https://www.travel.taipei/d_upload_ttn/sceneadmin/pic/11000848.jpg"> -->
+            </div>
+            <div class="booking_infor">
+                <div class="infor_title"><span>台北一日遊：<span id="infor_name">平安鐘</span></span><button class="delete_icon_1"></button></div>
+                <div class="infor_title_2">日期：<span class="text" id="infor_date">2021-04-23</span></div>
+                <div class="infor_title_2">時間：<span class="text" id="infor_time">早上9點到下午4點</span></div>
+                <div class="infor_title_2">費用：<span class="text" id="infor_price">新台幣2000元</span></div>
+                <div class="infor_title_2">地點：<span class="text" id="infor_location">臺北市 大安區忠孝東路4段</span></div>
+                <button class="delete_icon_2"></button>
+            </div>
+        </main>
+        <div class="separator_container">
+            <div class="separator"></div>
         </div>
-        <div class="booking_infor">
-            <div class="infor_title"><span>台北一日遊：<span id="infor_name">平安鐘</span></span><button class="delete_icon_1"></button></div>
-            <div class="infor_title_2">日期：<span class="text" id="infor_date">2021-04-23</span></div>
-            <div class="infor_title_2">時間：<span class="text" id="infor_time">早上9點到下午4點</span></div>
-            <div class="infor_title_2">費用：<span class="text" id="infor_price">新台幣2000元</span></div>
-            <div class="infor_title_2">地點：<span class="text" id="infor_location">臺北市 大安區忠孝東路4段</span></div>
-            <button class="delete_icon_2"></button>
+        <div class="connection_infor_container">
+            <span>您的聯絡資訊</span>
+            <form class="connection_infor">
+                <div class="text">聯絡姓名：<input class="input" type="text" name="connection_name"></div>
+                <div class="text">聯絡信箱：<input class="input" type="text" name="connection_email"></div>
+                <div class="text">手機號碼：<input class="input" type="number" name="connection_phone"></div>
+            </form>
+            <div>請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</div>
         </div>
-    </main>
-    <div class="separator_container">
-        <div class="separator"></div>
-    </div>
-    <div class="connection_infor_container">
-        <span>您的聯絡資訊</span>
-        <form class="connection_infor">
-            <div class="text">聯絡姓名：<input class="input" type="text" name="connection_name"></div>
-            <div class="text">聯絡信箱：<input class="input" type="text" name="connection_email"></div>
-            <div class="text">手機號碼：<input class="input" type="number" name="connection_phone"></div>
-        </form>
-        <div>請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</div>
-    </div>
-    <div class="separator_container">
-        <div class="separator"></div>
-    </div>
-    <div class="payment_infor_container">
-        <span>信用卡付款資訊</span>
-        <form class="connection_infor">
-            <div class="text">卡片號碼：<input class="input" type="number" name="connection_name" placeholder="**** **** **** ****"></div>
-            <div class="text">過期時間：<input class="input" type="number" name="connection_name" placeholder="MM/YY"></div>
-            <div class="text">驗證密碼：<input class="input" type="text" name="connection_name" placeholder="CVV"></div>
-        </form>
-    </div>
-    <div class="separator_container">
-        <div class="separator"></div>
-    </div>
-    <div class="payment">
-        <span>總價：<span>新台幣 2000 元</span></span>
-        <button class="pay_button">確認訂購並付款</button>
-    </div>
+        <div class="separator_container">
+            <div class="separator"></div>
+        </div>
+        <div class="payment_infor_container">
+            <span>信用卡付款資訊</span>
+            <form class="connection_infor">
+                <div class="text">卡片號碼：<input class="input" type="number" name="connection_name" placeholder="**** **** **** ****"></div>
+                <div class="text">過期時間：<input class="input" type="number" name="connection_name" placeholder="MM/YY"></div>
+                <div class="text">驗證密碼：<input class="input" type="text" name="connection_name" placeholder="CVV"></div>
+            </form>
+        </div>
+        <div class="separator_container">
+            <div class="separator"></div>
+        </div>
+        <div class="payment">
+            <span>總價：<span>新台幣 2000 元</span></span>
+            <button class="pay_button">確認訂購並付款</button>
+        </div>
+    </div>     
     <div class="footer">
         <div style="font-size: 16px; font-style: normal; font-weight: 700; line-height: 13.3px; color:#FFF">COPYRIGHT © 2021 台北一日遊</div>
     </div>
@@ -94,6 +96,7 @@
             </form>
         </div>
     </div>
+        
     <script src="../static/JS/sign in up.js"></script>
     <script src="../static/JS/booking.js"></script>
 </body>

@@ -113,7 +113,7 @@ document.querySelector(".slogan-item-3").addEventListener("submit", function(eve
     threshold: 0.05
     }
 
-const fetchData = () => {
+const fetchDatas = () => {
     if (isLoading) return; // 如果正在加載，則直接返回
         isLoading = true;
         fetch("http://127.0.0.1:3000/api/attractions?page=" + nextPage + "&keyword=" + keyword)
@@ -197,3 +197,65 @@ const fetchData = () => {
     observer.observe(loadingObserver)
 
 
+// ===================================================================================
+const button_plan = document.querySelector('#button_plan');
+// const button_submit = document.querySelector('#button_submit');
+
+button_plan.addEventListener('click', init_2);
+// button_submit.addEventListener('click', init_2);
+
+function init_2(event){
+    event.preventDefault();
+    const buttonId = event.target.id;
+    const token = localStorage.getItem('Token');
+    console.log(token);
+    if (token !== null){
+        fetchData(token, buttonId);
+    }else{
+        executeButtonsignin();
+    }
+}
+
+function fetchData(token, buttonId) {
+    fetch("http://127.0.0.1:3000/api/user/auth", {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        }
+    })
+    .then(handleResponse)
+    .then(data => handleData(buttonId))
+    .catch(handleError);
+}
+
+function handleResponse(response) {
+    if (!response.ok) {
+        throw new Error('Get null from backend');
+    }
+    return response.json();
+}
+
+function handleData(buttonId) {
+    console.log(buttonId);
+    switch(buttonId) {
+        case 'button_plan':
+            loginCheck_2();
+            break;
+        case 'button_submit':
+            booking();
+            break;
+    }
+}
+
+function loginCheck_2(){
+    window.location.href = "/booking";
+}
+
+function handleError(error) {
+    console.error('Backend could got problems', error);
+}
+
+function executeButtonsignin(){
+    modal.style.display = "block";
+    memberSignincontainer.style.display = "block";
+}

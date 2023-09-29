@@ -351,23 +351,29 @@ def api_booking():
             "FROM booking "
             "LEFT JOIN attractions ON attractions.id = booking.attractionId "
             "LEFT JOIN images ON images.attractions = booking.attractionId "
-            "WHERE booking.member_id = %s",
+            "WHERE booking.member_id = %s "
+            "LIMIT 1",
             (member_id,))
+
             data = cursor.fetchone()
             print(data)
-            
-            keys = ["attractionId", "name", "address", "URL_image"]
-            keys_data = {k: data[k] for k in keys}
+            if data:
+                keys = ["attractionId", "name", "address", "URL_image"]
+                keys_data = {k: data[k] for k in keys}
 
-            return jsonify({"data":{"attraction":keys_data, "date":data["date"], "time":data["time"], "price":data["price"]}}), 200
-            # return jsonify({"data":{"attraction":{"id": data["attractionId"], "name": data["name"], "address":data["address"], "image":data["URL_image"]},
-            #                             "date":data["date"], "time":data["time"], "price":data["price"]}}), 200
+                return jsonify({"data":{"attraction":keys_data, "date":data["date"], "time":data["time"], "price":data["price"]}}), 200
+                # return jsonify({"data":{"attraction":{"id": data["attractionId"], "name": data["name"], "address":data["address"], "image":data["URL_image"]},
+                #                             "date":data["date"], "time":data["time"], "price":data["price"]}}), 200
+            else:
+                return jsonify(None)     
         except mysql.connector.Error:
             return jsonify({"error": True,"message": "databaseError"}), 500
         
         finally:
-            cursor.close()
-            connection.close()
+            if cursor:
+                cursor.close()
+            if connection:
+                connection.close()
     
     if request.method == "DELETE":
         try:
@@ -381,7 +387,7 @@ def api_booking():
 
             connection = con.get_connection()
             cursor = connection.cursor(dictionary=True)
-            cursor.execute("DELETE FROM booking WHERE id = %s", (member_id, ))
+            cursor.execute("DELETE FROM booking WHERE member_id = %s", (member_id, ))
             connection.commit()
 
             if cursor.rowcount == 0: #如無對應id，該語句將成功執行，但不會刪除任何記錄

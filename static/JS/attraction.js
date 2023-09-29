@@ -179,7 +179,7 @@ function fetchData(token, buttonId) {
         }
     })
     .then(handleResponse)
-    .then(data => handleData(data, buttonId))
+    .then(data => handleData(buttonId))
     .catch(handleError);
 }
 
@@ -190,7 +190,7 @@ function handleResponse(response) {
     return response.json();
 }
 
-function handleData(data, buttonId) {
+function handleData(buttonId) {
     console.log(buttonId);
     switch(buttonId) {
         case 'button_plan':
