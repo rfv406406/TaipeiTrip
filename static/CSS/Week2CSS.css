@@ -274,7 +274,13 @@ body{
   width: 100%; /* 让图片的宽度填充整个容器 */
   height: 197px; 
   object-fit: cover; /* 使图片覆盖整个容器，超出部分将被裁剪 */
+  cursor: pointer;
 }
+
+.frame4-item-img img:Hover {
+  filter: drop-shadow(5px 10px 15px #000);
+}
+
 
 .frame4-item-name{
   display: flex; 
@@ -290,7 +296,7 @@ body{
   bottom: 0;
   left: 0;
   right: 0;
-  margin-bottom: 43.5px;
+  margin-bottom: 43px;
   overflow-wrap: break-word;
 }
 

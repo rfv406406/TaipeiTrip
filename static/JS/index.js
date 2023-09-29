@@ -190,7 +190,7 @@ const fetchDatas = () => {
     }
     const callback = ([entry]) => {
     if (entry && entry.isIntersecting) {
-        fetchData()
+        fetchDatas()
     }
     }
     let observer = new IntersectionObserver(callback, options)
