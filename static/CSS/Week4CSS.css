@@ -1,5 +1,9 @@
 body{
     margin:0;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    min-height:100vh;
 }
   
 .header{
@@ -19,12 +23,6 @@ body{
     padding: 10px 0 10px 0;
     margin-left: 5%;
 }    
-}
-
-@media (max-width:600px){
-.header{
-    margin-bottom: 0px;
-}
 }
 
 @media (max-width:360px){
@@ -101,395 +99,180 @@ body{
     line-height: 13.3px;
     } 
 
-.frame{
-    display:flex;
-    justify-content: center;
+.header_line{
+    display: flex;
+    justify-content: flex-start;
     align-items: center;
-}
-
-.content{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    width:1140px;
-    padding:0 15px;
-    gap:30px;
-    margin-bottom:40px;
+    margin:auto;
+    width: 1000px;
+    height: 17px;
+    padding: 5px 0;
+    color: #666;
+    font-family: Noto Sans TC;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+    margin-bottom: 30px;
 }
 
 @media (max-width:1200px){
-.content{
-    width: 100%;
-    height:100%;
-    flex-wrap: wrap;
-}
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+.header_line{
+    width:90%;
+}    
 }
 
-@media (max-width:360px){
-.content{
+.infors_container{
+    display: flex;
+    justify-content: flex-start;
+    width: 980px;
+    height: 200px;
+    gap: 30px;
+    margin:auto;
+}
+
+@media (max-width:1200px){
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+.infors_container{
+    width:90%;
+}    
+}
+
+@media (max-width:700px){
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+.infors_container{
     width:90%;
     height:100%;
     flex-wrap: wrap;
-}
-}
-
-.content .img_container{
-    display:flex;
-    align-items: center;
-    position:relative;
-    width:100%;
-    width:540px;
+    flex-basis: calc(80%);
+}    
 }
 
-@media (max-width:600px){
-.content .img_container{
-    justify-content: center;
-    width:360px;
+.attraction_image{
+    width: 266px;
+    height: 200px
+}
+
+@media (max-width:700px){
+    .attraction_image{
+        width: 100%;
+        height: 256px;
+        margin:auto;
     }
     }
 
-.img_container .image_div{
-    display:flex;
-    align-items: center;
-    justify-content: space-between;
-    /* width: 540px;   */
-    overflow-x: hidden;
-    scroll-behavior: smooth;
+.attraction_image img{
+    width: 266px;
+    height: 200px
 }
 
-.img_container .image{
-    display:flex;
-    align-items: center;
-    position:relative;
-}
-
-.img_container img{
-    width: 540px;
-    height: 406px;
+@media (max-width:700px){
+.attraction_image img{
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    position: relative;
-    flex-shrink: 0;
-    z-index: 1;
-    cursor: pointer;
-}
-    
-@media (max-width:600px){
-.img_container img{
-    width: 360px;
-    height: 350px;
 }
 }
-.img_container .button-img-left{
-    background-image: url('button-left.png');
-    background-size: 32px 32px;
-    width: 32px;
-    height: 32px;
-    background-color: transparent;
-    border: transparent;
-    position:absolute;
-    left: 10px;
-    z-index: 2;
-}
-/* .img_container .button-img-left:hover{
-    background-image: url('button-left-Hovered.png');
-    background-size: 32px 32px;
-    width: 32px;
-    height: 32px;
-    background-color: transparent;
-    border: transparent;
-    position:absolute;
-    left: 10px;
-    z-index: 2;
-  } */
 
-  .img_container .pot_container{
+.booking_infor{
+    width: 700px;
+    height: 185px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@media (max-width:700px){
+.booking_infor{
+    width: 100%;
+    height: 100%;
+}
+}
+
+.booking_infor .infor_title{
+    width: 100%;
+    height: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #489;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.booking_infor .delete_icon_1{
+    background-image: url("../image/icon_delete.png");
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    bottom: 15px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    gap: 12px;
-    z-index: 2;
+    width: 30px;
+    height: 30px;
+    background-color: #FFF;
+    border: 1px solid transparent;
 }
 
-.pot_container .pot{
-    display: flex;
+@media (max-width:700px){
+.booking_infor .delete_icon_1{
+    display: none;
+}
+}
+
+.booking_infor .delete_icon_2{
+    background-image: url("../image/icon_delete.png");
+    background-size: cover;
+    display: none;
     justify-content: center;
     align-items: center;
-    height: 12px;
-    width: 12px;
+    width: 30px;
+    height: 30px;
     background-color: #FFF;
-    border-radius: 50%;
+    border: 1px solid transparent;
+    align-self: flex-end;
 }
 
-.pot_container .potpot{
-    height: 11px;
-    width: 11px;
-    background-color: #000;
-    border: 1px solid;
-    border-radius: 50%;
-    border-color: #FFF;
-}
-  
-.img_container .button-img-right{
-    background-image: url('button-right.png');
-    background-size: 32px 32px;
-    width: 32px;
-    height: 32px;
-    background-color: transparent;
-    border:transparent;
-    position:absolute;
-    right: 10px;
-    z-index: 2;
-  }
-
-  /* .img_container .button-img-right:hover{
-    background-image: url('button-right-Hovered.png');
-    background-size: 32px 32px;
-    width: 32px;
-    height: 32px;
-    background-color: transparent;
-    border: transparent;
-    position:absolute;
-    right: 10px;
-    z-index: 2;
-  } */
-
-.content .plan_selector{
-    height:400px;
-}
-
-@media (max-width:1200px){
-.content .plan_selector{
-    width: 90%;
-}
-}
-
-@media (max-width:360px){
-.content .plan_selector{
-    width: auto;
-}
-}
-
-.plan_selector .name{
-    height:33px;
-    color:#666;
-    font-family: Noto Sans TC;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-.plan_selector .category_at_mrt_container{
+@media (max-width:700px){
+.booking_infor .delete_icon_2{
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height:24px;
-    color:#666;
-    font-family: Noto Sans TC;
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 20px;
-    gap: 5px;
-}
-
-.plan_selector .booking_form{
-    width: 560px;
-    height: 287px;
-    padding: 15px 20px 0 20px;
-    background-color: #E8E8E8;
-    margin-bottom: 8px;
-    border-radius: 5px;
-}
-
-@media (max-width:1200px){
-.plan_selector .booking_form{
-    width: auto;
 }
 }
 
-/* @media (max-width:360px){
-.plan_selector .booking_form{
-   
-}
-}   */
 
-.booking_form .booking_form_title{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 22px;
-    color: #666;
-    font-family: Noto Sans TC;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 15px;
+.booking_infor .infor_title_2{
     width: 100%;
-}
-
-.booking_form .booking_form_title2{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
     height: 24px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap; 
     color: #666;
     font-family: Noto Sans TC;
     font-size: 16px;
-    font-weight: 500;
     font-style: normal;
-    margin-bottom: 15px;
-    overflow-wrap: break-word;
-    width: 100%;
-}
-
-.booking_form .date_container{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    height: 35px;
-    margin-bottom: 15px;
-}
-
-.date_container .datetitle{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 81px;
-    height: 17px;
-    font-family: Noto Sans TC;
-    font-style: normal;
-    font-size: 16px;
     font-weight: 700;
+    margin-top: 15px;
 }
 
-.date_container .datePicker{
-    width: 149px;
-    height: 25px;
-    padding: 5px 10px 5px 10px;
-    font-family: Noto Sans TC;
-    font-size: 16px;
-    font-weight: 500;
-    margin-left: 5px;
-    border: transparent;
-}
-
-.booking_form .time_container{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+.booking_infor .text{
     width: 100%;
-    height: 22px;
-    margin-bottom: 15px;
-}
-
-.time_container .timetitle{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 98px;
-    height: 22px;
-    font-family: Noto Sans TC;
-    font-style: normal;
-    font-size: 16px;
-    font-weight: 700;
-    margin-right: 5px;
-    min-width: 81px;
-}
-
-.time_container .timebutton_container{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    height: 22px;
-    font-family: Noto Sans TC;
-    font-style: normal;
-    font-size: 16px;
-    font-weight: 700;
-}
-
-.timebutton_container .timeButton1{
-    background-color: #FFF;
-    width: 22px;
-    height: 22px;
-    margin-left: 5px;
-    margin-right: 4px;
-    border: transparent;
-    border-radius: 50%;
-}
-
-.timebutton_container .timeButton1-filled{
-    background-image: url("timebtnfill.png");
-}
-
-.timebutton_container .booking_form_title3{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
     height: 24px;
+    display: flex;
+    align-items: center;
     color: #666;
     font-family: Noto Sans TC;
     font-size: 16px;
-    font-weight: 500;
     font-style: normal;
-}
-
-.timebutton_container .timeButton2{
-    background-color: #FFF;
-    width: 22px;
-    height: 22px;
-    margin-left: 18px;
-    margin-right: 4px;
-    border: transparent;
-    border-radius: 50%;
-}
-
-.booking_form .price_container{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    height: 22px;
-    margin-bottom: 25px;
-}
-
-.price_container .booking_form_title4{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 24px;
-    color: #666;
-    font-family: Noto Sans TC;
-    font-size: 16px;
     font-weight: 500;
-    font-style: normal;
-    margin-left: 5px;
-}
-
-.booking_form .button_submit{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 154px;
-    height: 36px;
-    font-family: Noto Sans TC;
-    font-size: 19px;
-    font-weight: 500;
-    font-style: normal;
-    border: transparent;
-    border-radius: 5px;
-    background-color: #489;
-    color: #FFF
 }
 
 .separator_container{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 40px;
     margin-bottom: 40px;
 }
 
@@ -499,85 +282,142 @@ body{
     background-color: #E8E8E8;
 }
 
-.infors_container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width:100%;
-    margin-bottom: 40px;
+@media (max-width:1200px){
+.separator{
+    width: 90%;
+}
 }
 
-@media (max-width:360px){
-.infors_container{
-    height:100%;
-}
-}  
-
-.infors_container .infors{
-    width: 1180px;
-    padding: 10px 10px 0 10px;
+.connection_infor_container{
+    margin:auto;
+    width: 980px;
+    height: 227px;
+    color: #666;
+    font-family: Noto Sans TC;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
 }
 
 @media (max-width:1200px){
-    .infors_container .infors{
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+.connection_infor_container{
     width: 90%;
+    height: 100%;
+    line-height: 1.2;
+}    
 }
-}  
 
-@media (max-width:360px){
-.infors_container .infors{
+.connection_infor_container .text{
+    min-width: 81px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap; 
+    color: #666;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.connection_infor{
     width: 100%;
+    height: 175px;
+    margin-top: 20px;
 }
-}  
 
-.infors .introduction{
-    width:100%;
+.connection_infor .input{
+    width: 180px;
+    height: 18px;
+    padding: 10px;
+    color: #000;
+    border-radius: 5px;
+    border: #E8E8E8 solid 1px;
+}
+
+.payment_infor_container{
+    margin:auto;
+    width: 980px;
+    height: 198px;
+    color: #666;
+    font-family: Noto Sans TC;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+}
+
+@media (max-width:1200px){
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+.payment_infor_container{
+    width:90%;
+}    
+}
+
+.payment_infor_container .text{
+    min-width: 81px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap; 
+    color: #757575;
     font-family: Noto Sans TC;
     font-size: 16px;
     font-style: normal;
-    font-weight: 400;
-    color:#666;
+    font-weight: 500;
     margin-bottom: 20px;
 }
 
-.infors .address_container{
-    width:100%;
-    height:32px;
+.payment_infor_container .input{
+    width: 180px;
+    height: 18px;
+    padding: 10px;
+    color: #757575;
+    border-radius: 5px;
+    border: #E8E8E8 solid 1px;
+}
+
+.payment{
+    display: flex;
+    width: 980px;
+    height: 100px;
+    margin:auto;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 22px;
+    color: #666;
     font-family: Noto Sans TC;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    color:#666;
+    line-height: 13.3px;
+    margin-bottom: 40px;
 }
 
-.infors .address{
-    width:100%;
+@media (max-width:1200px){
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+    .payment{
+    width: 90%;
+}    
+}
+
+.payment .pay_button{
+    width: 173px;
+    height: 36px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border-color: transparent;
+    background-color: #489;
+    color: #FFF;
     font-family: Noto Sans TC;
-    font-size: 16px;
+    font-size: 19px;
     font-style: normal;
     font-weight: 400;
-    color:#666;
-    margin-bottom: 20px;
-}
-
-.infors .traffic_container{
-    width:100%;
-    height:32px;
-    font-family: Noto Sans TC;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    color:#666;
-}
-
-.infors .traffic{
-    width:100%;
-    font-family: Noto Sans TC;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    color:#666;
-    margin-bottom: 80px;
+    line-height: 16px;
+    white-space: nowrap; 
 }
 
 .footer{
@@ -588,7 +428,7 @@ body{
     align-items: center;
     width: 100%;
     height: 104px;
-    margin: 0;
+    flex-grow: 1;
   }
 
   .modal{
@@ -654,7 +494,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('icon_close.png');
+    background-image: url('../image/icon_close.png');
     background-repeat: no-repeat;
     background-color: #FFF;
     position: absolute;

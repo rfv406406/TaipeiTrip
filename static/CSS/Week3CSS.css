@@ -1,0 +1,863 @@
+body{
+    margin:0;
+}
+  
+.header{
+    display: flex;
+    height: 34px;
+    padding: 10px 360px 10px 360px;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #E8E8E8;
+    margin-bottom: 40px;
+}
+
+@media (max-width:1200px){
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+.header{
+    width:90%;
+    padding: 10px 0 10px 0;
+    margin-left: 5%;
+}    
+}
+
+@media (max-width:600px){
+.header{
+    margin-bottom: 0px;
+}
+}
+
+@media (max-width:360px){
+.header{
+    padding: 10px 0 10px 10px;
+}
+}
+
+.header .title{
+    font-family: Noto Sans TC;
+    font-size: 30px;
+    font-weight: 700;
+    color: #489;
+    min-width: 150px;
+} 
+
+.header .space{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: 875px;
+} 
+
+@media (max-width:1200px){
+    /*螢幕寬度小於1200，套用此區塊CSS*/
+    .header .space{
+        width: 90%;
+        min-width: 15px;
+    } 
+}
+
+.header .button_plan{
+    display: flex;
+    height: 34px;
+    min-width:84px;
+    padding: 10px 10px;
+    align-items: center;
+    color: #666666;
+    background-color:#FFF;
+    border:transparent;
+    font-family: Noto Sans TC;
+    font-weight: 500;
+    font-size:16px;
+    line-height: 13.3px;
+}
+      
+.frame-item-4{
+    display: flex;
+    height: 34px;
+    min-width:91px;
+    padding: 10px 10px;
+    align-items: center;
+    color: #666666;
+    background-color:#FFF;
+    border:transparent;
+    font-family: Noto Sans TC;
+    font-weight: 500;
+    font-size:16px;
+    line-height: 13.3px;
+      } 
+
+.frame-item-5{
+    display: none;
+    height: 34px;
+    min-width:91px;
+    padding: 10px 10px;
+    align-items: center;
+    color: #666666;
+    background-color:#FFF;
+    border:transparent;
+    font-family: Noto Sans TC;
+    font-weight: 500;
+    font-size:16px;
+    line-height: 13.3px;
+    } 
+
+.frame{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:1140px;
+    padding:0 15px;
+    gap:30px;
+    margin-bottom:40px;
+}
+
+@media (max-width:1200px){
+.content{
+    width: 100%;
+    height:100%;
+    flex-wrap: wrap;
+}
+}
+
+@media (max-width:360px){
+.content{
+    width:90%;
+    height:100%;
+    flex-wrap: wrap;
+}
+}
+
+.content .img_container{
+    display:flex;
+    align-items: center;
+    position:relative;
+    width:100%;
+    width:540px;
+}
+
+@media (max-width:600px){
+.content .img_container{
+    justify-content: center;
+    width:360px;
+    }
+    }
+
+.img_container .image_div{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    /* width: 540px;   */
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.img_container .image{
+    display:flex;
+    align-items: center;
+    position:relative;
+}
+
+.img_container img{
+    width: 540px;
+    height: 406px;
+    object-fit: cover;
+    position: relative;
+    flex-shrink: 0;
+    z-index: 1;
+    cursor: pointer;
+}
+    
+@media (max-width:600px){
+.img_container img{
+    width: 360px;
+    height: 350px;
+}
+}
+.img_container .button-img-left{
+    background-image: url('../image/button-left.png');
+    background-size: 32px 32px;
+    width: 32px;
+    height: 32px;
+    background-color: transparent;
+    border: transparent;
+    position:absolute;
+    left: 10px;
+    z-index: 2;
+}
+/* .img_container .button-img-left:hover{
+    background-image: url('button-left-Hovered.png');
+    background-size: 32px 32px;
+    width: 32px;
+    height: 32px;
+    background-color: transparent;
+    border: transparent;
+    position:absolute;
+    left: 10px;
+    z-index: 2;
+  } */
+
+  .img_container .pot_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    gap: 12px;
+    z-index: 2;
+}
+
+.pot_container .pot{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 12px;
+    width: 12px;
+    background-color: #FFF;
+    border-radius: 50%;
+}
+
+.pot_container .potpot{
+    height: 11px;
+    width: 11px;
+    background-color: #000;
+    border: 1px solid;
+    border-radius: 50%;
+    border-color: #FFF;
+}
+  
+.img_container .button-img-right{
+    background-image: url('../image/button-right.png');
+    background-size: 32px 32px;
+    width: 32px;
+    height: 32px;
+    background-color: transparent;
+    border:transparent;
+    position:absolute;
+    right: 10px;
+    z-index: 2;
+  }
+
+  /* .img_container .button-img-right:hover{
+    background-image: url('button-right-Hovered.png');
+    background-size: 32px 32px;
+    width: 32px;
+    height: 32px;
+    background-color: transparent;
+    border: transparent;
+    position:absolute;
+    right: 10px;
+    z-index: 2;
+  } */
+
+.content .plan_selector{
+    height:400px;
+}
+
+@media (max-width:1200px){
+.content .plan_selector{
+    width: 90%;
+}
+}
+
+@media (max-width:360px){
+.content .plan_selector{
+    width: auto;
+}
+}
+
+.plan_selector .name{
+    height:33px;
+    color:#666;
+    font-family: Noto Sans TC;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.plan_selector .category_at_mrt_container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height:24px;
+    color:#666;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    gap: 5px;
+}
+
+.plan_selector .booking_form{
+    width: 560px;
+    height: 287px;
+    padding: 15px 20px 0 20px;
+    background-color: #E8E8E8;
+    margin-bottom: 8px;
+    border-radius: 5px;
+}
+
+@media (max-width:1200px){
+.plan_selector .booking_form{
+    width: auto;
+}
+}
+
+/* @media (max-width:360px){
+.plan_selector .booking_form{
+   
+}
+}   */
+
+.booking_form .booking_form_title{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 22px;
+    color: #666;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.booking_form .booking_form_title2{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 24px;
+    color: #666;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    margin-bottom: 15px;
+    overflow-wrap: break-word;
+    width: 100%;
+}
+
+.booking_form .date_container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 35px;
+    margin-bottom: 15px;
+}
+
+.date_container .datetitle{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 81px;
+    height: 17px;
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.date_container .datePicker{
+    width: 149px;
+    height: 25px;
+    padding: 5px 10px 5px 10px;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 5px;
+    border: transparent;
+}
+
+.booking_form .time_container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 22px;
+    margin-bottom: 15px;
+}
+
+.time_container .timetitle{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 98px;
+    height: 22px;
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-size: 16px;
+    font-weight: 700;
+    margin-right: 5px;
+    min-width: 81px;
+}
+
+.time_container .timebutton_container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 22px;
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.timebutton_container .timeButton1{
+    background-color: #FFF;
+    width: 22px;
+    height: 22px;
+    margin-left: 5px;
+    margin-right: 4px;
+    border: transparent;
+    border-radius: 50%;
+}
+
+.timebutton_container .timeButton1-filled{
+    background-image: url("../image/timebtnfill.png");
+}
+
+.timebutton_container .timeButton2-filled{
+    background-image: url("../image/timebtnfill.png");
+}
+
+.timebutton_container .booking_form_title3{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 24px;
+    color: #666;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.timebutton_container .timeButton2{
+    background-color: #FFF;
+    width: 22px;
+    height: 22px;
+    margin-left: 18px;
+    margin-right: 4px;
+    border: transparent;
+    border-radius: 50%;
+}
+
+.booking_form .price_container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 22px;
+    margin-bottom: 25px;
+}
+
+.price_container .booking_form_title4{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 24px;
+    color: #666;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    margin-left: 5px;
+}
+
+.booking_form .button_submit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 154px;
+    height: 36px;
+    font-family: Noto Sans TC;
+    font-size: 19px;
+    font-weight: 500;
+    font-style: normal;
+    border: transparent;
+    border-radius: 5px;
+    background-color: #489;
+    color: #FFF
+}
+
+.separator_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.separator{
+    width: 1200px;
+    height: 1px;
+    background-color: #E8E8E8;
+}
+
+.infors_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    margin-bottom: 40px;
+}
+
+@media (max-width:360px){
+.infors_container{
+    height:100%;
+}
+}  
+
+.infors_container .infors{
+    width: 1180px;
+    padding: 10px 10px 0 10px;
+}
+
+@media (max-width:1200px){
+    .infors_container .infors{
+    width: 90%;
+}
+}  
+
+@media (max-width:360px){
+.infors_container .infors{
+    width: 100%;
+}
+}  
+
+.infors .introduction{
+    width:100%;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    color:#666;
+    margin-bottom: 20px;
+}
+
+.infors .address_container{
+    width:100%;
+    height:32px;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    color:#666;
+}
+
+.infors .address{
+    width:100%;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    color:#666;
+    margin-bottom: 20px;
+}
+
+.infors .traffic_container{
+    width:100%;
+    height:32px;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    color:#666;
+}
+
+.infors .traffic{
+    width:100%;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    color:#666;
+    margin-bottom: 80px;
+}
+
+.footer{
+    display: flex;
+    background-color:#757575;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 104px;
+    margin: 0;
+  }
+
+  .modal{
+    display: none; /* 預設為隱藏 */
+    position: fixed; /* 讓彈出窗口固定在畫面上，不受滾動影響 */
+    top: 0;
+    left: 0;
+    width: 100%; /* 覆蓋整個視窗的寬度 */
+    height: 100%; /* 覆蓋整個視窗的高度 */
+    background-color: rgba(0, 0, 0, 0.25); /* 透明黑色背景，可產生半透明的遮罩效果 */
+    z-index: 1000; /* 確保在其他元素之上 */
+  }
+  
+  .member_signin-container{
+    display:none;
+    position: absolute; /* 相對於.modal定位 */
+    top: 18%; /* 將其移至父元素的中央 */
+    left: 50%; /* 將其移至父元素的中央 */
+    transform: translate(-50%, -50%); /* 使用transform確保完美居中 */
+    width:340px;
+    height:275px;
+    border-radius: 6px;
+    box-shadow: 0px 4px 60px 0px #AAA;
+    background-color: #FFF;
+  }
+  
+  .member_signin-container .signin_form-header{
+    width: 340px;
+    height: 10px;
+    flex-shrink: 0;
+    background: linear-gradient(90deg, #337788 0%, #66AABB 100%);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+  
+  .member_signin-container .signin_form{
+    width:310px;
+    height:235px;
+    padding:15px;
+  }
+  
+  .signin_form .form_title-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:310px;
+    height:27px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  
+  .form_title-container .form_title{
+    font-family: Noto Sans TC;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    position: absolute;
+    color:#666;
+  }
+  
+  .form_title-container .form_x{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../image/icon_close.png');
+    background-repeat: no-repeat;
+    background-color: #FFF;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    border: none; /* 移除按鈕預設的邊框 */
+    cursor: pointer;
+  }
+  
+  .form_title-container .form_x img{
+    width: 16px;
+    height: 16px;
+    object-fit: cover;
+    cursor: pointer;
+  }
+  
+  .signin_form .name_email_password{
+    width:278px;
+    height:17px;
+    padding:15px;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 13.3px; 
+    color: #757575;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 6px;
+    border-color: #757575;
+    margin-bottom: 10px;
+  }
+  
+  .signin{
+    display: flex;
+    width: 310px;
+    height: 47px;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    color:#FFF;
+    border:transparent;
+    background-color: #489;
+    font-family: Noto Sans TC;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+    border-radius: 5px;
+    border-color: #489;
+    margin-bottom: 10px;
+  }
+  
+  .signon-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 13.3px;
+    color:#666;
+    border:transparent;
+  }
+  
+  .signininfor{
+    justify-content: center;
+    align-items: center;
+    display:none;
+    width:310px;
+    height:22px;
+    color:#489;
+    border:transparent;
+    background-color: #FFF;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 13.3px;
+    margin:auto;
+    margin-bottom: 10px;
+  }
+  
+  .go_signon{
+    color:#666;
+    border:transparent;
+    background-color: #FFF;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 13.3px;
+  }
+  
+  .member_signon-container{
+    display:none;
+    position: absolute; /* 相對於.modal定位 */
+    top: 18%; /* 將其移至父元素的中央 */
+    left: 50%; /* 將其移至父元素的中央 */
+    transform: translate(-50%, -50%); /* 使用transform確保完美居中 */
+    width:340px;
+    height:332px;
+    border-radius: 6px;
+    box-shadow: 0px 4px 60px 0px #AAA;
+    background-color: #FFF;
+  }
+  
+  .member_signon-container .signon_form-header{
+    width: 340px;
+    height: 10px;
+    flex-shrink: 0;
+    background: linear-gradient(90deg, #337788 0%, #66AABB 100%);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+  
+  .member_signon-container .signon_form{
+    width:310px;
+    height:235px;
+    padding:15px;
+  }
+  
+  .signon_form .form_title-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:310px;
+    height:27px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  
+  .signon_form .name_email_password{
+    width:278px;
+    height:17px;
+    padding:15px;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 13.3px; 
+    color: #757575;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 6px;
+    border-color: #757575;
+    margin-bottom: 10px;
+  }
+  
+  .signon{
+    display: flex;
+    width: 310px;
+    height: 47px;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    color:#FFF;
+    border:transparent;
+    background-color: #489;
+    font-family: Noto Sans TC;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+    border-radius: 5px;
+    border-color: #489;
+    margin-bottom: 10px;
+  }
+  
+  .signoninfor{
+    justify-content: center;
+    align-items: center;
+    display:none;
+    width:310px;
+    height:22px;
+    color:#489;
+    border:transparent;
+    background-color: #FFF;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 13.3px;
+    margin:auto;
+    margin-bottom: 10px;
+  }
+  
+  .return_signin{
+    color:#666;
+    border:transparent;
+    background-color: #FFF;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 13.3px;
+  }

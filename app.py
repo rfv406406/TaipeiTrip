@@ -6,6 +6,7 @@ app=Flask(
     static_folder = "static",
     static_url_path = "/static",
     )
+
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.config["JSON_AS_ASCII"]=False
@@ -23,9 +24,12 @@ con =  pooling.MySQLConnectionPool(pool_name = "mypool",
                               pool_size = 3,
                               **config)
 
+# JWT
+# ============================================================================================
 import jwt
 import datetime
 from datetime import datetime, timedelta
+from jwt import ExpiredSignatureError
 SECRET_KEY = "any string but secret"
 
 def create_token(user_data):
@@ -45,6 +49,8 @@ def decode_token(token):
         return 'Token has expired'
     except jwt.InvalidTokenError:
         return 'Invalid token'
+
+# ============================================================================================
 
 # Pages
 @app.route("/")
@@ -247,7 +253,6 @@ def user_auth():
             cursor = connection.cursor(dictionary=True)
             cursor.execute("SELECT id, name, email FROM member WHERE email= %s AND password=%s", (email, password))
             data = cursor.fetchone()
-            print(data)
 
             if data is None:
                 cursor.close()
@@ -268,7 +273,7 @@ def user_auth():
     if request.method == "GET":
         try:
             auth_header = request.headers.get('Authorization')
-            token = auth_header.split(" ")[1]
+            token = auth_header.split(' ')[1]
             payload = decode_token(token)
     
             user_id = payload.get('id')
@@ -276,10 +281,125 @@ def user_auth():
             user_email = payload.get('email')
 
             return jsonify({"data":{'id': user_id, 'name': user_name, 'email': user_email}}), 200
+        except ExpiredSignatureError:
+            return ({"error": True, "message": "Token is expired"}),401
         except Exception:
             return jsonify(None), 400
 
+@app.route("/api/booking", methods=["GET","POST","DELETE"])
 
+def api_booking():
+    if request.method == "POST":
+        try:
+            auth_header = request.headers.get('Authorization')
+            print(auth_header)
+            if auth_header is None:
+                return ({"error": True,"message": "please sign in"}), 403
+            else:
+                token = auth_header.split(' ')[1]
+                payload = decode_token(token)
+                member_id = payload.get('id')
+
+            data = request.json
+            print(data)
+            if not data:
+                return ({"error": True,"message": "data is not existed"}), 400
+            
+            attractionId = data["attractionId"]
+            date = data["date"]
+            time = data["time"]
+            price = data["price"]
+
+            connection = con.get_connection()
+            cursor = connection.cursor(dictionary=True)
+
+            cursor.execute("SELECT * FROM booking WHERE member_id = %s",(member_id,))
+            data = cursor.fetchall()
+            print(data)
+
+            if data:
+                cursor.execute("DELETE FROM booking WHERE member_id = %s", (member_id,))
+                connection.commit()
+
+            cursor.execute("INSERT INTO booking(member_id, attractionId, date, time, price) VALUES(%s, %s, %s, %s, %s)", (member_id, attractionId, date, time, price))
+            connection.commit()
+            cursor.close()
+            connection.close()
+
+            return jsonify({"ok": True}), 200
         
-app.run(debug=None, host="0.0.0.0", port=3000)
+        except mysql.connector.Error:
+            if cursor:
+                cursor.close()
+            if connection:
+                connection.close()
+            return jsonify({"error": True,"message": "databaseError"}), 500
+
+    if request.method == "GET":
+        try:
+            auth_header = request.headers.get('Authorization')
+            if auth_header is None:
+                return ({"error": True,"message": "please sign in"}), 403
+            else:
+                token = auth_header.split(' ')[1]
+                payload = decode_token(token)
+                member_id = payload.get('id')
+
+            connection = con.get_connection()
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute("SELECT booking.attractionId, booking.date, booking.time, booking.price, attractions.name, attractions.address, images.URL_image "
+            "FROM booking "
+            "LEFT JOIN attractions ON attractions.id = booking.attractionId "
+            "LEFT JOIN images ON images.attractions = booking.attractionId "
+            "WHERE booking.member_id = %s "
+            "LIMIT 1",
+            (member_id,))
+
+            data = cursor.fetchone()
+            print(data)
+            if data:
+                keys = ["attractionId", "name", "address", "URL_image"]
+                keys_data = {k: data[k] for k in keys}
+
+                return jsonify({"data":{"attraction":keys_data, "date":data["date"], "time":data["time"], "price":data["price"]}}), 200
+                # return jsonify({"data":{"attraction":{"id": data["attractionId"], "name": data["name"], "address":data["address"], "image":data["URL_image"]},
+                #                             "date":data["date"], "time":data["time"], "price":data["price"]}}), 200
+            else:
+                return jsonify(None)     
+        except mysql.connector.Error:
+            return jsonify({"error": True,"message": "databaseError"}), 500
+        
+        finally:
+            if cursor:
+                cursor.close()
+            if connection:
+                connection.close()
+    
+    if request.method == "DELETE":
+        try:
+            auth_header = request.headers.get('Authorization')
+            if auth_header is None:
+                return ({"error": True,"message": "please sign in"}), 403
+            else:
+                token = auth_header.split(' ')[1]
+                payload = decode_token(token)
+                member_id = payload.get('id')
+
+            connection = con.get_connection()
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute("DELETE FROM booking WHERE member_id = %s", (member_id, ))
+            connection.commit()
+
+            if cursor.rowcount == 0: #如無對應id，該語句將成功執行，但不會刪除任何記錄
+                return jsonify({"error": True, "message": "No record found to delete"}), 404
+
+            return jsonify({"ok":True}), 200
+        except mysql.connector.Error:
+            return jsonify({"error": True,"message": "databaseError"}), 500
+        
+        finally:
+            cursor.close()
+            connection.close()
+        
+app.run(debug=True, host="0.0.0.0", port=3000)
 # app.run(debug = True, port = 3000)
