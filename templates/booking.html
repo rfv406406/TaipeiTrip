@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking</title>
     <link rel="stylesheet" type="text/css" href="../static/CSS/Week4CSS.css" />
-    <script src="https://js.tappaysdk.com/tpdirect/v5.17.0"></script>
+    <script src="https://js.tappaysdk.com/tpdirect/v5.15.1"></script>
 </head>
 <body>
     <div class="header">
@@ -52,7 +52,7 @@
             <form class="connection_infor">
                 <div class="text">卡片號碼：<input class="input" id="card-number" type="number" name="connection_name" placeholder="**** **** **** ****"></div>
                 <div class="text">過期時間：<input class="input" id="card-expiration-date" type="number" name="connection_name" placeholder="MM/YY"></div>
-                <div class="text">驗證密碼：<input class="input" id="card-ccv" type="text" name="connection_name" placeholder="CVV"></div>
+                <div class="text">驗證密碼：<input class="input" id="card-ccv" type="text" name="connection_name" placeholder="CCV"></div>
             </form>
         </div>
         <div class="separator_container">
@@ -60,7 +60,7 @@
         </div>
         <div class="payment">
             <span>總價：<span>新台幣 2000 元</span></span>
-            <button class="pay_button">確認訂購並付款</button>
+            <button class="pay_button" disabled>確認訂購並付款</button>
         </div>
     </div>     
     <div class="footer">
