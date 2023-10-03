@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking</title>
     <link rel="stylesheet" type="text/css" href="../static/CSS/Week4CSS.css" />
+    <script src="https://js.tappaysdk.com/tpdirect/v5.17.0"></script>
 </head>
 <body>
     <div class="header">
@@ -49,9 +50,9 @@
         <div class="payment_infor_container">
             <span>信用卡付款資訊</span>
             <form class="connection_infor">
-                <div class="text">卡片號碼：<input class="input" type="number" name="connection_name" placeholder="**** **** **** ****"></div>
-                <div class="text">過期時間：<input class="input" type="number" name="connection_name" placeholder="MM/YY"></div>
-                <div class="text">驗證密碼：<input class="input" type="text" name="connection_name" placeholder="CVV"></div>
+                <div class="text">卡片號碼：<input class="input" id="card-number" type="number" name="connection_name" placeholder="**** **** **** ****"></div>
+                <div class="text">過期時間：<input class="input" id="card-expiration-date" type="number" name="connection_name" placeholder="MM/YY"></div>
+                <div class="text">驗證密碼：<input class="input" id="card-ccv" type="text" name="connection_name" placeholder="CVV"></div>
             </form>
         </div>
         <div class="separator_container">
