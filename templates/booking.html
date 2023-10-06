@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking</title>
     <link rel="stylesheet" type="text/css" href="../static/CSS/Week4CSS.css" />
-    <script src="https://js.tappaysdk.com/tpdirect/v5.15.1"></script>
 </head>
 <body>
     <div class="header">
@@ -20,7 +19,7 @@
     </div>
     <div id="body">
         <main class="infors_container">
-            <div class="attraction_image">
+            <div class="attraction_image" id="infor_image">
                 <!-- <img src="https://www.travel.taipei/d_upload_ttn/sceneadmin/pic/11000848.jpg"> -->
             </div>
             <div class="booking_infor">
@@ -50,18 +49,20 @@
         <div class="payment_infor_container">
             <span>信用卡付款資訊</span>
             <form class="connection_infor">
-                <div class="text">卡片號碼：<input class="input" id="card-number" type="number" name="connection_name" placeholder="**** **** **** ****"></div>
-                <div class="text">過期時間：<input class="input" id="card-expiration-date" type="number" name="connection_name" placeholder="MM/YY"></div>
-                <div class="text">驗證密碼：<input class="input" id="card-ccv" type="text" name="connection_name" placeholder="CCV"></div>
+                <div class="text"><span id="cardtype"></span>卡片號碼：<div class="input" id="card-number"></div></div>
+                <div class="text">過期時間：<div class="input" id="card-expiration-date"></div></div>
+                <div class="text">驗證密碼：<div class="input" id="card-ccv"></div></div>
             </form>
         </div>
         <div class="separator_container">
             <div class="separator"></div>
         </div>
         <div class="payment">
-            <span>總價：<span>新台幣 2000 元</span></span>
-            <button class="pay_button" disabled>確認訂購並付款</button>
+            <span>總價：<span>新台幣 <span id="total_price">0</span> 元</span></span>
+            <button class="pay_button">確認訂購並付款</button>
         </div>
+        <br>
+        <pre class="jumbotron text-left" id="curl"></pre>
     </div>     
     <div class="footer">
         <div style="font-size: 16px; font-style: normal; font-weight: 700; line-height: 13.3px; color:#FFF">COPYRIGHT © 2021 台北一日遊</div>
@@ -97,8 +98,9 @@
             </form>
         </div>
     </div>
-        
     <script src="../static/JS/sign in up.js"></script>
     <script src="../static/JS/booking.js"></script>
+    <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.17.0"></script> 
+    <script src="../static/JS/tappay.js"></script>
 </body>
 </html>

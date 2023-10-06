@@ -55,7 +55,7 @@ function loginCheck_2(){
 function appendData(data){
    
     const nameData = data.data.attraction.name;
-    const attractionIdData = data.data.attraction.id;
+    const attractionIdData = data.data.attraction.attractionId;
     const addressData = data.data.attraction.address;
     const imageData = data.data.attraction.URL_image;
     const dateData = data.data.date;
@@ -68,6 +68,7 @@ function appendData(data){
     const inforTime = document.querySelector('#infor_time');
     const inforPrice = document.querySelector('#infor_price');
     const inforLocation = document.querySelector('#infor_location');
+    const totalPrice = document.querySelector('#total_price');
 
     let img = document.createElement("img");
     img.src = imageData;
@@ -77,6 +78,7 @@ function appendData(data){
     inforDate.textContent = dateData;
     inforPrice.textContent = priceData;
     inforLocation.textContent = addressData;
+    totalPrice.textContent = priceData;
 
     const morning = '早上9點到下午4點'
     const afternoon = '下午4點到晚上9點'
@@ -86,7 +88,6 @@ function appendData(data){
     }else{
         inforTime.textContent = afternoon;
     } 
-
 }
 //取得訂購資料
 function fetchReservedata() {
