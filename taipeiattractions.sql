@@ -99,7 +99,7 @@ CREATE TABLE `booking` (
   `price` varchar(255) NOT NULL,
   `currenttime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -284,6 +284,41 @@ LOCK TABLES `mrts` WRITE;
 INSERT INTO `mrts` VALUES (1,'松江南京'),(2,'中正紀念堂'),(3,'士林'),(4,'中山'),(5,'葫洲'),(6,'芝山'),(7,'石牌'),(8,'新北投'),(9,'市政府'),(10,'行天宮'),(11,'北投'),(12,'大湖公園'),(13,'龍山寺'),(14,'唭哩岸'),(15,'台北101／世貿'),(16,'國父紀念館'),(17,'動物園'),(18,'松山'),(19,'木柵'),(20,NULL),(21,'忠義'),(22,'關渡'),(23,'大直'),(24,'文德'),(25,'象山'),(26,'雙連'),(27,'忠孝新生'),(28,'劍潭'),(29,'西門'),(30,'臺大醫院'),(31,'大安森林公園'),(32,'公館'),(33,'圓山');
 /*!40000 ALTER TABLE `mrts` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `ordering`
+--
+
+DROP TABLE IF EXISTS `ordering`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ordering` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `member_id` bigint NOT NULL,
+  `order_number` varchar(255) NOT NULL,
+  `attraction_id` bigint NOT NULL,
+  `attraction_name` varchar(255) NOT NULL,
+  `attraction_address` varchar(255) NOT NULL,
+  `price` int NOT NULL,
+  `connection_name` varchar(255) NOT NULL,
+  `connection_email` varchar(255) NOT NULL,
+  `phone_number` varchar(255) NOT NULL,
+  `date` varchar(255) NOT NULL,
+  `time` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ordering`
+--
+
+LOCK TABLES `ordering` WRITE;
+/*!40000 ALTER TABLE `ordering` DISABLE KEYS */;
+INSERT INTO `ordering` VALUES (1,1,'20231006004022252944',10,'南港山系-象山親山步道','臺北市  信義區信義路五段150巷',2500,'康智偉','rfv406406@gmail.com','0939931593','2022-01-31','afternoon','已繳款'),(2,1,'20231006144519082448',10,'南港山系-象山親山步道','臺北市  信義區信義路五段150巷',2500,'康智偉','rfv406406@gmail.com','0939931593','2022-01-31','afternoon','已繳款');
+/*!40000 ALTER TABLE `ordering` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -294,4 +329,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-29 22:55:37
+-- Dump completed on 2023-10-06 22:54:59
