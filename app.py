@@ -474,6 +474,8 @@ def api_orders():
                             WHERE order_number = %s
                         """, ('已繳款', order_number))
             connection.commit()
+            cursor.execute("DELETE FROM booking WHERE member_id = %s", (member_id, ))
+            connection.commit()
             cursor.close()
             connection.close()
             return jsonify({
@@ -502,7 +504,7 @@ def api_orders():
 def orders_get(orderNumber):
  
     auth_header = request.headers.get('Authorization')
-    print(auth_header)
+    # print(auth_header)
     if not auth_header:
         return ({"error": True,"message": "please sign in"}), 403
     token = auth_header.split(' ')[1]
@@ -515,7 +517,7 @@ def orders_get(orderNumber):
 
     cursor.execute("SELECT * FROM ordering WHERE order_number = %s",(orderNumber,))
     data = cursor.fetchone()
-    print(data)
+    # print(data)
     cursor.close()
     connection.close()
     if data:
@@ -526,7 +528,7 @@ def orders_get(orderNumber):
             "trip": {
                 "attraction": {
                     "id": data["attraction_id"],
-                    "name": data["connection_name"],
+                    "name": data["attraction_name"],
                     "address": data["attraction_address"],
                 },
                 "date": data["date"],
