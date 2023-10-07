@@ -1,7 +1,7 @@
 // const APP_ID = 137033;
 // const APP_KEY = 'app_g5H5hXkKSIHANVJsYh99hPcebudiWGo3YokDL3zG8kxYMZT4bX4bQoKJbi7V';
 
-TPDirect.setupSDK('137033', 'app_g5H5hXkKSIHANVJsYh99hPcebudiWGo3YokDL3zG8kxYMZT4bX4bQoKJbi7V', 'sandbox')
+TPDirect.setupSDK(137033, 'app_g5H5hXkKSIHANVJsYh99hPcebudiWGo3YokDL3zG8kxYMZT4bX4bQoKJbi7V', 'sandbox')
 // console.log(TPDirect);
 let fields = {
     number: {
@@ -89,7 +89,8 @@ document.querySelector('.pay_button').addEventListener('click', function (event)
             alert('please fill all informations')
             return;
         }
-        alert('get prime 成功，prime: ' + result.card.prime);
+        alert('get prime 成功');
+        // alert('get prime 成功，prime: ' + result.card.prime);
         
         
         fetchbookingdata(result.card.prime, connectionName, connectionEmail, connectionPhone);
