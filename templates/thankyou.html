@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank you</title>
+    <link rel="stylesheet" type="text/css" href="../static/CSS/Week6CSS.css" />
+</head>
+<body>
+    <div class="header">
+        <h2 class="title" id="Title">台北一日遊</h2>
+        <div class="space"></div>
+        <button class="button_plan" id="button_plan">預定行程</button>
+        <button class="frame-item-4">登入/註冊</button>
+        <button class="frame-item-5">登出系統</button>
+    </div>
+    <div class="connection_infor_container">
+        <span></span>
+        <form class="connection_infor">
+            <div class="text">感謝您的訂閱~~ 3QQQ ^^</div>
+            <div class="text">訂單編號：<div class="input" id="order_number"></div></div>
+            <div class="text">顧客姓名：<div class="input" id="name"></div></div>
+            <div class="text">景點名稱：<div class="input" id="attraction_name"></div></div>
+        </form>
+        <div></div>
+    </div>
+    <div class="footer">
+        <div style="font-size: 16px; font-style: normal; font-weight: 700; line-height: 13.3px; color:#FFF">COPYRIGHT © 2021 台北一日遊</div>
+    </div>
+    <div class="modal">
+        <div class="member_signin-container">
+            <div class="signin_form-header"></div>
+            <form class="signin_form" id="signin_form" action="/signin" method="PUT">
+                <div class="form_title-container">
+                    <div class="form_title">登入會員帳號</div>
+                    <button class="form_x"></button>
+                </div>
+                <input type="text" name="email" class="name_email_password" placeholder="輸入電子信箱">
+                <input type="password" name="password" class="name_email_password" placeholder="輸入密碼" autocomplete="current-password">
+                <button class="signin" id="signinSubmit">登入帳戶</button>
+                <div class="signininfor"></div>
+                <div class="signon-container">還沒有帳戶？<button class="go_signon">點此註冊</button></div>
+            </form>
+        </div>
+        <div class="member_signon-container">
+            <div class="signon_form-header"></div>
+            <form class="signon_form" id="signon_form" action="/signon" method="POST">
+                <div class="form_title-container">
+                    <div class="form_title">註冊會員帳號</div>
+                    <button class="form_x"></button>
+                </div>
+                <input type="text" name="signon_name" class="name_email_password" placeholder="輸入姓名">
+                <input type="text" name="signon_email" class="name_email_password" placeholder="輸入電子信箱">
+                <input type="password" name="signon_password" class="name_email_password" placeholder="輸入密碼" autocomplete="new-password">
+                <button class="signon" id="signonSubmit">註冊新帳戶</button>
+                <div class="signoninfor"></div>
+                <div class="signon-container">已經有帳戶了？<button class="return_signin">點此登入</button></div>
+            </form>
+        </div>
+    </div>
+    <script src="../static/JS/sign in up.js"></script>
+    <script src="../static/JS/thankbooking.js"></script>
+</body>
+</html>

@@ -26,8 +26,8 @@ con =  pooling.MySQLConnectionPool(pool_name = "mypool",
 
 # JWT
 # ============================================================================================
+import requests
 import jwt
-import datetime
 from datetime import datetime, timedelta
 from jwt import ExpiredSignatureError
 SECRET_KEY = "any string but secret"
@@ -292,7 +292,7 @@ def api_booking():
     if request.method == "POST":
         try:
             auth_header = request.headers.get('Authorization')
-            print(auth_header)
+            # print(auth_header)
             if auth_header is None:
                 return ({"error": True,"message": "please sign in"}), 403
             else:
@@ -301,7 +301,7 @@ def api_booking():
                 member_id = payload.get('id')
 
             data = request.json
-            print(data)
+            # print(data)
             if not data:
                 return ({"error": True,"message": "data is not existed"}), 400
             
@@ -315,7 +315,7 @@ def api_booking():
 
             cursor.execute("SELECT * FROM booking WHERE member_id = %s",(member_id,))
             data = cursor.fetchall()
-            print(data)
+            # print(data)
 
             if data:
                 cursor.execute("DELETE FROM booking WHERE member_id = %s", (member_id,))
@@ -356,7 +356,7 @@ def api_booking():
             (member_id,))
 
             data = cursor.fetchone()
-            print(data)
+            # print(data)
             if data:
                 keys = ["attractionId", "name", "address", "URL_image"]
                 keys_data = {k: data[k] for k in keys}
@@ -400,6 +400,150 @@ def api_booking():
         finally:
             cursor.close()
             connection.close()
+
+@app.route("/api/orders", methods=["POST"])
+
+def api_orders():
+    try:
+        auth_header = request.headers.get('Authorization')
+        if not auth_header:
+            return ({"error": True,"message": "please sign in"}), 403
+        token = auth_header.split(' ')[1]
+        payload = decode_token(token)
+        member_id = payload.get('id')
+        if not payload:
+            return ({"error": True,"message": "please sign in"}), 403
         
-app.run(debug=True, host="0.0.0.0", port=3000)
+        connection = con.get_connection()
+        cursor = connection.cursor(dictionary=True)
+
+        data = request.get_json()
+       
+        name = data["order"]["contact"]["name"]
+        email = data["order"]["contact"]["email"]
+        phone_number = data["order"]["contact"]["phone"]
+        prime = data["prime"]
+        price = data["order"]["price"]
+        attraction_name = data["order"]["trip"]["attraction"]["name"] 
+        attraction_address = data["order"]["trip"]["attraction"]["address"]
+        attraction_id = data["order"]["trip"]["attraction"]["id"]  
+        date = data["order"]["trip"]["date"]  
+        time = data["order"]["trip"]["time"]
+    
+        if not name or not email or not phone_number:
+            return jsonify({"error": True,"message": "please fill all information"}), 400
+        else:
+            order_number = datetime.utcnow().strftime('%Y%m%d%H%M%S%f')
+            payload = {
+                "prime": data["prime"],
+                "partner_key": 'partner_HhmDLgk9cfgfzexAH1atrizRHAfXrRsLshDvpu6S6tW9m4rc0dtrE3cP',
+                "merchant_id": "rfv406406_CTBC",
+                "details": "TapPay Test",
+                "amount": data["order"]["price"],
+                "order_number": order_number,
+                "cardholder": {
+                    "phone_number": phone_number,
+                    "name": name,
+                    "email": email
+                },
+                "remember": True
+            }
+        cursor.execute("""
+                       INSERT INTO ordering(
+                       member_id, order_number, attraction_id, attraction_name, attraction_address,
+                       connection_name, connection_email, phone_number, 
+                       date, time, price, status) 
+                       VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", 
+                       (member_id, order_number, attraction_id, attraction_name, attraction_address, name, email, phone_number, date, time, price, '未繳款'))
+        connection.commit()
+        cursor.close()
+        connection.close()
+   
+        headers = {'content-type': 'application/json',
+                   "x-api-key": 'partner_HhmDLgk9cfgfzexAH1atrizRHAfXrRsLshDvpu6S6tW9m4rc0dtrE3cP'}
+        response = requests.post('https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime',
+                                 data=json.dumps(payload), headers=headers)
+        response_json = response.json()
+        print(response_json)
+        if response_json["status"] == 0:
+            connection = con.get_connection()
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute("""
+                            UPDATE ordering
+                            SET status = %s
+                            WHERE order_number = %s
+                        """, ('已繳款', order_number))
+            connection.commit()
+            cursor.execute("DELETE FROM booking WHERE member_id = %s", (member_id, ))
+            connection.commit()
+            cursor.close()
+            connection.close()
+            return jsonify({
+				"data": {
+					"number": response_json['order_number'],
+					"payment": {
+					"status": "已付款",
+					"message": "付款成功"
+					}
+				}
+			}),200
+        else:
+            return jsonify({
+				"data": {
+					"number": response_json['order_number'],
+					"payment": {
+					"status": "未付款",
+					"message": "付款失敗"
+					}
+				}
+			}),200
+    except Exception as e:
+            return jsonify({"error": True,"message":f"Error occurred: {str(e)}"}), 500
+    
+@app.route("/api/orders/<orderNumber>", methods=['GET'])
+def orders_get(orderNumber):
+ 
+    auth_header = request.headers.get('Authorization')
+    # print(auth_header)
+    if not auth_header:
+        return ({"error": True,"message": "please sign in"}), 403
+    token = auth_header.split(' ')[1]
+    payload = decode_token(token)
+    if not payload:
+        return ({"error": True,"message": "please sign in"}), 403
+    
+    connection = con.get_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    cursor.execute("SELECT * FROM ordering WHERE order_number = %s",(orderNumber,))
+    data = cursor.fetchone()
+    # print(data)
+    cursor.close()
+    connection.close()
+    if data:
+        order_info = {
+            'data':{
+            "number": data["order_number"],
+            "price": data["price"],
+            "trip": {
+                "attraction": {
+                    "id": data["attraction_id"],
+                    "name": data["attraction_name"],
+                    "address": data["attraction_address"],
+                },
+                "date": data["date"],
+                "time": data["time"],
+            },
+            "contact": {
+                "name": data["connection_name"],
+                "email":data["connection_email"],
+                "phone": data["phone_number"]
+            },
+            "status": data["status"]
+        }}
+
+    return jsonify(order_info), 200
+        
+        
+app.run(debug=None, host="0.0.0.0", port=3000)
 # app.run(debug = True, port = 3000)
