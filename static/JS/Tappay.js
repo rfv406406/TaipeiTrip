@@ -71,7 +71,7 @@ document.querySelector('.pay_button').addEventListener('click', function (event)
     const tappayStatus = TPDirect.card.getTappayFieldsStatus();
 
     if (tappayStatus.canGetPrime === false) {
-        alert('can not get prime');
+        // alert('can not get prime');
         return;
     }
 
@@ -82,14 +82,13 @@ document.querySelector('.pay_button').addEventListener('click', function (event)
         let connectionPhone = document.querySelector("input[name=connection_phone]").value;
 
         if (result.status !== 0) {
-            alert('get prime error ' + result.msg)
+            // alert('get prime error ' + result.msg)
             return;
         }
         if (connectionName==""||connectionEmail==""||connectionPhone==""){
             alert('please fill all informations')
             return;
         }
-        alert('get prime 成功');
         // alert('get prime 成功，prime: ' + result.card.prime);
         
         
