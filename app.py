@@ -1,5 +1,8 @@
 from flask import *
 from flask_cors import CORS
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 app=Flask(
     __name__,
@@ -15,10 +18,10 @@ app.config["TEMPLATES_AUTO_RELOAD"]=True
 import mysql.connector
 from mysql.connector import pooling
 config = {
-    "host":"127.0.0.1",
-    "user":"root",
-    "password":"rfv406406",
-    "database":"taipeiattractions",
+    "host": os.getenv('HOST'),
+    "user":os.getenv('USER'),
+    "password":os.getenv('PASSWORD'),
+    "database":os.getenv('DATABASE'),
 }
 con =  pooling.MySQLConnectionPool(pool_name = "mypool",
                               pool_size = 3,
@@ -30,7 +33,7 @@ import requests
 import jwt
 from datetime import datetime, timedelta
 from jwt import ExpiredSignatureError
-SECRET_KEY = "any string but secret"
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 def create_token(user_data):
     payload = {
@@ -436,7 +439,7 @@ def api_orders():
             order_number = datetime.utcnow().strftime('%Y%m%d%H%M%S%f')
             payload = {
                 "prime": data["prime"],
-                "partner_key": 'partner_HhmDLgk9cfgfzexAH1atrizRHAfXrRsLshDvpu6S6tW9m4rc0dtrE3cP',
+                "partner_key": os.getenv('PARTNER_KEY'),
                 "merchant_id": "rfv406406_CTBC",
                 "details": "TapPay Test",
                 "amount": data["order"]["price"],
@@ -460,7 +463,7 @@ def api_orders():
         connection.close()
    
         headers = {'content-type': 'application/json',
-                   "x-api-key": 'partner_HhmDLgk9cfgfzexAH1atrizRHAfXrRsLshDvpu6S6tW9m4rc0dtrE3cP'}
+                   "x-api-key": os.getenv('PARTNER_KEY')}
         response = requests.post('https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime',
                                  data=json.dumps(payload), headers=headers)
         response_json = response.json()
