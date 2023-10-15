@@ -1,9 +1,9 @@
 from dotenv import load_dotenv
 import os, jwt
-load_dotenv()
-
 from datetime import datetime, timedelta
 from jwt import ExpiredSignatureError
+
+load_dotenv()
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 

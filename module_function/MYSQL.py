@@ -1,3 +1,4 @@
+from flask import *
 from dotenv import load_dotenv
 import os
 load_dotenv()
@@ -5,7 +6,7 @@ load_dotenv()
 import mysql.connector
 from mysql.connector import pooling
 config = {
-    "host": os.getenv('HOST'),
+    "host":os.getenv('HOST'),
     "user":os.getenv('USER'),
     "password":os.getenv('PASSWORD'),
     "database":os.getenv('DATABASE'),
