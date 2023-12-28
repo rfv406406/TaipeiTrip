@@ -1,6 +1,6 @@
 # TaipeiTrip
 
-Taipei Day Tour is an e-commerce travel website. 
+TaipeiTrip is an e-commerce travel website. 
 The backend is designed using a Restful API architecture, connecting to government open resources APIs to get information about attractions. It offers a travel booking service and payments through the TapPay SDK as a third-party payment solution.
 
 <img src=readmefile/img1.png width=100% />
