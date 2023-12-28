@@ -1,5 +1,6 @@
 from flask import Blueprint,jsonify,request
 from module_function.MYSQL import *
+from module_function.JWT import *
 
 bookings = Blueprint('BOOKINGS', __name__)
 
