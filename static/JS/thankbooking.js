@@ -54,7 +54,7 @@ function loginCheck_2(){
 //返回首頁
 document.getElementById('Title').addEventListener('click', function () {
     event.preventDefault();
-    window.location.href = '=';
+    window.location.href = '/';
 });
 
 // =============================================================================
