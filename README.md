@@ -3,7 +3,7 @@
 Taipei Day Tour is an e-commerce travel website. 
 The backend is designed using a Restful API architecture, connecting to government open resources APIs to get information about attractions. It offers a travel booking service and payments through the TapPay SDK as a third-party payment solution.
 
-<img src=readmefile/img1.png width=80% />
+<img src=readmefile/img1.png width=100% />
 
 ## DEMO URL
 
@@ -24,7 +24,7 @@ To book a travel date and time slot, you need to log in to use this feature. Bel
 
 ## Website architecture
 
-<img src=readmefile/TaipeitripST.png width=80% />
+<img src=readmefile/TaipeitripST.png width=100% />
 
 The front-end pages are created using basic HTML, CSS, and JavaScript. The backend framework is ```Python Flask```. The website adopts a ```front-end and back-end separation design```. Based on the Request sent by the front-end, data in ```JSON format``` is returned through the ```RESTful API```.
 
@@ -32,9 +32,9 @@ Version control is managed using ```Git/GitHub```. After completing periodic mis
 
 ## Database
 
-<img src=readmefile/DB.png width=80% />
-
 Adopting a MySQL relational database design that conforms to the third normal form.
+
+<img src=readmefile/DB.png width=100% />
 
 ## Features
 
