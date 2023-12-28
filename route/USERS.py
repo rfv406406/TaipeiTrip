@@ -1,6 +1,6 @@
 from flask import Blueprint,jsonify,request
 from module_function.MYSQL import *
-from module_function.JWT import *
+from module_function.JWT import create_token, decode_token
 
 users = Blueprint('USERS', __name__)
 

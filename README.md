@@ -20,7 +20,7 @@ To book a travel date and time slot, you need to log in to use this feature. Bel
 
 | Card Number | Valid Date | CVV |
 |-----|--------|--------|
-| 4242 4242 4242 4242 | 12/26 | 123 |
+| 4242 4242 4242 4242 | 12/24 | 123 |
 
 ## Website architecture
 
@@ -38,39 +38,35 @@ Adopting a MySQL relational database design that conforms to the third normal fo
 
 ## Features
 
-### 📜 Infinite Scroll & Lazy Loading
-<img src=https://user-images.githubusercontent.com/101781321/224511319-804eeb29-c602-49ab-9b64-beb61e488998.gif width=100% />
+### Infinite Scroll & Lazy Loading
+
+Using the Intersection Observer API to achieve the loading of attractions.
+
+![Alt text](<readmefile/lazy loading.gif>)
 <br/>
 
-### 🔎 Keyword Search
-<img src=https://user-images.githubusercontent.com/101781321/224511341-73e4ede1-e9d2-40c4-8ff7-d19d1e8d47dc.gif width=100% />
+### Keyword Search
+
+Conducting attraction searches using keyword matching.
+
+![Alt text](<readmefile/keyword search.gif>)
 <br/>
 
-### 💁‍♂️ Member System
-<img src=https://user-images.githubusercontent.com/101781321/224511352-2e8bda11-fb7e-4d14-9804-9ab07c439d94.gif width=100% />
+### Attraction
+![Alt text](readmefile/%E6%99%AF%E9%BB%9E%E9%A0%81%E9%9D%A2%E8%BC%AA%E6%92%AD%E5%9C%96.gif)
 <br/>
 
-### 🎠 Carousel & Attraction Detail
-<img src=https://user-images.githubusercontent.com/101781321/224511363-22d56d1a-82fa-4594-b59d-4fe55ec9c0e7.gif width=100% />
-<br/>
+### Booking & TapPay 
 
-### 💳 Booking & TapPay SDK
-<img src=https://user-images.githubusercontent.com/101781321/224511369-679c2953-9104-44b1-914d-f5142904d243.gif width=100% />
-<br/>
+Booking service and payments through the TapPay SDK as a third-party payment solution.
 
-### 📋 Order History
-<img src=https://user-images.githubusercontent.com/101781321/224511370-229a67ce-78d3-4c39-bd0f-f32c54bc80ce.gif width=100% />
-<br/>
-
-### 📱 Responsive Web Design (RWD)
-<img src=https://user-images.githubusercontent.com/101781321/224511372-95c42881-1571-411f-9a2f-411c4c373d5d.gif width=100% />
+![Alt text](<readmefile/booking ordering.gif>)
 <br/>
 
 ## Contact
 
-🙋 李宥臻 YOU-ZHEN, LI
+康智偉 Chih-Wei, KANG
 
-📧 charlie9684@gmail.com
-
+rfv406406@gmail.com
 
 ***  
