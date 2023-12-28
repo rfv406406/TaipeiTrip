@@ -69,4 +69,4 @@ Booking service and payments through the TapPay SDK as a third-party payment sol
 
 rfv406406@gmail.com
 
-***  
+***
