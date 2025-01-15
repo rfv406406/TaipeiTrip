@@ -5,10 +5,6 @@ The backend is designed using a Restful API architecture, connecting to governme
 
 <img src=readmefile/img1.png width=100% />
 
-## DEMO URL
-
-https://parkingabc.online:5000/
-
 ## Test Account
 
 Guests could preview information about attractions without logging in. 
