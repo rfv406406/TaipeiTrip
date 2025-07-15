@@ -8,7 +8,6 @@ function init_2(event){
     event.preventDefault();
     const buttonId = event.target.id;
     const token = localStorage.getItem('Token');
-    console.log(token);
     fetchData(token, buttonId);
 }
 
@@ -32,7 +31,6 @@ function handleResponse(response) {
 }
 
 function handleData(buttonId ,data) {
-    console.log(buttonId);
     switch(buttonId) {
         case 'button_plan':
             loginCheck_2();
@@ -110,12 +108,12 @@ function checkResponse(response) {
     return response.json().then(data => {
         if (data == null || data.data == null) {
             body.innerHTML = '<div style="display: flex; justify-content: center; align-items: center; width: 90%; margin:auto; margin-bottom: 30px;">目前沒有任何預定行程</div>';
-            throw new Error('No booking data available'); // 抛出错误
+            throw new Error('No booking data available'); 
         }
-        return data; // 返回实际数据以进行进一步处理
+        return data; 
     }).catch(error => {
         console.error('Error during processing response:', error);
-        throw error; // 重新抛出错误，以便于调用者也可以捕获
+        throw error; 
     });
 }
 

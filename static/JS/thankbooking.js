@@ -8,7 +8,6 @@ function init_2(event){
     event.preventDefault();
     const buttonId = event.target.id;
     const token = localStorage.getItem('Token');
-    console.log(token);
     fetchData(token, buttonId);
 }
 
@@ -32,7 +31,6 @@ function handleResponse(response) {
 }
 
 function handleData(buttonId ,data) {
-    console.log(buttonId);
     switch(buttonId) {
         case 'button_plan':
             loginCheck_2();
@@ -60,15 +58,10 @@ document.getElementById('Title').addEventListener('click', function () {
 // =============================================================================
 
 const currentURL = window.location.href;
-// 使用split方法根据问号（?）分割URL
 const parts = currentURL.split('?');
-// 获取参数部分
 const paramsPart = parts[1];
-// 使用split方法再次分割参数部分，以获取参数名和参数值
 const params = paramsPart.split('=');
-// 获取参数名和参数值
 const order_Number = params[1];
-console.log(order_Number)
 
 function fetchOrderingData() {
     const token = localStorage.getItem('Token');

@@ -11,7 +11,6 @@ const signoninfor = document.querySelector(".signoninfor");
 const signininfor = document.querySelector(".signininfor");
 
 buttonSignin.addEventListener('click', (event) => {
-    console.log("點點點!")
     event.preventDefault();
     modal.style.display = "block";
     memberSignincontainer.style.display = "block";
@@ -53,10 +52,8 @@ function handleSignonSubmit(event) {
     event.preventDefault();
 
     if (inputResults[0] && inputResults[1]) {
-        alert("Please fills all infors");
-        console.log(inputResults[0]);
-        console.log(inputResults[1]);
-        return;
+        alert("請輸入完整訊息");
+        return null;
     } 
 
     if (!inputResults[0]){
@@ -143,7 +140,6 @@ function signonForsuccess(signoninfor, memberSignoncontainer, data) {
     signoninfor.style.display = "flex";
     memberSignoncontainer.style.height = "354px";
     signoninfor.style.color = "#489";
-    console.log(data);
 }
 //註冊失敗文字顯示
 function signonForfailure(signoninfor, memberSignoncontainer, data) {
@@ -151,7 +147,6 @@ function signonForfailure(signoninfor, memberSignoncontainer, data) {
     signoninfor.style.display = "flex";
     memberSignoncontainer.style.height = "354px";
     signoninfor.style.color = "red";
-    console.log(data.message);
 }
 //登入成功文字顯示
 function signinForsuccess(signininfor, memberSignincontainer, data) {
@@ -162,7 +157,6 @@ function signinForsuccess(signininfor, memberSignincontainer, data) {
     buttonSignin.style.display = "none";
     buttonSignout.style.display = "flex";
     location.reload(); 
-    console.log(data);
 }
 //登入失敗文字顯示
 function signinForfailure(signininfor, memberSignincontainer, data) {
@@ -170,7 +164,6 @@ function signinForfailure(signininfor, memberSignincontainer, data) {
     signininfor.style.display = "flex";
     memberSignincontainer.style.height = "297px";
     signininfor.style.color = "red";
-    console.log(data);
 }
 //登出_監聽事件
 buttonSignout.addEventListener('click', logout);
@@ -181,12 +174,11 @@ function saveToken(token){
 //使用者登入狀態確認
 function init(){
     const token = localStorage.getItem('Token');
-    console.log(token)
     if (token == null){
         if(window.location.pathname === '/booking') {
             window.location.href = '/'; 
         }else{
-            return
+            return null;
         }
     }
     fetch("/api/user/auth", {
@@ -200,15 +192,15 @@ function init(){
 }
 //確認登入狀態後之事件處理
 function loginCheck(data, buttonSignin, buttonSignout){
-    console.log(data);
     if (data !== null) {
         buttonSignin.style.display = "none";
         buttonSignout.style.display = "flex";
         buttonSignout.addEventListener('click', logout);
-        console.log(data.data.name)
         const usernameData = data.data.name;
         const userName = document.querySelector('#user_name');
-        userName.textContent = usernameData;
+        if (userName !== null) {
+            userName.textContent = usernameData;
+        }
     } else {
         buttonSignin.style.display = "flex";
         buttonSignout.style.display = "none";

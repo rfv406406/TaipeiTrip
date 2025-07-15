@@ -1,8 +1,4 @@
-// const APP_ID = 137033;
-// const APP_KEY = 'app_g5H5hXkKSIHANVJsYh99hPcebudiWGo3YokDL3zG8kxYMZT4bX4bQoKJbi7V';
-
 TPDirect.setupSDK(137033, 'app_g5H5hXkKSIHANVJsYh99hPcebudiWGo3YokDL3zG8kxYMZT4bX4bQoKJbi7V', 'sandbox')
-// console.log(TPDirect);
 let fields = {
     number: {
         // css selector
@@ -130,7 +126,6 @@ function fetchbookingdata(prime, connectionName, connectionEmail, connectionPhon
                 }
             }
         };
-        console.log(JSON.stringify(json)); 
         
         return fetch("/api/orders", {
             method: 'POST',
@@ -160,7 +155,6 @@ function getBookingData(data){
     const dateData = data.data.date;
     const timeData = data.data.time;
     const priceData = data.data.price;
-    console.log(attractionIdData)
     return {
         name: nameData,
         attractionId: attractionIdData,

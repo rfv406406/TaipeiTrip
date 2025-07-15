@@ -13,7 +13,6 @@ body{
 }
 
 @media (max-width:1200px){
-    /*螢幕寬度小於1200，套用此區塊CSS*/
 .header{
     width:90%;
     padding: 10px 0 10px 0;
@@ -49,7 +48,6 @@ body{
 } 
 
 @media (max-width:1200px){
-    /*螢幕寬度小於1200，套用此區塊CSS*/
     .header .space{
         width: 90%;
         min-width: 15px;
@@ -152,7 +150,6 @@ body{
     display:flex;
     align-items: center;
     justify-content: space-between;
-    /* width: 540px;   */
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
@@ -190,19 +187,8 @@ body{
     left: 10px;
     z-index: 2;
 }
-/* .img_container .button-img-left:hover{
-    background-image: url('button-left-Hovered.png');
-    background-size: 32px 32px;
-    width: 32px;
-    height: 32px;
-    background-color: transparent;
-    border: transparent;
-    position:absolute;
-    left: 10px;
-    z-index: 2;
-  } */
 
-  .img_container .pot_container{
+.img_container .pot_container{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -245,18 +231,6 @@ body{
     right: 10px;
     z-index: 2;
   }
-
-  /* .img_container .button-img-right:hover{
-    background-image: url('button-right-Hovered.png');
-    background-size: 32px 32px;
-    width: 32px;
-    height: 32px;
-    background-color: transparent;
-    border: transparent;
-    position:absolute;
-    right: 10px;
-    z-index: 2;
-  } */
 
 .content .plan_selector{
     height:400px;
@@ -306,16 +280,10 @@ body{
 }
 
 @media (max-width:1200px){
-.plan_selector .booking_form{
-    width: auto;
+    .plan_selector .booking_form{
+        width: auto;
+    }
 }
-}
-
-/* @media (max-width:360px){
-.plan_selector .booking_form{
-   
-}
-}   */
 
 .booking_form .booking_form_title{
     display: flex;
@@ -596,22 +564,22 @@ body{
   }
 
   .modal{
-    display: none; /* 預設為隱藏 */
-    position: fixed; /* 讓彈出窗口固定在畫面上，不受滾動影響 */
+    display: none; 
+    position: fixed; 
     top: 0;
     left: 0;
-    width: 100%; /* 覆蓋整個視窗的寬度 */
-    height: 100%; /* 覆蓋整個視窗的高度 */
-    background-color: rgba(0, 0, 0, 0.25); /* 透明黑色背景，可產生半透明的遮罩效果 */
-    z-index: 1000; /* 確保在其他元素之上 */
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.25); 
+    z-index: 1000; 
   }
   
   .member_signin-container{
     display:none;
-    position: absolute; /* 相對於.modal定位 */
-    top: 18%; /* 將其移至父元素的中央 */
-    left: 50%; /* 將其移至父元素的中央 */
-    transform: translate(-50%, -50%); /* 使用transform確保完美居中 */
+    position: absolute; 
+    top: 18%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
     width:340px;
     height:275px;
     border-radius: 6px;
@@ -666,7 +634,7 @@ body{
     right: 0;
     width: 16px;
     height: 16px;
-    border: none; /* 移除按鈕預設的邊框 */
+    border: none; 
     cursor: pointer;
   }
   
@@ -759,10 +727,10 @@ body{
   
   .member_signon-container{
     display:none;
-    position: absolute; /* 相對於.modal定位 */
-    top: 18%; /* 將其移至父元素的中央 */
-    left: 50%; /* 將其移至父元素的中央 */
-    transform: translate(-50%, -50%); /* 使用transform確保完美居中 */
+    position: absolute; 
+    top: 18%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
     width:340px;
     height:332px;
     border-radius: 6px;

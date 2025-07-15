@@ -21,7 +21,7 @@ function getDatas() {
             for (let i = 0; i < data.data.length; i++) {
                 let mrt = data.data[i];
                 frame3[i].innerText = mrt;
-                frame3[i].dataset.mrt = mrt; // 設置 data-mrt 屬性
+                frame3[i].dataset.mrt = mrt;
             }
             frame3.forEach(item => {
                 item.addEventListener("click", function() {
@@ -34,17 +34,16 @@ function getDatas() {
             });
         })
         .catch(error => {
-            console.error("發生錯誤", error);
+            console.error("發生錯誤", error.message);
         });
-    }
+}
 
-    // 阻止表單的預設提交行為，這裡只需要做一次
-    document.querySelector(".slogan-item-3").addEventListener("submit", function(event) {
-        event.preventDefault();
-    });
+// 阻止表單的預設提交行為，這裡只需要做一次
+document.querySelector(".slogan-item-3").addEventListener("submit", function(event) {
+    event.preventDefault();
+});
 
 getDatas();
-
 
 // 自動生成
 function getData(){
@@ -69,7 +68,6 @@ function getData(){
             let frame4ItemMrt = frame4Items[i].querySelector(".frame4-item2-mrt");
             let frame4ItemCategory = frame4Items[i].querySelector(".frame4-item2-category");
 
-            // 设置数据
             frame4ItemName.textContent = nameData;
             frame4ItemMrt.textContent = mrtData;
             frame4ItemCategory.textContent = categoryData;
@@ -80,7 +78,6 @@ function getData(){
 
             frame4Items[i].addEventListener("click", function(event) {
                 event.preventDefault();
-                console.log(idData);
                 window.location = "/attraction/" + idData;
                     })
                 }})  
@@ -121,7 +118,6 @@ const fetchDatas = () => {
             return response.json();
         })
         .then(function(data){
-        console.log(data);
         if (data.message === 'no spot') {
             // 如果收到 {error: true, message: 'no spot'} 這條消息
             Container.textContent = '查無資料';
@@ -145,7 +141,6 @@ const fetchDatas = () => {
 
                 frame4Item.addEventListener("click", function(event) {
                     event.preventDefault();
-                    console.log(idData);
                     window.location = "/attraction/" + idData;
                 });
 
@@ -185,13 +180,13 @@ const fetchDatas = () => {
         }    
     })
     .catch(error => {
-    console.error('There was a problem with the fetch operation:', error.message);
+            console.error('There was a problem with the fetch operation:', error.message);
         });
     }
     const callback = ([entry]) => {
-    if (entry && entry.isIntersecting) {
-        fetchDatas()
-    }
+        if (entry && entry.isIntersecting) {
+            fetchDatas()
+        }
     }
     let observer = new IntersectionObserver(callback, options)
     observer.observe(loadingObserver)
@@ -208,7 +203,6 @@ function init_2(event){
     event.preventDefault();
     const buttonId = event.target.id;
     const token = localStorage.getItem('Token');
-    console.log(token);
     if (token !== null){
         fetchData(token, buttonId);
     }else{
@@ -236,7 +230,6 @@ function handleResponse(response) {
 }
 
 function handleData(buttonId) {
-    console.log(buttonId);
     switch(buttonId) {
         case 'button_plan':
             loginCheck_2();

@@ -170,9 +170,9 @@ body{
 }
 
 .frame3-listbar {
-  display: flex;       /* 使用 flex 使項目並排顯示 */
-  overflow-x: hidden;    /* 允許在需要時水平滾動 */
-  white-space: nowrap; /* 防止項目換行 */      
+  display: flex;      
+  overflow-x: hidden;    
+  white-space: nowrap; 
   align-items: center;
   max-width: 1086px;
   height: 24px;
@@ -193,7 +193,7 @@ body{
   font-weight: 500;
   font-size: 16px;
   font-style: normal;
-  cursor: pointer;  /*手手*/      
+  cursor: pointer; 
 }
 
 .frame3-listbar-item:hover {
@@ -239,7 +239,7 @@ body{
 .frame4{
   display: flex;
   max-width: 1170px;
-  margin: 0 auto; /* 在水平方向上居中 */
+  margin: 0 auto; 
   flex-wrap: wrap;
   margin-top: 20px;
   gap: 30px;
@@ -271,9 +271,9 @@ body{
 }
 
 .frame4-item-img img {
-  width: 100%; /* 让图片的宽度填充整个容器 */
+  width: 100%;
   height: 197px; 
-  object-fit: cover; /* 使图片覆盖整个容器，超出部分将被裁剪 */
+  object-fit: cover;
   cursor: pointer;
 }
 
@@ -338,7 +338,6 @@ body{
 }
 
 @media (max-width:1200px){
-  /*螢幕寬度小於1200，套用此區塊CSS*/
   .frame{
     width:90%;
     padding: 10px 0 10px 0;
@@ -412,22 +411,22 @@ body{
 }
 
 .modal{
-  display: none; /* 預設為隱藏 */
-  position: fixed; /* 讓彈出窗口固定在畫面上，不受滾動影響 */
+  display: none;
+  position: fixed; 
   top: 0;
   left: 0;
-  width: 100%; /* 覆蓋整個視窗的寬度 */
-  height: 100%; /* 覆蓋整個視窗的高度 */
-  background-color: rgba(0, 0, 0, 0.25); /* 透明黑色背景，可產生半透明的遮罩效果 */
-  z-index: 1000; /* 確保在其他元素之上 */
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.25); 
+  z-index: 1000; 
 }
 
 .member_signin-container{
   display:none;
-  position: absolute; /* 相對於.modal定位 */
-  top: 18%; /* 將其移至父元素的中央 */
-  left: 50%; /* 將其移至父元素的中央 */
-  transform: translate(-50%, -50%); /* 使用transform確保完美居中 */
+  position: absolute;
+  top: 18%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
   width:340px;
   height:275px;
   border-radius: 6px;
@@ -482,7 +481,7 @@ body{
   right: 0;
   width: 16px;
   height: 16px;
-  border: none; /* 移除按鈕預設的邊框 */
+  border: none; 
   cursor: pointer;
 }
 
@@ -575,10 +574,10 @@ body{
 
 .member_signon-container{
   display:none;
-  position: absolute; /* 相對於.modal定位 */
-  top: 18%; /* 將其移至父元素的中央 */
-  left: 50%; /* 將其移至父元素的中央 */
-  transform: translate(-50%, -50%); /* 使用transform確保完美居中 */
+  position: absolute;
+  top: 18%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
   width:340px;
   height:332px;
   border-radius: 6px;
