@@ -150,60 +150,9 @@ document.getElementById('Title').addEventListener('click', function (event) {
 });
 
 //===================================================================================
-const button_plan = document.querySelector('#button_plan');
 const button_submit = document.querySelector('#button_submit');
 
-button_plan.addEventListener('click', init_2);
 button_submit.addEventListener('click', init_2);
-
-function init_2(event){
-    event.preventDefault();
-    const buttonId = event.target.id;
-    const token = localStorage.getItem('Token');
-    if (token !== null){
-        fetchData(token, buttonId);
-    }else{
-        executeButtonsignin();
-    }
-}
-
-function fetchData(token, buttonId) {
-    fetch("/api/user/auth", {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-        }
-    })
-    .then(handleResponse)
-    .then(data => handleData(buttonId))
-    .catch(handleError);
-}
-
-function handleResponse(response) {
-    if (!response.ok) {
-        throw new Error('Get null from backend');
-    }
-    return response.json();
-}
-
-function handleData(buttonId) {
-    switch(buttonId) {
-        case 'button_plan':
-            loginCheck_2();
-            break;
-        case 'button_submit':
-            booking();
-            break;
-    }
-}
-
-function handleError(error) {
-}
-
-//確認登入狀態後之事件處理
-function loginCheck_2(){
-    window.location.href = "/booking";
-}
 
 function executeButtonsignin(){
     modal.style.display = "block";

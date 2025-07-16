@@ -122,7 +122,6 @@ function displaySignonResponse(data) {
     if (data.token) {
         signinForsuccess(signininfor, memberSignincontainer, data);
         saveToken(data.token);
-        // submitToken();
     } 
     
     if (data.message === "電子郵件或密碼錯誤"){
@@ -175,10 +174,8 @@ function saveToken(token){
 function init(){
     const token = localStorage.getItem('Token');
     if (token == null){
-        if(window.location.pathname === '/booking') {
+        if(window.location.pathname != '/') {
             window.location.href = '/'; 
-        }else{
-            return null;
         }
     }
     fetch("/api/user/auth", {
@@ -189,6 +186,8 @@ function init(){
     })
     .then(response => response.json())
     .then(data => loginCheck(data, buttonSignin, buttonSignout));
+    // firstPage render
+    getData();
 }
 //確認登入狀態後之事件處理
 function loginCheck(data, buttonSignin, buttonSignout){
@@ -219,3 +218,60 @@ function logout() {
 //F5
 window.addEventListener('load', init);
 
+function turnBookingPage() {
+    window.location.href = "/booking";
+}
+
+function handleData(buttonId) {
+    switch(buttonId) {
+        case 'button_plan':
+            turnBookingPage();
+            break;
+        case 'button_submit':
+            booking();
+            break;
+    }
+}
+
+function handleResponse(response) {
+    if (!response.ok) {
+        throw new Error('Get error from backend');
+    }
+    return response.json();
+}
+
+function handleError(error) {
+    console.error('error', error);
+}
+
+// ===================================================================================
+const button_plan = document.querySelector('#button_plan');
+button_plan.addEventListener('click', init_2);
+
+function init_2(event){
+    event.preventDefault();
+    const buttonId = event.target.id;
+    const token = localStorage.getItem('Token');
+    if (token !== null){
+        fetchData(token, buttonId);
+    }else{
+        executeButtonsignin();
+    }
+}
+
+function executeButtonsignin(){
+    modal.style.display = "block";
+    memberSignincontainer.style.display = "block";
+}
+
+function fetchData(token, buttonId) {
+    fetch("/api/user/auth", {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        }
+    })
+    .then(handleResponse)
+    .then(handleData(buttonId))
+    .catch(handleError);
+}

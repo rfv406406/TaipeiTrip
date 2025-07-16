@@ -36,6 +36,7 @@ body{
     font-weight: 700;
     color: #489;
     min-width: 150px;
+    cursor: pointer;
 } 
 
 .header .space{
@@ -65,6 +66,7 @@ body{
     font-weight: 500;
     font-size:16px;
     line-height: 13.3px;
+    cursor: pointer;
 }
       
 .frame-item-4{
@@ -80,7 +82,8 @@ body{
     font-weight: 500;
     font-size:16px;
     line-height: 13.3px;
-      } 
+    cursor: pointer;
+} 
 
 .frame-item-5{
     display: none;
@@ -95,7 +98,8 @@ body{
     font-weight: 500;
     font-size:16px;
     line-height: 13.3px;
-    } 
+    cursor: pointer;
+} 
 
 .header_line{
     display: flex;

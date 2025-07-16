@@ -10,7 +10,7 @@ buttonLeft.onclick = function () {
 };
 
 
-//listbarn功能
+//listbar功能
 function getDatas() {
     fetch("/api/mrts")
         .then(function(response) {
@@ -34,14 +34,9 @@ function getDatas() {
             });
         })
         .catch(error => {
-            console.error("發生錯誤", error.message);
+            console.error("error: ", error.message);
         });
 }
-
-// 阻止表單的預設提交行為，這裡只需要做一次
-document.querySelector(".slogan-item-3").addEventListener("submit", function(event) {
-    event.preventDefault();
-});
 
 getDatas();
 
@@ -79,49 +74,42 @@ function getData(){
             frame4Items[i].addEventListener("click", function(event) {
                 event.preventDefault();
                 window.location = "/attraction/" + idData;
-                    })
-                }})  
-            }
-getData();
-
+            })
+        }
+    })  
+}
 
 //Intersection Observer
 let nextPage = 1
 let Container = document.querySelector('.frame4')
 let loadingObserver = document.querySelector('.loadingObserver')
 let isLoading = false;
-let keyword = "";  // Declare keyword as a global variable
+let keyword = "";  
 
 document.querySelector(".slogan-item-3").addEventListener("submit", function(event) {
     event.preventDefault();
-    let inputData = document.querySelector("input[name=keyword]").value;
+    const inputData = document.querySelector("input[name=keyword]").value;
     if(inputData !== ""){
         keyword = inputData;
         nextPage = 0;
         Container.innerHTML = '';
-        observer.observe(loadingObserver); // Re-attach the observer when searching again
-        fetchData();
+        fetchDatas();
     }else{
         location.reload();
     }
-    });
-
-    const options = {
-    threshold: 0.05
-    }
+});
 
 const fetchDatas = () => {
-    if (isLoading) return; // 如果正在加載，則直接返回
-        isLoading = true;
-        fetch("/api/attractions?page=" + nextPage + "&keyword=" + keyword)
-        .then(function(response){
-            return response.json();
-        })
-        .then(function(data){
+    if (isLoading) return null;
+    isLoading = true;
+    fetch("/api/attractions?page=" + nextPage + "&keyword=" + keyword)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
         if (data.message === 'no spot') {
-            // 如果收到 {error: true, message: 'no spot'} 這條消息
             Container.textContent = '查無資料';
-            observer.observe(loadingObserver);
+            isLoading = false;
         }else {
             if (data.nextPage !== null) {
                 nextPage = data.nextPage;
@@ -180,75 +168,20 @@ const fetchDatas = () => {
         }    
     })
     .catch(error => {
-            console.error('There was a problem with the fetch operation:', error.message);
+            console.error('error:', error);
+            isLoading = false;
         });
-    }
-    const callback = ([entry]) => {
-        if (entry && entry.isIntersecting) {
-            fetchDatas()
-        }
-    }
-    let observer = new IntersectionObserver(callback, options)
-    observer.observe(loadingObserver)
+}
 
-
-// ===================================================================================
-const button_plan = document.querySelector('#button_plan');
-// const button_submit = document.querySelector('#button_submit');
-
-button_plan.addEventListener('click', init_2);
-// button_submit.addEventListener('click', init_2);
-
-function init_2(event){
-    event.preventDefault();
-    const buttonId = event.target.id;
-    const token = localStorage.getItem('Token');
-    if (token !== null){
-        fetchData(token, buttonId);
-    }else{
-        executeButtonsignin();
+const callback = ([entry]) => {
+    if (entry && entry.isIntersecting) {
+        fetchDatas();
     }
 }
 
-function fetchData(token, buttonId) {
-    fetch("/api/user/auth", {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-        }
-    })
-    .then(handleResponse)
-    .then(data => handleData(buttonId))
-    .catch(handleError);
+const options = {
+    threshold: 0.05
 }
 
-function handleResponse(response) {
-    if (!response.ok) {
-        throw new Error('Get null from backend');
-    }
-    return response.json();
-}
-
-function handleData(buttonId) {
-    switch(buttonId) {
-        case 'button_plan':
-            loginCheck_2();
-            break;
-        case 'button_submit':
-            booking();
-            break;
-    }
-}
-
-function loginCheck_2(){
-    window.location.href = "/booking";
-}
-
-function handleError(error) {
-    console.error('Backend could got problems', error);
-}
-
-function executeButtonsignin(){
-    modal.style.display = "block";
-    memberSignincontainer.style.display = "block";
-}
+let observer = new IntersectionObserver(callback, options)
+observer.observe(loadingObserver)

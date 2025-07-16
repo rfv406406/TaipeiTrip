@@ -18,9 +18,9 @@ def api_mrts():
         mrt_names = []
         for name in mrts:
             mrt_names.append(name["mrt"])
-        spot_dict = {
-            "data": mrt_names
-            }
+            spot_dict = {
+                "data": mrt_names
+                }
         return jsonify(spot_dict)
     else:
         error_dict = {
