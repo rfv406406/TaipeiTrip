@@ -16,7 +16,6 @@ def api_attractions():
     cursor = connection.cursor(dictionary=True)
     try: 
         if keyword:
-            print("keyword:", keyword)
             sql_query = (
                 "SELECT attractions.id, attractions.name, attractions.description, attractions.address, "
                 "attractions.transport, attractions.lat, attractions.lng, mrts.mrt, categories.category "
@@ -42,7 +41,6 @@ def api_attractions():
             cursor.execute(sql_query, (limit, offset))
 
         attractions = cursor.fetchall()
-        print("attractions:", attractions)
 
         for attraction in attractions:
             cursor.execute("SELECT URL_image FROM images WHERE attractions = %s", (attraction["id"],))

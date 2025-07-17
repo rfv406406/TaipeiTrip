@@ -6,13 +6,20 @@ app = Flask(
     static_folder= "templates",
     static_url_path= "/",
 )
-app.secret_key = "any string but secret"
+app.secret_key = "rfv406406"
 
 from mysql.connector import pooling
 
+# config = {
+#     "host":"127.0.0.1",
+#     "user":"root",
+#     "password":"rfv406406",
+#     "database":"taipeiattractions",
+# }
+
 config = {
-    "host":"127.0.0.1",
-    "user":"root",
+    "host":"parking-rds.clw082guwyfz.ap-southeast-2.rds.amazonaws.com",
+    "user":"rfv406406",
     "password":"rfv406406",
     "database":"taipeiattractions",
 }
@@ -21,7 +28,7 @@ con =  pooling.MySQLConnectionPool(pool_name = "mypool",
                               pool_size = 3,
                               **config)
 
-json_file_path = "data/taipei-attractions.json"
+json_file_path = "taipei-attractions.json"
 with open(json_file_path, "r", encoding="utf-8") as json_file:
     data = json.load(json_file)
 

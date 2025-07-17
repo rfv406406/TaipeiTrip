@@ -11,7 +11,6 @@ def api_booking():
     if request.method == "POST":
         try:
             auth_header = request.headers.get('Authorization')
-            # print(auth_header)
             if auth_header is None:
                 return ({"error": True,"message": "please sign in"}), 403
             else:
@@ -20,7 +19,6 @@ def api_booking():
                 member_id = payload.get('id')
 
             data = request.json
-            # print(data)
             if not data:
                 return ({"error": True,"message": "data is not existed"}), 400
             
@@ -34,7 +32,6 @@ def api_booking():
 
             cursor.execute("SELECT * FROM booking WHERE member_id = %s",(member_id,))
             data = cursor.fetchall()
-            # print(data)
 
             if data:
                 cursor.execute("DELETE FROM booking WHERE member_id = %s", (member_id,))
@@ -75,16 +72,14 @@ def api_booking():
             (member_id,))
 
             data = cursor.fetchone()
-            # print(data)
             if data:
                 keys = ["attractionId", "name", "address", "URL_image"]
                 keys_data = {k: data[k] for k in keys}
 
                 return jsonify({"data":{"attraction":keys_data, "date":data["date"], "time":data["time"], "price":data["price"]}}), 200
-                # return jsonify({"data":{"attraction":{"id": data["attractionId"], "name": data["name"], "address":data["address"], "image":data["URL_image"]},
-                #                             "date":data["date"], "time":data["time"], "price":data["price"]}}), 200
             else:
                 return jsonify(None)     
+            
         except mysql.connector.Error:
             return jsonify({"error": True,"message": "databaseError"}), 500
         
@@ -109,7 +104,7 @@ def api_booking():
             cursor.execute("DELETE FROM booking WHERE member_id = %s", (member_id, ))
             connection.commit()
 
-            if cursor.rowcount == 0: #如無對應id，該語句將成功執行，但不會刪除任何記錄
+            if cursor.rowcount == 0: 
                 return jsonify({"error": True, "message": "No record found to delete"}), 404
 
             return jsonify({"ok":True}), 200

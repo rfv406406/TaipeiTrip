@@ -69,7 +69,6 @@ def api_orders():
         response = requests.post('https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime',
                                  data=json.dumps(payload), headers=headers)
         response_json = response.json()
-        print(response_json)
         if response_json["status"] == 0:
             connection = con.get_connection()
             cursor = connection.cursor(dictionary=True)
@@ -109,7 +108,6 @@ def api_orders():
 def orders_get(orderNumber):
  
     auth_header = request.headers.get('Authorization')
-    # print(auth_header)
     if not auth_header:
         return ({"error": True,"message": "please sign in"}), 403
     token = auth_header.split(' ')[1]
@@ -122,7 +120,6 @@ def orders_get(orderNumber):
 
     cursor.execute("SELECT * FROM ordering WHERE order_number = %s",(orderNumber,))
     data = cursor.fetchone()
-    # print(data)
     cursor.close()
     connection.close()
     if data:
