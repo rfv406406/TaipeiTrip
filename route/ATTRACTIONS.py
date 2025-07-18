@@ -104,17 +104,12 @@ def api_attraction(attractionId):
             for image in images:
                 images_list.append(image["URL_image"])
             attraction["images"] = images_list
-            
-            cursor.close()
-            connection.close()
 
             spot_dict = {
                 "data": attraction
             }
             return jsonify(spot_dict),200
         else:
-            cursor.close()
-            connection.close()
             error_dict = {
                 "error": True,
                 "message": "NO ID"
@@ -122,9 +117,14 @@ def api_attraction(attractionId):
             return jsonify(error_dict),400
 
     except mysql.connector.Error:
-        cursor.close()
-        connection.close()
+
         return jsonify({
             "error": True,
             "message": "databaseError"
         }),500
+    
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()

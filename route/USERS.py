@@ -23,19 +23,16 @@ def user():
         if data is None:
             cursor.execute("INSERT INTO member(name, email, password) VALUES(%s, %s, %s)", (name, email, password))
             connection.commit()
-            cursor.close()
-            connection.close()
             return jsonify({"ok":True}), 200
         else:
-            cursor.close()
-            connection.close()
             return jsonify({"error": True,"message": "Email已經註冊帳戶"}), 400
     except mysql.connector.Error:
+        return jsonify({"error": True,"message": "databaseError"}), 500
+    finally:
         if cursor:
             cursor.close()
         if connection:
             connection.close()
-        return jsonify({"error": True,"message": "databaseError"}), 500
 
 @users.route("/api/user/auth", methods=["GET","PUT"])
 
@@ -52,20 +49,17 @@ def user_auth():
             data = cursor.fetchone()
 
             if data is None:
-                cursor.close()
-                connection.close()
                 return jsonify({"error": True,"message": "電子郵件或密碼錯誤"}), 400
             else:
-                cursor.close()
-                connection.close()
                 token = create_token(data)
                 return jsonify({'token': token}), 200
         except mysql.connector.Error:
+            return jsonify({"error": True,"message": "databaseError"}), 500
+        finally:
             if cursor:
                 cursor.close()
             if connection:
                 connection.close()
-            return jsonify({"error": True,"message": "databaseError"}), 500
                    
     if request.method == "GET":
         try:

@@ -174,7 +174,9 @@ function saveToken(token){
 function init(){
     const token = localStorage.getItem('Token');
     if (token == null){
-        if(window.location.pathname != '/') {
+        if(window.location.pathname == '/' || window.location.pathname.includes(`attraction/`)) {
+            return null;
+        } else {
             window.location.href = '/'; 
         }
     }
@@ -187,7 +189,6 @@ function init(){
     .then(response => response.json())
     .then(data => loginCheck(data, buttonSignin, buttonSignout));
     // firstPage render
-    getData();
 }
 //確認登入狀態後之事件處理
 function loginCheck(data, buttonSignin, buttonSignout){

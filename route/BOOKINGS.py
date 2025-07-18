@@ -39,17 +39,16 @@ def api_booking():
 
             cursor.execute("INSERT INTO booking(member_id, attractionId, date, time, price) VALUES(%s, %s, %s, %s, %s)", (member_id, attractionId, date, time, price))
             connection.commit()
-            cursor.close()
-            connection.close()
 
             return jsonify({"ok": True}), 200
         
         except mysql.connector.Error:
+            return jsonify({"error": True,"message": "databaseError"}), 500
+        finally:
             if cursor:
                 cursor.close()
             if connection:
                 connection.close()
-            return jsonify({"error": True,"message": "databaseError"}), 500
 
     if request.method == "GET":
         try:
@@ -112,5 +111,7 @@ def api_booking():
             return jsonify({"error": True,"message": "databaseError"}), 500
         
         finally:
-            cursor.close()
-            connection.close()
+            if cursor:
+                cursor.close()
+            if connection:
+                connection.close()

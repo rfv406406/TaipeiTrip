@@ -61,8 +61,6 @@ def api_orders():
                        VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", 
                        (member_id, order_number, attraction_id, attraction_name, attraction_address, name, email, phone_number, date, time, price, '未繳款'))
         connection.commit()
-        cursor.close()
-        connection.close()
    
         headers = {'content-type': 'application/json',
                    "x-api-key": os.getenv('PARTNER_KEY')}
@@ -70,18 +68,14 @@ def api_orders():
                                  data=json.dumps(payload), headers=headers)
         response_json = response.json()
         if response_json["status"] == 0:
-            connection = con.get_connection()
-            cursor = connection.cursor(dictionary=True)
             cursor.execute("""
                             UPDATE ordering
                             SET status = %s
                             WHERE order_number = %s
                         """, ('已繳款', order_number))
-            connection.commit()
             cursor.execute("DELETE FROM booking WHERE member_id = %s", (member_id, ))
             connection.commit()
-            cursor.close()
-            connection.close()
+
             return jsonify({
 				"data": {
 					"number": response_json['order_number'],
@@ -103,6 +97,12 @@ def api_orders():
 			}),200
     except Exception as e:
             return jsonify({"error": True,"message":f"Error occurred: {str(e)}"}), 500
+    
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
     
 @orders_blueprint.route("/api/orders/<orderNumber>", methods=['GET'])
 def orders_get(orderNumber):

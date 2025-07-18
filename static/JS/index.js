@@ -79,6 +79,8 @@ function getData(){
     })  
 }
 
+getData();
+
 //Intersection Observer
 let nextPage = 1
 let Container = document.querySelector('.frame4')
