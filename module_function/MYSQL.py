@@ -14,5 +14,6 @@ config = {
 }
 
 con = pooling.MySQLConnectionPool(pool_name = "pool",
-                              pool_size = 30,
+                              pool_size = 10,
                               **config)
+

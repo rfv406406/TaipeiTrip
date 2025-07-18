@@ -16,7 +16,7 @@ To book a travel date and time slot, you need to log in to use this feature. Bel
 
 | Card Number | Valid Date | CVV |
 |-----|--------|--------|
-| 4242 4242 4242 4242 | 12/24 | 123 |
+| 4242 4242 4242 4242 | 12/31 | 123 |
 
 ## Website architecture
 
@@ -49,6 +49,9 @@ Conducting attraction searches using keyword matching.
 <br/>
 
 ### Attraction
+
+Showing the attraction details.
+
 ![Alt text](readmefile/%E6%99%AF%E9%BB%9E%E9%A0%81%E9%9D%A2%E8%BC%AA%E6%92%AD%E5%9C%96.gif)
 <br/>
 
