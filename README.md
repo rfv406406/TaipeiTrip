@@ -7,7 +7,7 @@ The backend is designed using a Restful API architecture, connecting to governme
 
 ## Test address
 
-[address](https://taipeitrip.parkinglotshare.online/)
+https://taipeitrip.parkinglotshare.online/
 
 ## Test Account
 
